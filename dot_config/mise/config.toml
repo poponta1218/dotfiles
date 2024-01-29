@@ -1,0 +1,13 @@
+[tools]
+rust = "latest"
+poetry = "latest"
+go = "latest"
+julia = "latest"
+neovim = "stable"
+chezmoi = "latest"
+python = "3.11.7"
+starship = "latest"
+eza = "latest"
+ruby = "latest"
+node = "20.11.0"
+bitwarden = "latest"
