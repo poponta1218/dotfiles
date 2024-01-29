@@ -1,0 +1,19 @@
+#!/usr/bin/env perl
+
+# LuaLaTeX
+$lualatex     = 'lualatex -shell-escape -synctex=1 -interaction=nonstopmode';
+$pdflualatex  = $lualatex;
+$max_repeat   = 5;
+
+# BibTeX
+$bibtex       = 'bibtex %O %B';
+$biber        = 'biber %O --bblencoding=utf8 -u -U --output_safechars %B';
+
+# index
+$makeindex    = 'mendex %O -o %D %S';
+
+# PDF
+$pdf_mode     = 4;
+
+# preview
+$pvc_view_file_via_temporary = 0;
