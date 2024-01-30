@@ -1,20 +1,16 @@
-# >>> Zcompile define >>>
+# >>> Sheldon initialize >>>
 function source {
-  ensure_zcompiled $1
-  builtin source $1
+  ensure_zcompiled ${1}
+  builtin source ${1}
 }
-
 function ensure_zcompiled {
-  local compiled="$1.zwc"
-  if [[ ! -r "$compiled" || "$1" -nt "$compiled" ]]; then
+  local compiled="${1}.zwc"
+  if [[ ! -r "${compiled}" || "${1}" -nt "${compiled}" ]]; then
     zcompile $1
   fi
 }
+ensure_zcompiled ${HOME}/.zshrc
 
-ensure_zcompiled ~/.zshrc
-# <<< Zcompile define >>>
-
-# >>> Sheldon initialize >>>
 ZSH_CONFIG_DIR="${HOME}/.config/zsh"
 export SHELDON_CONFIG_DIR="${ZSH_CONFIG_DIR}/sheldon"
 if [[ -e "${SHELDON_CONFIG_DIR}" ]]; then
@@ -23,11 +19,12 @@ if [[ -e "${SHELDON_CONFIG_DIR}" ]]; then
   sheldon_toml="${SHELDON_CONFIG_DIR}/plugins.toml"
   if [[ ! -r "${sheldon_cache}" || "${sheldon_toml}" -nt "${sheldon_cache}" ]]; then
     rm -f ${sheldon_cache}
-    ${sheldon_bin}/sheldon source >${sheldon_cache}
+    ${sheldon_bin}/sheldon source > ${sheldon_cache}
   fi
   source "${sheldon_cache}"
   unset sheldon_bin sheldon_cache sheldon_toml
 fi
+zsh-defer unfunction source ensure_zcompiled
 # <<< Sheldon initialize <<<
 
 # >>> Zprof execute >>>
@@ -35,5 +32,3 @@ fi
 #   zprof | less
 # fi
 # <<< Zprof execute <<<
-
-zsh-defer unfunction source
