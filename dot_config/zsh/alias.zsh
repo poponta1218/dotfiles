@@ -145,7 +145,6 @@ alias lu="lt -u"
 # <<< ls alias configure <<<
 
 # >>> cd alias configure >>>
-alias cd..="cd .."
 alias cdz="cd ${ZSH_CONFIG_DIR}"
 # <<< cd alias configure <<<
 
@@ -169,6 +168,7 @@ if (( ${+commands[nvim]} )) ; then
   export EDITOR="nvim"
   export VISUAL="nvim"
 fi
+alias vu="vi"
 # <<< vim alias configure <<<
 
 # >>> Personal script alias configure >>>
