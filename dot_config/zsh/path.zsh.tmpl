@@ -49,7 +49,8 @@ if [[ -e "${gitrepopath}" ]] ; then
 fi
 unset gitrepopath
 # <<< Shell-utilities configure <<<
-{{ if eq ( substr 0 4 .chezmoi.hostname ) "tako" }}
+{{- if eq ( substr 0 4 .chezmoi.hostname ) "tako" }}
+
 # >>> Intel compiler configure >>>
 if [[ -d "/opt/intel/oneapi" ]] ; then
   source "/opt/intel/oneapi/setvars.sh" > /dev/null 2>&1
@@ -113,9 +114,34 @@ if [[ -d "${HOME}/xTB/xtb-6.5.1" ]] ; then
 # export MKL_NUM_THREADS=4
 fi
 # <<< xTB 6.5.1 configure <<<
-{{ if .chezmoi.hostname "tako57" }}
-# >>> Personal configure
+{{- end }}
+
+{{- if eq .chezmoi.hostname "tako50" }}
+
+# >>> Quantum Espresso configure >>>
+if [[ -d "/usr/local/bin/qe-7.2" ]] ; then
+  export PATH="/usr/local/bin/qe-1.7.2${PATH:+:${PATH}}"
+fi
+# <<< Quantum Espresso configure <<<
+
+# >>> XCrySDen configure >>>
+if [[ -d "/usr/local/bin/xcrysden-1.6.2" ]] ; then
+  export PATH="/usr/local/bin/xcrysden-1.6.2${PATH:+:${PATH}}"
+elif [[ -d "/usr/local/bin/xcrysden-1.5.60" ]] ; then
+  export PATH="/usr/local/bin/xcrysden-1.5.60${PATH:+:${PATH}}"
+fi
+# <<< XCrySDen configure <<<
+
+# >>> VESTA configure >>>
+if [[ -d "/usr/local/bin/VESTA-3.5.8" ]] ; then
+  export PATH="/usr/local/bin/VESTA-3.5.8${PATH:+:${PATH}}"
+  export LD_LIBRARY_PATH="/usr/local/bin/VESTA-3.5.8${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
+fi
+# <<< VESTA configure <<<
+{{- end }}
+
+# >>> Personal configure >>>
+{{- if eq .chezmoi.hostname "tako57" }}
 export PATH="${HOME}/analysis/bondvec2csv${PATH:+:${PATH}}"
-# <<< Personal configure
-{{ end }}
-{{ end }}
+{{- end }}
+# <<< Personal configure <<<
