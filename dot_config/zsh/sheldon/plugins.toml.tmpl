@@ -42,7 +42,17 @@ remote = "https://raw.githubusercontent.com/sorin-ionescu/prezto/master/modules/
 github = "ohmyzsh/ohmyzsh"
 proto = "ssh"
 dir = "plugins"
-use = ["{command-not-found,gpg-agent}/*.plugin.zsh"]
+use = ["{command-not-found,git}/*.plugin.zsh"]
+
+[plugins.auth-agent]
+github = "ohmyzsh/ohmyzsh"
+proto = "ssh"
+dir = "plugins"
+{{- if eq ( substr 0 4 .chezmoi.hostname ) "tako" }}
+use = ["ssh-agent/*.plugin.zsh"]
+{{- else }}
+use = ["gpg-agent/*.plugin.zsh"]
+{{- end }}
 
 [plugins.dot-expansion]
 github = "wazum/zsh-directory-dot-expansion"
