@@ -20,7 +20,9 @@ proto = "ssh"
 apply = ["source"]
 
 [templates]
-defer = "{{ hooks?.pre | nl }}{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}{{ hooks?.post | nl }}"
+defer = """
+{{ "{{ hooks?.pre | nl }}{% for file in files %}zsh-defer source {{ file }}" }}
+{{ "{% endfor %}{{ hooks?.post | nl }}" }}"""
 
 [plugins]
 # For example:
@@ -76,17 +78,17 @@ use = ["F-Sy-H.plugin.zsh"]
 [plugins.zsh-history-substring-search]
 github = "zsh-users/zsh-history-substring-search"
 proto = "ssh"
-use = ["{{ name }}.zsh"]
+use = [{{ "\"{{ name }}.zsh\"" }}]
 
 [plugins.zsh-autosuggestions]
 github = "zsh-users/zsh-autosuggestions"
 proto = "ssh"
-use = ["{{ name }}.zsh"]
+use = [{{ "\"{{ name }}.zsh\"" }}]
 
 [plugins.git-prompt]
 github = "woefe/git-prompt.zsh"
 proto = "ssh"
-use = ["{{ name }}.zsh"]
+use = [{{ "\"{{ name }}.zsh\"" }}]
 
 [plugins.syncload]
 local = "~/.config/zsh"
