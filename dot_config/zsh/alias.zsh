@@ -119,7 +119,9 @@ fi
 # >>> ls alias configure >>>
 alias l="ls -1hA"
 alias ll="ls -lh"
+alias lv="ll -v"
 alias la="ll -A"
+alias lva="ll -vA"
 alias kk="ll"
 alias lll="ll"
 alias lm="la | ${PAGER}"
