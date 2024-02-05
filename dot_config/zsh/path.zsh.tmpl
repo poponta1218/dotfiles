@@ -54,9 +54,9 @@ unset gitrepopath
 # >>> Intel compiler configure >>>
 if [[ -d "/opt/intel/oneapi" ]] ; then
   source "/opt/intel/oneapi/setvars.sh" > /dev/null 2>&1
-elif [[ -d "/opt/intel/compilers_and_libraries"]] ; then
+elif [[ -d "/opt/intel/compilers_and_libraries" ]] ; then
   source "/opt/intel/compilers_and_libraries/linux/compilervars.sh" > /dev/null 2>&1
-elif [[ -d "/opt/intel/composerxe"]] ; then
+elif [[ -d "/opt/intel/composerxe" ]] ; then
   source "/opt/intel/composerxe/bin/compilervars.sh" > /dev/null 2>&1
 fi
 # <<< Intel compiler configure <<<
