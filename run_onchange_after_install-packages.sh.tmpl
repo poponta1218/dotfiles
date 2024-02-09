@@ -1,0 +1,6 @@
+{{- if eq .chezmoi.os "linux" -}}
+#!/bin/sh
+
+mise install --yes
+mise upgrade --yes
+{{- end }}

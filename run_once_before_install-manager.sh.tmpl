@@ -1,0 +1,10 @@
+{{- if eq .chezmoi.os "linux" -}}
+#!/bin/sh
+
+# Install Sheldon
+curl --proto '=https' -fLsS https://rossmacarthur.github.io/install/crate.sh |
+  bash -s -- --repo rossmacarthur/sheldon --to ~/.local/bin
+
+# Install mise
+curl https://mise.run | sh
+{{- end }}
