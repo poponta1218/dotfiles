@@ -49,7 +49,7 @@ if [[ -e "${gitrepopath}" ]] ; then
 fi
 unset gitrepopath
 # <<< Shell-utilities configure <<<
-{{- if eq ( substr 0 4 .chezmoi.hostname ) "tako" }}
+{{- if ( or ( eq ( substr 0 4 .chezmoi.hostname ) "tako") ( eq .chezmoi.username "tako" ) )}}
 
 # >>> Intel compiler configure >>>
 if [[ -d "/opt/intel/oneapi" ]] ; then
@@ -60,6 +60,7 @@ elif [[ -d "/opt/intel/composerxe" ]] ; then
   source "/opt/intel/composerxe/bin/compilervars.sh" > /dev/null
 fi
 # <<< Intel compiler configure <<<
+{{- if eq ( substr 0 4 .chezmoi.hostname ) "tako" }}
 
 # >>> MPI configure >>>
 if [[ -d "/opt/mpich2" ]] ; then
@@ -114,6 +115,7 @@ if [[ -d "${HOME}/xTB/xtb-6.5.1" ]] ; then
 # export MKL_NUM_THREADS=4
 fi
 # <<< xTB 6.5.1 configure <<<
+{{- end }}
 {{- end }}
 
 {{- if eq .chezmoi.hostname "tako50" }}
