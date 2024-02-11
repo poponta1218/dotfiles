@@ -1,0 +1,31 @@
+[user]
+  name = {{ .git.name | quote }}
+  email = {{ .git.email | quote }}
+  signingkey = {{ .git.signingkey | quote }}
+
+[core]
+{{- if eq .chezmoi.os ( or "linux" "darwin" ) }}
+  autocrlf = input
+{{- else if eq .chezmoi.os "windows" }}
+  autocrlf = true
+{{- end }}
+  safecrlf = true
+  ignorecase = false
+  quotepath = false
+
+[merge]
+  ff = false
+
+[push]
+  default = simple
+
+[pull]
+  ff = only
+{{- if ne ( substr 0 4 .chezmoi.hostname ) "tako" }}
+
+[commit]
+  gpgsign = true
+
+[gpg]
+  program = /usr/local/bin/gpg
+{{- end }}
