@@ -1,0 +1,10 @@
+# vim: ft=toml
+
+{{ $gitname := promptStringOnce . "gitname" "Your git name" }}
+{{ $gitemail := promptStringOnce . "gitemail" "Your github email" }}
+{{ $gitsigningkey := promptStringOnce . "gitsigningkey" "Your PGP signing key" }}
+
+[data.git]
+  name = {{ $gitname | quote }}
+  email = {{ $gitemail | quote }}
+  signingkey = {{ $gitsigningkey | quote }}
