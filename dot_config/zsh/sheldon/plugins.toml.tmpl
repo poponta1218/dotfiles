@@ -18,7 +18,6 @@ apply = ["defer"]
 
 [plugins.zsh-defer]
 github = "romkatv/zsh-defer"
-proto = "ssh"
 apply = ["source"]
 
 [templates]
@@ -44,13 +43,11 @@ remote = "https://raw.githubusercontent.com/sorin-ionescu/prezto/master/modules/
 
 [plugins.ohmyzsh-plugin]
 github = "ohmyzsh/ohmyzsh"
-proto = "ssh"
 dir = "plugins"
 use = ["{command-not-found,git}/*.plugin.zsh"]
 
 [plugins.auth-agent]
 github = "ohmyzsh/ohmyzsh"
-proto = "ssh"
 dir = "plugins"
 {{- if eq ( substr 0 4 .chezmoi.hostname ) "tako" }}
 use = ["ssh-agent/*.plugin.zsh"]
@@ -60,36 +57,29 @@ use = ["gpg-agent/*.plugin.zsh"]
 
 [plugins.dot-expansion]
 github = "wazum/zsh-directory-dot-expansion"
-proto = "ssh"
 
 [plugins.cmd-time]
 github = "popstas/zsh-command-time"
-proto = "ssh"
 
 [plugins.zsh-completions]
 github = "zsh-users/zsh-completions"
-proto = "ssh"
 dir = "src"
 apply = ["fpath"]
 
 [plugins.faster-syntax-highlighting]
 github = "z-shell/F-Sy-H"
-proto = "ssh"
 use = ["F-Sy-H.plugin.zsh"]
 
 [plugins.zsh-history-substring-search]
 github = "zsh-users/zsh-history-substring-search"
-proto = "ssh"
 use = [{{ "\"{{ name }}.zsh\"" }}]
 
 [plugins.zsh-autosuggestions]
 github = "zsh-users/zsh-autosuggestions"
-proto = "ssh"
 use = [{{ "\"{{ name }}.zsh\"" }}]
 
 [plugins.git-prompt]
 github = "woefe/git-prompt.zsh"
-proto = "ssh"
 use = [{{ "\"{{ name }}.zsh\"" }}]
 
 [plugins.syncload]
