@@ -1,11 +1,15 @@
-{{- if eq .chezmoi.os "linux" -}}
+{{- if eq .chezmoi.os ( or "linux" "darwin" ) -}}
 #!/bin/sh
 # vim: ft=sh
 
 # Install Sheldon
-curl --proto '=https' -fLsS https://rossmacarthur.github.io/install/crate.sh |
-  bash -s -- --repo rossmacarthur/sheldon --to ~/.local/bin
+if [[ ! -f ~/.local/bin/sheldon ]]; then
+  curl --proto '=https' -fLsS https://rossmacarthur.github.io/install/crate.sh |
+    bash -s -- --repo rossmacarthur/sheldon --to ~/.local/bin
+fi
 
 # Install mise
-curl https://mise.run | sh
+if [[ ! -f ~/.local/bin/mise ]]; then
+  curl https://mise.run | sh
+fi
 {{- end }}
