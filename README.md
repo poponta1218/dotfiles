@@ -16,9 +16,10 @@ My dotfiles managed by [chezmoi](https://www.chezmoi.io/).
 ```bash
 sh -c "$(curl -fsLS get.chezmoi.io)" -- -b ${HOME}/.local/bin init --apply poponta1218 && \
 rm -rf ${HOME}/.local/bin/chezmoi
-# Prompt asks you to enter your git username, email, and PGP signing key.
-# When you don't type these, these are set to be empty.
 ```
+
+Prompt asks you to enter your git username, email, and PGP signing key.  
+When you don't type these, these are set to be empty.
 
 ## 3. Update dotfiles
 
