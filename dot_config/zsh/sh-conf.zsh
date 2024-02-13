@@ -14,6 +14,7 @@ setopt AUTO_MENU
 setopt AUTO_LIST
 setopt AUTO_PARAM_SLASH
 setopt EXTENDED_GLOB
+setopt NO_NO_MATCH
 unsetopt MENU_COMPLETE
 unsetopt FLOW_CONTROL
 unsetopt LIST_BEEP
