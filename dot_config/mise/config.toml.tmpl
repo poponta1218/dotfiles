@@ -2,7 +2,6 @@
 
 [tools]
 bat = "latest"
-bitwarden = "latest"
 chezmoi = "latest"
 choose = "latest"
 delta = "latest"
@@ -15,6 +14,7 @@ ripgrep = "latest"
 tokei = "latest"
 zoxide = "latest"
 {{- if ne ( substr 0 4 .chezmoi.hostname ) "tako" }}
+bitwarden = "latest"
 go = "latest"
 julia = "latest"
 node = "latest"

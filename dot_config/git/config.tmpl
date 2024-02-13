@@ -3,7 +3,9 @@
 [user]
   name = {{ .git.name | quote }}
   email = {{ .git.email | quote }}
+{{- if ne ( substr 0 4 .chezmoi.hostname ) "tako" }}
   signingkey = {{ .git.signingkey | quote }}
+{{- end }}
 
 [core]
 {{- if eq .chezmoi.os ( or "linux" "darwin" ) }}
@@ -14,6 +16,9 @@
   safecrlf = true
   ignorecase = false
   quotepath = false
+
+[url "git@github.com:"]
+  pushInsteadOf = https://github.com/
 
 [merge]
   ff = false
@@ -29,5 +34,5 @@
   gpgsign = true
 
 [gpg]
-  program = /usr/local/bin/gpg
+  program = /usr/bin/gpg
 {{- end }}
