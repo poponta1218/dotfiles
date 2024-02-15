@@ -1,0 +1,26 @@
+# vim: ft=sshconfig
+
+Host *
+  ForwardAgent yes
+  ForwardX11Trusted yes
+  ServerAliveInterval 60
+  TCPKeepAlive yes
+  XAuthLocation /usr/bin/xauth
+
+Host github github.com
+  HostName github.com
+  User git
+{{- if ne ( substr 0 4 .chezmoi.hostname ) "tako" }}
+  IdentityFile ~/.ssh/id_ed25519_github.pub
+{{- else if ge ( atoi ( substr 4 2 .chezmoi.hostname ) ) 58 }}
+  IdentityFile ~/.ssh/id_ed25519_github
+{{- else }}
+  IdentityFile ~/.ssh/id_ecdsa_github
+{{- end }}
+{{- if eq .chezmoi.username "tako" }}
+
+Host 192.168.0.32
+  HostName tako32
+  HostKeyAlgorithm +ssh-dss,ssh-rsa
+  PublicKeyAcceptedAlgorithms +ssh-rsa
+{{- end }}
