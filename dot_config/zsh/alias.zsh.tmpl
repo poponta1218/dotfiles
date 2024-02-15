@@ -81,16 +81,16 @@ alias pbp="pbpaste"
 # >>> Download helper configure >>>
 {{- if ( and ( eq ( substr 0 4 .chezmoi.hostname) "tako" ) ( le ( atoi ( substr 4 6 .chezmoi.hostname ) ) 58 ) ) }}
 if (( ${+commands[aria2c]} )) ; then
-  alias aria2c="${aliases[aria2c]:-aria2c} --check-certificate=false"
+  alias aria2c="aria2c --check-certificate=false"
 fi
 if (( ${+commands[axel]} )) ; then
-  alias axel="${aliases[axel]:-axel} --insecure"
+  alias axel="axel --insecure"
 fi
 if (( ${+commands[wget]} )) ; then
-  alias wget="${aliases[wget]:-wget} --no-check-certificate"
+  alias wget="wget --no-check-certificate"
 fi
 if (( ${+commands[curl]} )) ; then
-  alias curl="${aliases[curl]:-curl} --insecure"
+  alias curl="curl --insecure"
 fi
 
 {{- end }}
