@@ -79,17 +79,7 @@ alias pbp="pbpaste"
 # <<< Clipboard alias configure <<<
 
 # >>> Download helper configure >>>
-if (( ${+commands[aria2c]} )) ; then
-  alias get="aria2c --max-connection-per-server=5 --continue"
-elif (( ${+commands[axel]} )) ; then
-  alias get="axel --num-connections=5 --alternate"
-elif (( ${+commands[wget]} )) ; then
-  alias get="wget --continue --progress=bar --timestamping"
-elif (( ${+commands[curl]} )) ; then
-  alias get="curl --continue-at - --location --progress-bar --remote-name --remote-time"
-fi
 {{- if ( and ( eq ( substr 0 4 .chezmoi.hostname) "tako" ) ( le ( atoi ( substr 4 6 .chezmoi.hostname ) ) 58 ) ) }}
-
 if (( ${+commands[aria2c]} )) ; then
   alias aria2c="${aliases[aria2c]:-aria2c} --check-certificate=false"
 fi
@@ -102,7 +92,17 @@ fi
 if (( ${+commands[curl]} )) ; then
   alias curl="${aliases[curl]:-curl} --insecure"
 fi
+
 {{- end }}
+if (( ${+commands[aria2c]} )) ; then
+  alias get="${aliases[aria2c]:-aria2c} --max-connection-per-server=5 --continue"
+elif (( ${+commands[axel]} )) ; then
+  alias get="${aliases[axel]:-axel} --num-connections=5 --alternate"
+elif (( ${+commands[wget]} )) ; then
+  alias get="${aliases[wget]:-wget} --continue --progress=bar --timestamping"
+elif (( ${+commands[curl]} )) ; then
+  alias get="${aliases[curl]:-curl} --continue-at - --location --progress-bar --remote-name --remote-time"
+fi
 # <<< Download helper configure <<<
 
 # >>> Directory server via HTTP >>>
