@@ -88,7 +88,7 @@ elif (( ${+commands[wget]} )) ; then
 elif (( ${+commands[curl]} )) ; then
   alias get="curl --continue-at - --location --progress-bar --remote-name --remote-time"
 fi
-{{- if ( and ( eq ( substr 0 4 .chezmoi.hostname) "tako" ) ( le ( atoi ( substr 4 2 .chezmoi.hostname ) ) 58 ) ) }}
+{{- if ( and ( eq ( substr 0 4 .chezmoi.hostname) "tako" ) ( le ( atoi ( substr 4 6 .chezmoi.hostname ) ) 58 ) ) }}
 
 if (( ${+commands[aria2c]} )) ; then
   alias aria2c="${aliases[aria2c]:-aria2c} --check-certificate=false"
