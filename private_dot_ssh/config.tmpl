@@ -12,7 +12,7 @@ Host github github.com
   User git
 {{- if ne ( substr 0 4 .chezmoi.hostname ) "tako" }}
   IdentityFile ~/.ssh/id_ed25519_github.pub
-{{- else if ge ( atoi ( substr 4 2 .chezmoi.hostname ) ) 58 }}
+{{- else if ge ( atoi ( substr 4 6 .chezmoi.hostname ) ) 58 }}
   IdentityFile ~/.ssh/id_ed25519_github
 {{- else }}
   IdentityFile ~/.ssh/id_ecdsa_github
