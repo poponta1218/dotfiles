@@ -1,4 +1,4 @@
-# vim: ft=sh
+# vim: set ft=sh
 
 # >>> Sheldon initialize >>>
 function source {

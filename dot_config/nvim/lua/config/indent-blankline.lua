@@ -1,3 +1,2 @@
--- vim: ft=lua
-
+-- vim: set ft=lua
 require("ibl").setup({})

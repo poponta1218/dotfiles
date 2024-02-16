@@ -1,5 +1,4 @@
--- vim: ft=lua
-
+-- vim: set ft=lua
 if vim.fn.has("wsl") == 1 then
     vim.g.clipboard = {
         name = "WslClipboard",

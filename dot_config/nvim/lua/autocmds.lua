@@ -1,5 +1,4 @@
--- vim: ft=lua
-
+-- vim: set ft=lua
 vim.scriptencoding = "utf-8"
 
 local augroup = vim.api.nvim_create_augroup -- Create/get autocommand group

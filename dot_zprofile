@@ -1,4 +1,4 @@
-# vim: ft=sh
+# vim: set ft=sh
 
 # >>> Language configure >>>
 if [[ -z "${LANG}" ]]; then
