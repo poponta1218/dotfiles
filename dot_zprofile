@@ -1,49 +1,5 @@
 # vim: ft=sh
 
-# >>> Browser configure >>>
-if [[ -z "${BROWSER}" && "${OSTYPE}" == darwin* ]]; then
-  export BROWSER="open"
-fi
-# <<< Browser configure <<<
-
-# >>> Editors configure >>>
-if [[ -z "${EDITOR}" ]]; then
-  if (( ${+commands[nvim]} )); then
-    export EDITOR="nvim"
-  elif (( ${+commands[vi]} )); then
-    export EDITOR="vi"
-  elif (( ${+commands[emacs]} )); then
-    export EDITOR="emacs"
-  elif (( ${+commands[nano]} )); then
-    export EDITOR="nano"
-  else
-    export EDITOR=""
-  fi
-fi
-
-if [[ -z "${VISUAL}" ]]; then
-  if (( ${+commands[nvim]} )); then
-    export EDITOR="nvim"
-  elif (( ${+commands[vi]} )); then
-    export VISUAL="vi"
-  elif (( ${+commands[emacs]} )); then
-    export VISUAL="emacs"
-  elif (( ${+commands[nano]} )); then
-    export VISUAL="nano"
-  else
-    export VISUAL=""
-  fi
-fi
-
-if [[ -z "${PAGER}" ]]; then
-  if (( ${+commands[less]} )); then
-    export PAGER="less"
-  else
-    export PAGER="more"
-  fi
-fi
-# <<< Editors configure <<<
-
 # >>> Language configure >>>
 if [[ -z "${LANG}" ]]; then
   export LANG="en_US.UTF-8"
@@ -63,13 +19,3 @@ path=(
   ${path}
 )
 # <<< Paths configure <<<
-
-# >>> Less configure >>>
-if [[ -z "${LESS}" ]]; then
-  export LESS="--chop-long-lines --ignore-case --jump-target=4 --LONG-PROMPT --no-init --quit-if-one-screen --RAW-CONTROL-CHARS"
-fi
-
-if [[ -z "${LESSOPEN}" ]] && (( ${#commands[(i)lesspipe(|.sh)]} )); then
-  export LESSOPEN="| /usr/bin/env ${commands[(i)lesspipe(|.sh)]} %s 2>&-"
-fi
-# <<< Less configure <<<
