@@ -1,75 +1,6 @@
 # vim: ft=sh
 
-# >>> General configure >>>
-XDG_CONFIG_HOME="${HOME}/.config"
-XDG_CACHE_HOME="${HOME}/.cache"
-XDG_DATA_HOME="${HOME}/.local/share"
-XDG_STATE_HOME="${HOME}/.local/state"
-
-export LD_LIBRARY_PATH="/usr/local/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
-export LIBRARY_PATH="/usr/local/lib${LIBRARY_PATH:+:${LIBRARY_PATH}}"
-
-if [[ "$(uname -r)" == *microsoft* ]] ; then
-  WINDOWS_USER=$(/mnt/c/Windows/System32/cmd.exe /c 'echo %USERNAME%' 2> /dev/null | sed -e 's/\r//g')
-  export PATH="/mnt/c/Users/${WINDOWS_USER}/AppData/Local/Programs/Microsoft VS Code/bin${PATH:+:${PATH}}"
-fi
-unset WINDOWS_USER
-
-export PATH="${HOME}/bin${PATH:+:${PATH}}"
-export PATH="${HOME}/.local/bin${PATH:+:${PATH}}"
-export PATH="/snap/bin${PATH:+:${PATH}}"
-# <<< General configure <<<
-
-# >>> mise configure >>>
-if [[ -e "${HOME}/.local/bin/mise" ]] ; then
-  export PATH="${XDG_DATA_HOME}/mise/shims${PATH:+:${PATH}}"
-fi
-# <<< mise configure <<<
-
-# >>> TeXLive configure >>>
-if [[ -e "/usr/local/texlive" ]] ; then
-  export PATH="/usr/local/texlive/latest/bin/x86_64-linux${PATH:+:${PATH}}"
-  export MANPATH="/usr/local/texlive/latest/texmf-dist/doc/man${MANPATH:+:${MANPATH}}"
-  export INFOPATH="/usr/local/texlive/latest/texmf-dist/doc/info${INFOPATH:+:${INFOPATH}}"
-fi
-# >>> TeXLive configure <<<
-
-# >>> Perl configure >>>
-if [[ -e "${HOME}/perl5" ]] ; then
-  export PATH="${HOME}/perl5/bin${PATH:+:${PATH}}"
-  export PERL5LIB="${HOME}/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
-  export PERL_LOCAL_LIB_ROOT="${HOME}/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
-  export PERL_MB_OPT="--install_base \"${HOME}/perl5\""
-  export PERL_MM_OPT="INSTALL_BASE=${HOME}/perl5"
-fi
-# <<< Perl configure <<<
-
-# >>> Shell-utilities configure >>>
-gitrepopath="${HOME}/git-repo"
-if [[ -e "${gitrepopath}" ]] ; then
-  source "${gitrepopath}/shell-utilities/init.sh"
-fi
-unset gitrepopath
-# <<< Shell-utilities configure <<<
-{{- if ( or ( eq ( substr 0 4 .chezmoi.hostname ) "tako") ( eq .chezmoi.username "tako" ) )}}
-
-# >>> Intel compiler configure >>>
-if [[ -e "/opt/intel/oneapi" ]] ; then
-  source "/opt/intel/oneapi/setvars.sh" > /dev/null
-elif [[ -e "/opt/intel/compilers_and_libraries" ]] ; then
-  source "/opt/intel/compilers_and_libraries/linux/compilervars.sh" intel64 > /dev/null
-elif [[ -e "/opt/intel/composerxe" ]] ; then
-  source "/opt/intel/composerxe/bin/compilervars.sh" intel64 > /dev/null
-fi
-# <<< Intel compiler configure <<<
 {{- if eq ( substr 0 4 .chezmoi.hostname ) "tako" }}
-
-# >>> MPI configure >>>
-if [[ -d "/opt/mpich2" ]] ; then
-  export PATH="/opt/mpich2/bin${PATH:+:${PATH}}"
-fi
-# <<< MPI configure <<<
-
 # >>> Gaussian03 configure >>>
 export g03root="/usr/local/pgi"
 if [[ -d "${g03root}/g03" ]] ; then
@@ -117,7 +48,12 @@ if [[ -d "${HOME}/xTB/xtb-6.5.1" ]] ; then
 # export MKL_NUM_THREADS=4
 fi
 # <<< xTB 6.5.1 configure <<<
-{{- end }}
+
+# >>> MPI configure >>>
+if [[ -d "/opt/mpich2" ]] ; then
+  export PATH="/opt/mpich2/bin${PATH:+:${PATH}}"
+fi
+# <<< MPI configure <<<
 {{- end }}
 
 {{- if eq .chezmoi.hostname "tako50" }}
@@ -143,6 +79,70 @@ if [[ -d "/usr/local/bin/VESTA-3.5.8" ]] ; then
 fi
 # <<< VESTA configure <<<
 {{- end }}
+
+{{- if ( or ( eq ( substr 0 4 .chezmoi.hostname ) "tako") ( eq .chezmoi.username "tako" ) )}}
+
+# >>> Intel compiler configure >>>
+if [[ -e "/opt/intel/oneapi" ]] ; then
+  source "/opt/intel/oneapi/setvars.sh" > /dev/null
+elif [[ -e "/opt/intel/compilers_and_libraries" ]] ; then
+  source "/opt/intel/compilers_and_libraries/linux/compilervars.sh" intel64 > /dev/null
+elif [[ -e "/opt/intel/composerxe" ]] ; then
+  source "/opt/intel/composerxe/bin/compilervars.sh" intel64 > /dev/null
+fi
+# <<< Intel compiler configure <<<
+{{- end }}
+
+# >>> mise configure >>>
+if [[ -e "${HOME}/.local/bin/mise" ]] ; then
+  export PATH="${XDG_DATA_HOME}/mise/shims${PATH:+:${PATH}}"
+fi
+# <<< mise configure <<<
+
+# >>> TeXLive configure >>>
+if [[ -e "/usr/local/texlive" ]] ; then
+  export PATH="/usr/local/texlive/latest/bin/x86_64-linux${PATH:+:${PATH}}"
+  export MANPATH="/usr/local/texlive/latest/texmf-dist/doc/man${MANPATH:+:${MANPATH}}"
+  export INFOPATH="/usr/local/texlive/latest/texmf-dist/doc/info${INFOPATH:+:${INFOPATH}}"
+fi
+# >>> TeXLive configure <<<
+
+# >>> Perl configure >>>
+if [[ -e "${HOME}/perl5" ]] ; then
+  export PATH="${HOME}/perl5/bin${PATH:+:${PATH}}"
+  export PERL5LIB="${HOME}/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
+  export PERL_LOCAL_LIB_ROOT="${HOME}/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
+  export PERL_MB_OPT="--install_base \"${HOME}/perl5\""
+  export PERL_MM_OPT="INSTALL_BASE=${HOME}/perl5"
+fi
+# <<< Perl configure <<<
+
+# >>> Shell-utilities configure >>>
+gitrepopath="${HOME}/git-repo"
+if [[ -e "${gitrepopath}" ]] ; then
+  source "${gitrepopath}/shell-utilities/init.sh"
+fi
+unset gitrepopath
+# <<< Shell-utilities configure <<<
+# >>> General configure >>>
+XDG_CONFIG_HOME="${HOME}/.config"
+XDG_CACHE_HOME="${HOME}/.cache"
+XDG_DATA_HOME="${HOME}/.local/share"
+XDG_STATE_HOME="${HOME}/.local/state"
+
+export LD_LIBRARY_PATH="/usr/local/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
+export LIBRARY_PATH="/usr/local/lib${LIBRARY_PATH:+:${LIBRARY_PATH}}"
+
+if [[ "$(uname -r)" == *microsoft* ]] ; then
+  WINDOWS_USER=$(/mnt/c/Windows/System32/cmd.exe /c 'echo %USERNAME%' 2> /dev/null | sed -e 's/\r//g')
+  export PATH="/mnt/c/Users/${WINDOWS_USER}/AppData/Local/Programs/Microsoft VS Code/bin${PATH:+:${PATH}}"
+fi
+unset WINDOWS_USER
+
+export PATH="${HOME}/bin${PATH:+:${PATH}}"
+export PATH="${HOME}/.local/bin${PATH:+:${PATH}}"
+export PATH="/snap/bin${PATH:+:${PATH}}"
+# <<< General configure <<<
 
 # >>> Personal configure >>>
 {{- if eq .chezmoi.hostname "tako57" }}
