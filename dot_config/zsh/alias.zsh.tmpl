@@ -43,7 +43,7 @@ alias cpi="${aliases[cp]:-cp} -i"
 alias lni="${aliases[ln]:-ln} -i"
 alias mvi="${aliases[mv]:-mv} -i"
 alias rmi="${aliases[rm]:-rm} -i"
-if (( ${+commands[safe-rm]} && ! ${+commands[safe-rmdir]} )) ; then
+if (( ${+commands[safe-rm]} && ! ${+commands[safe-rmdir]} )); then
   alias rm=safe-rm
 fi
 
@@ -52,22 +52,22 @@ alias chown="chown --preserve-root -v"
 # <<< General alias configure <<<
 
 # >>> Clipboard alias configure >>>
-if [[ "${OSTYPE}" == darwin* ]] ; then
+if [[ "${OSTYPE}" == darwin* ]]; then
   alias o="open"
-elif [[ "${OSTYPE}" == cygwin* ]] ; then
+elif [[ "${OSTYPE}" == cygwin* ]]; then
   alias o="cygstart"
   alias pbcopy="tee > /dev/clipboard"
   alias pbpaste="cat /dev/clipboard"
-elif [[ "${OSTYPE}" == linux-android ]] ; then
+elif [[ "${OSTYPE}" == linux-android ]]; then
   alias o="termux-open"
   alias pbcopy="termux-clipboard-set"
   alias pbpaste="termux-clipboard-get"
 else
   alias o="xdg-open"
-  if (( ${+commands[xclip]} )) ; then
+  if (( ${+commands[xclip]} )); then
     alias pbcopy="xclip -selection clipboard -in"
     alias pbpaste="xclip -selection clipboard -out"
-  elif (( ${+commands[xsel]} )) ; then
+  elif (( ${+commands[xsel]} )); then
     alias pbcopy="xsel --clipboard --input"
     alias pbpaste="xsel --clipboard --output"
   fi
@@ -79,40 +79,40 @@ alias pbp="pbpaste"
 # <<< Clipboard alias configure <<<
 
 # >>> Download helper configure >>>
-{{- if ( and ( eq ( substr 0 4 .chezmoi.hostname) "tako" ) ( le ( atoi ( substr 4 6 .chezmoi.hostname ) ) 58 ) ) }}
-if (( ${+commands[aria2c]} )) ; then
+{{- if ( and ( contains .chezmoi.hostname "tako" ) ( le ( atoi ( substr 4 6 .chezmoi.hostname ) ) 58 ) ) }}
+if (( ${+commands[aria2c]} )); then
   alias aria2c="aria2c --check-certificate=false"
 fi
-if (( ${+commands[axel]} )) ; then
+if (( ${+commands[axel]} )); then
   alias axel="axel --insecure"
 fi
-if (( ${+commands[wget]} )) ; then
+if (( ${+commands[wget]} )); then
   alias wget="wget --no-check-certificate"
 fi
-if (( ${+commands[curl]} )) ; then
+if (( ${+commands[curl]} )); then
   alias curl="curl --insecure"
 fi
 
 {{- end }}
-if (( ${+commands[aria2c]} )) ; then
+if (( ${+commands[aria2c]} )); then
   alias get="${aliases[aria2c]:-aria2c} --max-connection-per-server=5 --continue"
-elif (( ${+commands[axel]} )) ; then
+elif (( ${+commands[axel]} )); then
   alias get="${aliases[axel]:-axel} --num-connections=5 --alternate"
-elif (( ${+commands[wget]} )) ; then
+elif (( ${+commands[wget]} )); then
   alias get="${aliases[wget]:-wget} --continue --progress=bar --timestamping"
-elif (( ${+commands[curl]} )) ; then
+elif (( ${+commands[curl]} )); then
   alias get="${aliases[curl]:-curl} --continue-at - --location --progress-bar --remote-name --remote-time"
 fi
 # <<< Download helper configure <<<
 
 # >>> Directory server via HTTP >>>
-if (( $#commands[(i)python(|[23])] )) ; then
+if (( $#commands[(i)python(|[23])] )); then
   autoload -Uz is-at-least
-  if (( $+commands[python3] )) ; then
+  if (( $+commands[python3] )); then
     alias http-serve="python3 -m http.server"
-  elif (( $+commands[python2] )) ; then
+  elif (( $+commands[python2] )); then
     alias http-serve="python2 -m SimpleHTTPServer"
-  elif is-at-least 3 ${"$(python --version 2>&1)"[(w)2]} ; then
+  elif is-at-least 3 ${"$(python --version 2>&1)"[(w)2]}; then
     alias http-serve="python -m http.server"
   else
     alias http-serve="python -m SimpleHTTPServer"
@@ -124,7 +124,7 @@ fi
 alias df="df -kh"
 alias du="du -kh"
 
-if [[ "${OSTYPE}" == darwin* || "${OSTYPE}" == *bsd* ]] ; then
+if [[ "${OSTYPE}" == darwin* || "${OSTYPE}" == *bsd* ]]; then
   alias topc="top -o cpu"
   alias topm="top -o vsize"
 else
@@ -142,7 +142,7 @@ alias lva="ll -vA"
 alias kk="ll"
 alias lll="ll"
 alias lm="la | ${PAGER}"
-if (( ${+commands[eza]} )) ; then
+if (( ${+commands[eza]} )); then
   alias ls="eza"
   alias ll="${aliases[ll]} --icons --git"
   alias lr="ll -T"
@@ -152,7 +152,7 @@ if (( ${+commands[eza]} )) ; then
   alias lc="ll -schanged"
 else
   alias lr="ll -R"
-  if [[ ${(@M)${(f)"$(ls --version 2>&1)"}:#*GNU *} ]] ; then
+  if [[ ${(@M)${(f)"$(ls --version 2>&1)"}:#*GNU *} ]]; then
     alias lx="ll -XB"
   fi
   alias lk="ll -Sr"
@@ -178,7 +178,7 @@ alias restart="kill -CONT"
 # <<< kill alias configure <<<
 
 # >>> vim alias configure >>>
-if (( ${+commands[nvim]} )) ; then
+if (( ${+commands[nvim]} )); then
   alias vi="nvim"
   alias vim="nvim"
   alias neovim="nvim"
@@ -189,7 +189,7 @@ alias vu="vi"
 # <<< vim alias configure <<<
 
 # >>> Personal script alias configure >>>
-if (( ${commands[ejobs]} )) ; then
+if (( ${commands[ejobs]} )); then
   alias pid="ejobs"
 fi
 # <<< Personal script alias configure <<<

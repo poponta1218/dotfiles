@@ -1,3 +1,5 @@
+# vim: ft=sh
+
 # >>> Git prompt configure >>>
 ZSH_THEME_GIT_PROMPT_PREFIX="("
 ZSH_THEME_GIT_PROMPT_SUFFIX=")"

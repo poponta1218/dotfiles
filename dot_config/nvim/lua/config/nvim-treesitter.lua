@@ -1,3 +1,5 @@
+-- vim: ft=lua
+
 require("nvim-treesitter").setup({
     highlight = {
         enable = true,

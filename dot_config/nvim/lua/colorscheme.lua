@@ -1,3 +1,5 @@
+-- vim: ft=lua
+
 -- vim.cmd([[
 -- try
 --   colorscheme nordfox

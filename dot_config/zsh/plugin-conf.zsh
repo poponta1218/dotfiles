@@ -1,3 +1,5 @@
+# vim: ft=sh
+
 zmodload -F zsh/terminfo +p:terminfo
 # >>> Autosuggestions configure >>>
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1

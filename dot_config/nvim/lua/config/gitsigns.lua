@@ -1,3 +1,5 @@
+-- vim: ft=lua
+
 require("gitsigns").setup({
     signs = {
         add = {
