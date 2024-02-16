@@ -79,7 +79,7 @@ alias pbp="pbpaste"
 # <<< Clipboard alias configure <<<
 
 # >>> Download helper configure >>>
-{{- if ( and ( eq ( substr 0 4 .chezmoi.hostname) "tako" ) ( le ( atoi ( substr 4 6 .chezmoi.hostname ) ) 58 ) ) }}
+{{- if ( and ( contains .chezmoi.hostname "tako" ) ( le ( atoi ( substr 4 6 .chezmoi.hostname ) ) 58 ) ) }}
 if (( ${+commands[aria2c]} )) ; then
   alias aria2c="aria2c --check-certificate=false"
 fi

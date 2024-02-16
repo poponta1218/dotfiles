@@ -1,6 +1,6 @@
 # vim: ft=sh
 
-{{- if eq ( substr 0 4 .chezmoi.hostname ) "tako" }}
+{{- if contains "tako" .chezmoi.hostname }}
 # >>> Gaussian03 configure >>>
 export g03root="/usr/local/pgi"
 if [[ -d "${g03root}/g03" ]] ; then
@@ -80,7 +80,7 @@ fi
 # <<< VESTA configure <<<
 {{- end }}
 
-{{- if ( or ( eq ( substr 0 4 .chezmoi.hostname ) "tako") ( eq .chezmoi.username "tako" ) )}}
+{{- if ( or ( contains "tako" .chezmoi.hostname ) ( eq .chezmoi.username "tako" ) )}}
 
 # >>> Intel compiler configure >>>
 if [[ -e "/opt/intel/oneapi" ]] ; then
@@ -134,11 +134,14 @@ XDG_STATE_HOME="${HOME}/.local/state"
 export LD_LIBRARY_PATH="/usr/local/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
 export LIBRARY_PATH="/usr/local/lib${LIBRARY_PATH:+:${LIBRARY_PATH}}"
 
+{{- if contains "WSL" .chezmoi.kernel.osrelease }}
+
 if [[ "$(uname -r)" == *microsoft* ]] ; then
   WINDOWS_USER=$(/mnt/c/Windows/System32/cmd.exe /c 'echo %USERNAME%' 2> /dev/null | sed -e 's/\r//g')
   export PATH="/mnt/c/Users/${WINDOWS_USER}/AppData/Local/Programs/Microsoft VS Code/bin${PATH:+:${PATH}}"
 fi
 unset WINDOWS_USER
+{{- end }}
 
 export PATH="${HOME}/bin${PATH:+:${PATH}}"
 export PATH="${HOME}/.local/bin${PATH:+:${PATH}}"
