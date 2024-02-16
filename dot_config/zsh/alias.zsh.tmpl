@@ -218,7 +218,9 @@ alias lu="lt -u"
 # <<< ls alias configure <<<
 
 # >>> cat alias configure >>>
-alias cat="bat --paging=never"
+if (( ${+commands[bat]} )); then
+  alias cat="bat --paging=never"
+fi
 # <<< cat alias configure <<<
 
 
