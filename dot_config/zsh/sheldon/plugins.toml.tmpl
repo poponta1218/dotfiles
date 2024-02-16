@@ -87,9 +87,9 @@ local = "~/.config/zsh"
 use = ["{keybind,path,sh-conf}.zsh"]
 apply = ["source"]
 
+[plugins.mise]
+inline = 'zsh-defer eval "$(mise activate zsh)"'
+
 [plugins.lazyload]
 local = "~/.config/zsh"
 use = ["{alias,plugin-conf,prompt}.zsh"]
-
-[plugins.mise]
-inline = 'zsh-defer eval "$(mise activate zsh)"'
