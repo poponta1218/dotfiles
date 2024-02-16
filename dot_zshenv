@@ -1,4 +1,5 @@
-# Ensure that a non-login, non-interactive shell has a defined environment.
+# vim: ft=sh
+
 # >>> Zprof initialize >>>
 # zmodload zsh/zprof && zprof
 # >>> Zprof initialize >>>

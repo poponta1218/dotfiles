@@ -1,3 +1,5 @@
+# vim: ft=sh
+
 # >>> Terminal configure >>>
 setopt COMBINING_CHARS
 setopt INTERACTIVE_COMMENTS

@@ -1,3 +1,5 @@
+-- vim: ft=lua
+
 require("base")
 require("autocmds")
 require("options")

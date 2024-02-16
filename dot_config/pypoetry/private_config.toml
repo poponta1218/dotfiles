@@ -1,2 +1,4 @@
+# vim: ft=toml
+
 [virtualenvs]
 in-project = true

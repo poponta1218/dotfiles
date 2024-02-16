@@ -1,3 +1,5 @@
+# vim: ft=sh
+
 # >>> Sheldon initialize >>>
 function source {
   ensure_zcompiled "${1}"

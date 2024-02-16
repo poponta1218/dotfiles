@@ -1,4 +1,5 @@
 #!/usr/bin/env perl
+# vim: ft=perl
 
 # LuaLaTeX
 $lualatex     = 'lualatex -shell-escape -synctex=1 -interaction=nonstopmode';

@@ -1,3 +1,5 @@
+# vim: ft=sh
+
 # >>> Browser configure >>>
 if [[ -z "${BROWSER}" && "${OSTYPE}" == darwin* ]]; then
   export BROWSER="open"

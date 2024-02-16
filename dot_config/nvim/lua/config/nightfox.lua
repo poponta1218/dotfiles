@@ -1,3 +1,5 @@
+-- vim: ft=lua
+
 -- Default options
 require("nightfox").setup({
     options = {

@@ -1,3 +1,5 @@
+-- vim: ft=lua
+
 local opts = {
     noremap = true,
     silent = true,
