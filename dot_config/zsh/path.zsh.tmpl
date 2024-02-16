@@ -3,7 +3,7 @@
 {{- if contains "tako" .chezmoi.hostname }}
 # >>> Gaussian03 configure >>>
 export g03root="/usr/local/pgi"
-if [[ -d "${g03root}/g03" ]]; then
+if [[ -e "${g03root}/g03" ]]; then
   source "${g03root}/g03/bsd/g03.profile"
   export GAUSS_SCRDIR="/scr"
   export PATH="${g03root}/g03${PATH:+:${PATH}}"
@@ -12,7 +12,7 @@ fi
 
 # >>> Gaussian09 configure >>>
 export g09root="/usr/local/pgi"
-if [[ -d "${g09root}/g09" ]]; then
+if [[ -e "${g09root}/g09" ]]; then
   source "${g09root}/g09/bsd/g09.profile"
   export GAUSS_SCRDIR="${HOME}/.scr"
   export PATH="${g09root}/g09${PATH:+:${PATH}}"
@@ -21,7 +21,7 @@ fi
 
 # >>> GRRM11 configure >>>
 export GRRMroot="/usr/local/GRRM11"
-if [[ -d "${GRRMroot}" ]]; then
+if [[ -e "${GRRMroot}" ]]; then
   export subgau="g09"
 # export subgau="./g09grrm"
   export subchk="formchk"
@@ -32,16 +32,16 @@ fi
 # <<< GRRM11 configure <<<
 
 # >>> PIMD configure >>>
-if [[ -d "${HOME}/PIMD-MPI" ]]; then
+if [[ -e "${HOME}/PIMD-MPI" ]]; then
   export PATH="${HOME}/PIMD-MPI/exe${PATH:+:${PATH}}"
-elif [[ -d "${HOME}/pimd" ]]; then
+elif [[ -e "${HOME}/pimd" ]]; then
   export PATH="${HOME}/pimd/exe${PATH:+:${PATH}}"
   export PATH="${HOME}/pimd/exe_xTB${PATH:+:${PATH}}"
 fi
 # <<< PIMD configure <<<
 
 # >>> xTB 6.5.1 configure >>>
-if [[ -d "${HOME}/xTB/xtb-6.5.1" ]]; then
+if [[ -e "${HOME}/xTB/xtb-6.5.1" ]]; then
   source "${HOME}/xTB/xtb-6.5.1/share/xtb/config_env.bash"
   export OMP_NUM_THREADS=1
   export OMP_STACKSIZE=512000
@@ -50,7 +50,7 @@ fi
 # <<< xTB 6.5.1 configure <<<
 
 # >>> MPI configure >>>
-if [[ -d "/opt/mpich2" ]]; then
+if [[ -e "/opt/mpich2" ]]; then
   export PATH="/opt/mpich2/bin${PATH:+:${PATH}}"
 fi
 # <<< MPI configure <<<
@@ -59,21 +59,21 @@ fi
 {{- if eq .chezmoi.hostname "tako50" }}
 
 # >>> Quantum Espresso configure >>>
-if [[ -d "/usr/local/bin/qe-7.2" ]]; then
+if [[ -e "/usr/local/bin/qe-7.2" ]]; then
   export PATH="/usr/local/bin/qe-1.7.2${PATH:+:${PATH}}"
 fi
 # <<< Quantum Espresso configure <<<
 
 # >>> XCrySDen configure >>>
-if [[ -d "/usr/local/bin/xcrysden-1.6.2" ]]; then
+if [[ -e "/usr/local/bin/xcrysden-1.6.2" ]]; then
   export PATH="/usr/local/bin/xcrysden-1.6.2${PATH:+:${PATH}}"
-elif [[ -d "/usr/local/bin/xcrysden-1.5.60" ]]; then
+elif [[ -e "/usr/local/bin/xcrysden-1.5.60" ]]; then
   export PATH="/usr/local/bin/xcrysden-1.5.60${PATH:+:${PATH}}"
 fi
 # <<< XCrySDen configure <<<
 
 # >>> VESTA configure >>>
-if [[ -d "/usr/local/bin/VESTA-3.5.8" ]]; then
+if [[ -e "/usr/local/bin/VESTA-3.5.8" ]]; then
   export PATH="/usr/local/bin/VESTA-3.5.8${PATH:+:${PATH}}"
   export LD_LIBRARY_PATH="/usr/local/bin/VESTA-3.5.8${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
 fi
