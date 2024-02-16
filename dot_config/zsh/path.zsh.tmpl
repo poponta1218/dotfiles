@@ -86,7 +86,7 @@ fi
 if [[ -e "/opt/intel/oneapi" ]]; then
   source "/opt/intel/oneapi/setvars.sh" intel64 >/dev/null
 elif [[ -e "/opt/intel/bin" ]]; then
-  source "/opt/intel/bin/compilervars.sh" intel64 >/dev/null
+  . "/opt/intel/bin/compilervars.sh" intel64 >/dev/null
 fi
 # <<< Intel compiler configure <<<
 {{- end }}
