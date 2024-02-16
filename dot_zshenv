@@ -1,4 +1,4 @@
-# vim: ft=sh
+# vim: set ft=sh
 
 # >>> Zprof initialize >>>
 # zmodload zsh/zprof && zprof

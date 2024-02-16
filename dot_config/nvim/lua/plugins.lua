@@ -1,5 +1,4 @@
--- vim: ft=lua
-
+-- vim: set ft=lua
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
@@ -171,8 +170,8 @@ local neovim_plugins = {
         "folke/which-key.nvim",
         event = "VeryLazy",
         init = function()
-          vim.o.timeout = true
-          vim.o.timeoutlen = 300
+            vim.o.timeout = true
+            vim.o.timeoutlen = 300
         end,
         opts = {},
     },
