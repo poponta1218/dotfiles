@@ -28,7 +28,7 @@ zsh-defer unfunction source ensure_zcompiled
 # <<< Sheldon initialize <<<
 
 # >>> Zprof execute >>>
-# if (which zprof > /dev/null 2>&1) ; then
+# if (which zprof > /dev/null 2>&1); then
 #   zprof | less
 # fi
 # <<< Zprof execute <<<
