@@ -11,10 +11,9 @@ function ensure_zcompiled {
     zcompile "${1}"
   fi
 }
-ensure_zcompiled "${HOME}/.zshrc"
+ensure_zcompiled "${ZDOTDIR}/.zshrc"
 
-ZSH_CONFIG_DIR="${HOME}/.config/zsh"
-export SHELDON_CONFIG_DIR="${ZSH_CONFIG_DIR}/sheldon"
+export SHELDON_CONFIG_DIR="${ZDOTDIR}/sheldon"
 if [[ -e "${SHELDON_CONFIG_DIR}" ]]; then
   sheldon_bin="${HOME}/.local/bin"
   sheldon_cache="${SHELDON_CONFIG_DIR}/sheldon.zsh"
