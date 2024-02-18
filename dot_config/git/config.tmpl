@@ -3,14 +3,14 @@
 [user]
   name = {{ .git.name | quote }}
   email = {{ .git.email | quote }}
-{{- if ne ( substr 0 4 .chezmoi.hostname ) "tako" }}
+{{- if not contains "tako" .chezmoi.hostname }}
   signingkey = {{ .git.signingkey | quote }}
 {{- end }}
 
 [core]
-{{- if eq .chezmoi.os ( or "linux" "darwin" ) }}
+{{- if contains ( or "linux" "darwin" ) .chezmoi.os }}
   autocrlf = input
-{{- else if eq .chezmoi.os "windows" }}
+{{- else if contains "windows" .chezmoi.os }}
   autocrlf = true
 {{- end }}
   safecrlf = true
@@ -28,7 +28,7 @@
 
 [pull]
   ff = only
-{{- if ne ( substr 0 4 .chezmoi.hostname ) "tako" }}
+{{- if not contains "tako" .chezmoi.hostname }}
 
 [commit]
   gpgsign = true

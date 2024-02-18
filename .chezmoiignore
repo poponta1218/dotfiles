@@ -4,3 +4,7 @@ README.md
 .gitignore
 **/*.zwc
 **/sheldon.zsh
+
+{{- if not contains "tako" .chezmoi.hostname }}
+private_dot_gnupg
+{{- end }}
