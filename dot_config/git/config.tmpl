@@ -3,7 +3,7 @@
 [user]
   name = {{ .git.name | quote }}
   email = {{ .git.email | quote }}
-{{- if not contains "tako" .chezmoi.hostname }}
+{{- if not ( contains "tako" .chezmoi.hostname ) }}
   signingkey = {{ .git.signingkey | quote }}
 {{- end }}
 
@@ -28,7 +28,7 @@
 
 [pull]
   ff = only
-{{- if not contains "tako" .chezmoi.hostname }}
+{{- if not ( contains "tako" .chezmoi.hostname ) }}
 
 [commit]
   gpgsign = true

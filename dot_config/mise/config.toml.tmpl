@@ -13,7 +13,7 @@ neovim = "stable"
 ripgrep = "latest"
 tokei = "latest"
 zoxide = "latest"
-{{- if not contains "tako" .chezmoi.hostname }}
+{{- if not ( contains "tako" .chezmoi.hostname ) }}
 bitwarden = "latest"
 go = "latest"
 julia = "latest"

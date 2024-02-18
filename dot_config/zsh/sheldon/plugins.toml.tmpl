@@ -49,7 +49,7 @@ use = ["{command-not-found,git}/*.plugin.zsh"]
 [plugins.auth-agent]
 github = "ohmyzsh/ohmyzsh"
 dir = "plugins"
-{{- if eq ( substr 0 4 .chezmoi.hostname ) "tako" }}
+{{- if contains "tako" .chezmoi.hostname }}
 use = ["ssh-agent/*.plugin.zsh"]
 {{- else }}
 use = ["gpg-agent/*.plugin.zsh"]
