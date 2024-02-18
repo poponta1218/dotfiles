@@ -10,9 +10,9 @@ Host *
 Host github github.com
   HostName github.com
   User git
-{{- if ne ( substr 0 4 .chezmoi.hostname ) "tako" }}
+{{- if not ( contains "tako" .chezmoi.hostname ) }}
   IdentityFile ~/.ssh/id_ed25519_github.pub
-{{- else if ge ( atoi ( substr 4 6 .chezmoi.hostname ) ) 58 }}
+{{- else if ( and ( contains "tako" .chezmoi.hostname ) ( ge ( atoi ( substr 4 6 .chezmoi.hostname ) ) 58 ) ) }}
   IdentityFile ~/.ssh/id_ed25519_github
 {{- else }}
   IdentityFile ~/.ssh/id_ecdsa_github

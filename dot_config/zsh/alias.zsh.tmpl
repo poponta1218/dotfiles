@@ -49,6 +49,8 @@ fi
 
 alias chmod="chmod --preserve-root -v"
 alias chown="chown --preserve-root -v"
+
+alias zshrc="${EDITOR} ${ZDOTDIR}/.zshrc"
 # <<< General alias configure <<<
 
 # >>> Browser configure >>>
@@ -223,14 +225,13 @@ if (( ${+commands[bat]} )); then
 fi
 # <<< cat alias configure <<<
 
-
 # >>> cd alias configure >>>
-alias cdz="cd ${ZSH_CONFIG_DIR}"
+alias cdz="cd ${ZDOTDIR}"
 # <<< cd alias configure <<<
 
 # >>> source alias configure >>>
 alias s="source"
-alias sz="source ${HOME}/.zshrc"
+alias sz="source ${ZDOTDIR}/.zshrc"
 # <<< source alias configure <<<
 
 # >>> kill alias configure >>>
@@ -244,7 +245,7 @@ if (( ${+commands[nvim]} )); then
   alias vim="nvim"
   alias neovim="nvim"
   alias vimtutor="nvim -c Tutor"
-  NVIM_CONFIG_DIR="${XDG_CONFIG_HOME}/nvim"
+  export NVIM_CONFIG_DIR="${XDG_CONFIG_HOME}/nvim"
 fi
 alias vu="vi"
 # <<< vim alias configure <<<

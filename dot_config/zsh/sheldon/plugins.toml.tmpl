@@ -49,7 +49,7 @@ use = ["{command-not-found,git}/*.plugin.zsh"]
 [plugins.auth-agent]
 github = "ohmyzsh/ohmyzsh"
 dir = "plugins"
-{{- if eq ( substr 0 4 .chezmoi.hostname ) "tako" }}
+{{- if contains "tako" .chezmoi.hostname }}
 use = ["ssh-agent/*.plugin.zsh"]
 {{- else }}
 use = ["gpg-agent/*.plugin.zsh"]
@@ -89,6 +89,9 @@ apply = ["source"]
 
 [plugins.mise]
 inline = 'zsh-defer eval "$(mise activate zsh)"'
+
+[plugins.zoxide]
+inline = 'zsh-defer eval "$(zoxide init zsh)"'
 
 [plugins.lazyload]
 local = "~/.config/zsh"

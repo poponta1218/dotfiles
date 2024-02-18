@@ -10,15 +10,18 @@ fd = "latest"
 fzf = "latest"
 hyperfine = "latest"
 neovim = "stable"
+poetry = "latest"
+{{- if eq .chezmoi.hostname  "tako58" }}
+python = "2.7.18"
+{{- end }}
 ripgrep = "latest"
 tokei = "latest"
 zoxide = "latest"
-{{- if ne ( substr 0 4 .chezmoi.hostname ) "tako" }}
+{{- if not ( contains "tako" .chezmoi.hostname ) }}
 bitwarden = "latest"
 go = "latest"
 julia = "latest"
 node = "latest"
-poetry = "latest"
 python = "3.11.7"
 ruby = "latest"
 rust = "latest"
