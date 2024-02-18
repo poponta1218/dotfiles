@@ -90,6 +90,9 @@ apply = ["source"]
 [plugins.mise]
 inline = 'zsh-defer eval "$(mise activate zsh)"'
 
+[plugins.zoxide]
+inline = 'zsh-defer eval "$(zoxide init zsh)"'
+
 [plugins.lazyload]
 local = "~/.config/zsh"
 use = ["{alias,plugin-conf,prompt}.zsh"]
