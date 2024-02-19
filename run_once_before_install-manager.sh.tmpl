@@ -1,4 +1,4 @@
-{{- if eq .chezmoi.os ( or "linux" "darwin" ) -}}
+{{- if contains ( or "linux" "darwin" ) .chezmoi.os -}}
 #!/usr/bin/env bash
 # vim: set ft=sh
 
