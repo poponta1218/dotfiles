@@ -6,5 +6,5 @@ README.md
 **/sheldon.zsh
 
 {{- if contains "tako" .chezmoi.hostname }}
-private_dot_gnupg/
+.gnupg/
 {{- end }}
