@@ -5,6 +5,6 @@ README.md
 **/*.zwc
 **/sheldon.zsh
 
-{{- if not ( contains "tako" .chezmoi.hostname ) }}
+{{- if contains "tako" .chezmoi.hostname }}
 private_dot_gnupg/
 {{- end }}
