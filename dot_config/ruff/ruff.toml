@@ -43,7 +43,7 @@ dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 max-complexity = 10
 
 [lint.pydocstyle]
-convetion = "numpy"
+convention = "numpy"
 
 [lint.pylint]
 max-args = 8
