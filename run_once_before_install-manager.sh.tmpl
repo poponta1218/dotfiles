@@ -3,13 +3,13 @@
 # vim: set ft=sh
 
 # Install Sheldon
-if [[ ! -f ~/.local/bin/sheldon ]]; then
+if [[ ! -f "${HOME}/.local/bin/sheldon" ]]; then
   curl --proto '=https' -fLsS https://rossmacarthur.github.io/install/crate.sh |
-    bash -s -- --repo rossmacarthur/sheldon --to ~/.local/bin
+    bash -s -- --repo rossmacarthur/sheldon --to "${HOME}/.local/bin"
 fi
 
 # Install mise
-if [[ ! -f ~/.local/bin/mise ]]; then
+if [[ ! -f "${HOME}/.local/bin/mise" ]]; then
   curl https://mise.run | sh
 fi
 {{- end }}
