@@ -130,10 +130,16 @@ export LIBRARY_PATH="/usr/local/lib${LIBRARY_PATH:+:${LIBRARY_PATH}}"
 {{- if contains "WSL" .chezmoi.kernel.osrelease }}
 
 if [[ "$(uname -r)" == *microsoft* ]]; then
-  WINDOWS_USER=$(/mnt/c/Windows/System32/cmd.exe /c 'echo %USERNAME%' 2>/dev/null | sed -e 's/\r//g')
-  export PATH="/mnt/c/Users/${WINDOWS_USER}/AppData/Local/Programs/Microsoft VS Code/bin${PATH:+:${PATH}}"
+  vscode_path=$(wslpath -u "$(/mnt/c/Windows/System32/cmd.exe /c 'echo %PATH%' 2>/dev/null | grep -oP '(?<=;)[^;]+\\Microsoft VS Code\\bin'| head -n 1)")
+  cursor_path=$(wslpath -u "$(/mnt/c/Windows/System32/cmd.exe /c 'echo %PATH%' 2>/dev/null | grep -oP '(?<=;)[^;]+\\cursor\\resources\\app\\bin' | head -n 1)")
+  if [[ -n "${vscode_path}" ]]; then
+    export PATH="${vscode_path}${PATH:+:${PATH}}"
+  fi
+  if [[ -n "${cursor_path}" ]]; then
+    export PATH="${cursor_path}${PATH:+:${PATH}}"
+  fi
+  unset vscode_path cursor_path
 fi
-unset WINDOWS_USER
 {{- end }}
 
 export PATH="${HOME}/bin${PATH:+:${PATH}}"
