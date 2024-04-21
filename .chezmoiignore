@@ -4,7 +4,6 @@ README.md
 .gitignore
 **/*.zwc
 **/sheldon.zsh
-**/personal-conf.zsh
 
 {{- if contains "tako" .chezmoi.hostname }}
 .gnupg/
