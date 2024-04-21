@@ -147,7 +147,7 @@ export PATH="/snap/bin${PATH:+:${PATH}}"
 # <<< General configure <<<
 
 # >>> Personal configure >>>
-{{- if eq .chezmoi.hostname "tako57" }}
-export PATH="${HOME}/analysis/bondvec2csv${PATH:+:${PATH}}"
-{{- end }}
+if [[ -e "${ZDOTDIR}/personal-conf.zsh" ]]; then
+  source "${ZDOTDIR}/personal-conf.zsh"
+fi
 # <<< Personal configure <<<
