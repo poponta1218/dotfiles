@@ -1,0 +1,57 @@
+# vim: set ft=toml
+
+exclude = [
+  ".bzr",
+  ".direnv",
+  ".eggs",
+  ".git",
+  ".git-rewrite",
+  ".hg",
+  ".ipynb_checkpoints",
+  ".mypy_cache",
+  ".nox",
+  ".pants.d",
+  ".pyenv",
+  ".pytest_cache",
+  ".pytype",
+  ".ruff_cache",
+  ".svn",
+  ".tox",
+  ".venv",
+  ".vscode",
+  "__pypackages__",
+  "_build",
+  "buck-out",
+  "build",
+  "dist",
+  "node_modules",
+  "site-packages",
+  "venv",
+]
+
+indent-width = 4
+line-length = 119
+target-version = "py38"
+
+[lint]
+select = ["ALL"]
+ignore = ["E203", "D", "ANN", "COM", "G004", "T20", "ERA"]
+unfixable = ["F401", "F841"]
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[lint.mccabe]
+max-complexity = 10
+
+[lint.pydocstyle]
+convention = "numpy"
+
+[lint.pylint]
+max-args = 8
+
+[format]
+docstring-code-format = true
+docstring-code-line-length = "dynamic"
+indent-style = "space"
+line-ending = "native"
+quote-style = "double"
+skip-magic-trailing-comma = false
