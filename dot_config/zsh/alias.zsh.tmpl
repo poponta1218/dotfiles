@@ -155,7 +155,7 @@ if (( ${+commands[aria2c]} )); then
 elif (( ${+commands[axel]} )); then
   alias get="${aliases[axel]:-axel} --num-connections=5 --alternate"
 elif (( ${+commands[wget]} )); then
-  alias get="${aliases[wget]:-wget} --continue --progress=bar --timestamping"
+  alias get="${aliases[wget]:-wget} --continue --progress=bar --timestamping --hsts-file=${XDG_CACHE_HOME}/wget-hsts"
 elif (( ${+commands[curl]} )); then
   alias get="${aliases[curl]:-curl} --continue-at - --location --progress-bar --remote-name --remote-time"
 fi
