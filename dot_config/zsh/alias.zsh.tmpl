@@ -250,6 +250,13 @@ fi
 alias vu="vi"
 # <<< vim alias configure <<<
 
+# >>> Rye alias configure >>>
+if (( ${+commands[rye]} )); then
+  alias mkvenv="python3 -m venv --upgrade-deps --prompt . .venv && activate"
+  alias activate=". .venv/bin/activate"
+fi
+# <<< Rye alias configure <<<
+
 # >>> Personal script alias configure >>>
 if (( ${commands[ejobs]} )); then
   alias pid="ejobs"

@@ -135,6 +135,11 @@ if [[ -e "${XDG_CONFIG_HOME}/npm" ]]; then
 fi
 # <<< npm configure <<<
 
+# >>> Rye configure >>>
+if [[ -e "${XDG_DATA_HOME}/mise/plugins/rye" ]]; then
+  source "${HOME}/.rye/env"
+fi
+
 # >>> Shell-utilities configure >>>
 gitrepopath="${HOME}/git-repo"
 if [[ -e "${gitrepopath}" ]]; then

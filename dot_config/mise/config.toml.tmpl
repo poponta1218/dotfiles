@@ -10,20 +10,16 @@ fd = "latest"
 fzf = "latest"
 hyperfine = "latest"
 neovim = "stable"
-{{- if eq .chezmoi.hostname  "tako58" }}
-poetry = "1.1.15"
-python = "2.7.18"
-{{- end }}
 ripgrep = "latest"
 tokei = "latest"
 zoxide = "latest"
 {{- if not ( contains "tako" .chezmoi.hostname ) }}
 bitwarden = "latest"
 go = "latest"
+java = "openjdk-21.0.2"
 julia = "latest"
 node = "latest"
-poetry = "latest"
-python = "3.11.7"
 ruby = "latest"
 rust = "latest"
+rye = "latest"
 {{- end }}
