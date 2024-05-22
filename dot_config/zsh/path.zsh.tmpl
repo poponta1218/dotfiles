@@ -5,7 +5,8 @@
 export g03root="/usr/local/pgi"
 if [[ -e "${g03root}/g03" ]]; then
   source "${g03root}/g03/bsd/g03.profile"
-  export GAUSS_SCRDIR="/scr"
+  export GAUSS_SCRDIR="${HOME}/.scr"
+  mkdir -p "${GAUSS_SCRDIR}"
   export PATH="${g03root}/g03${PATH:+:${PATH}}"
 fi
 # <<< Gaussian03 configure <<<
@@ -15,6 +16,7 @@ export g09root="/usr/local/pgi"
 if [[ -e "${g09root}/g09" ]]; then
   source "${g09root}/g09/bsd/g09.profile"
   export GAUSS_SCRDIR="${HOME}/.scr"
+  mkdir -p "${GAUSS_SCRDIR}"
   export PATH="${g09root}/g09${PATH:+:${PATH}}"
 fi
 # <<< Gaussian09 configure <<<
@@ -30,15 +32,6 @@ if [[ -e "${GRRMroot}" ]]; then
   export PATH="${GRRMroot}${PATH:+:${PATH}}"
 fi
 # <<< GRRM11 configure <<<
-
-# >>> PIMD configure >>>
-if [[ -e "${HOME}/PIMD-MPI" ]]; then
-  export PATH="${HOME}/PIMD-MPI/exe${PATH:+:${PATH}}"
-elif [[ -e "${HOME}/pimd" ]]; then
-  export PATH="${HOME}/pimd/exe${PATH:+:${PATH}}"
-  export PATH="${HOME}/pimd/exe_xTB${PATH:+:${PATH}}"
-fi
-# <<< PIMD configure <<<
 
 # >>> xTB 6.5.1 configure >>>
 if [[ -e "${HOME}/xTB/xtb-6.5.1" ]]; then
