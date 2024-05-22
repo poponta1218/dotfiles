@@ -152,8 +152,7 @@ if [[ "$(uname -r)" == *microsoft* ]]; then
   vscode_path=$(wslpath -u "$(/mnt/c/Windows/System32/cmd.exe /c 'echo %PATH%' 2>/dev/null | grep -oP '(?<=;)[^;]+\\Microsoft VS Code\\bin'| head -n 1)")
   if [[ -n "${cursor_path}" ]]; then
     export PATH="${cursor_path}${PATH:+:${PATH}}"
-  fi
-  if [[ -n "${vscode_path}" ]]; then
+  elif [[ -n "${vscode_path}" ]]; then
     export PATH="${vscode_path}${PATH:+:${PATH}}"
   fi
   unset cursor_path vscode_path
