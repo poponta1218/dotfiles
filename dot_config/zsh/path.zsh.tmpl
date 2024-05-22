@@ -91,11 +91,25 @@ fi
 # <<< Intel compiler configure <<<
 {{- end }}
 
+# >>> GnuPG configure >>>
+export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
+# <<< GnuPG configure <<<
+
 # >>> mise configure >>>
 if [[ -e "${HOME}/.local/bin/mise" ]]; then
   export PATH="${XDG_DATA_HOME}/mise/shims${PATH:+:${PATH}}"
 fi
 # <<< mise configure <<<
+
+# >>> Dotnet configure >>>
+export DOTNET_CLI_HOME="${XDG_DATA_HOME}/dotnet"
+# <<< Dotnet configure <<<
+
+# >>> Go configure >>>
+if [[ -e "${XDG_DATA_HOME}/mise/plugins/go" ]]; then
+  export GOPATH="${XDG_DATA_HOME}/go"
+fi
+# <<< Go configure <<<
 
 # >>> TeXLive configure >>>
 if [[ -e "/usr/local/texlive" ]]; then
@@ -114,6 +128,17 @@ if [[ -e "${HOME}/perl5" ]]; then
   export PERL_MM_OPT="INSTALL_BASE=${HOME}/perl5"
 fi
 # <<< Perl configure <<<
+
+# >>> npm configure >>>
+if [[ -e "${XDG_CONFIG_HOME}/npm" ]]; then
+  export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
+fi
+# <<< npm configure <<<
+
+# >>> Rye configure >>>
+if [[ -e "${XDG_DATA_HOME}/mise/plugins/rye" ]]; then
+  source "${HOME}/.rye/env"
+fi
 
 # >>> Shell-utilities configure >>>
 gitrepopath="${HOME}/git-repo"
