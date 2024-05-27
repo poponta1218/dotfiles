@@ -84,6 +84,13 @@ fi
 # <<< Intel compiler configure <<<
 {{- end }}
 
+# >>> CUDA configure >>>
+if [[ -e "/usr/local/cuda" ]]; then
+  export PATH="/usr/local/cuda/bin${PATH:+:${PATH}}"
+  export LD_LIBRARY_PATH="/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
+fi
+# <<< CUDA configure <<<
+
 # >>> GnuPG configure >>>
 export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
 # <<< GnuPG configure <<<
