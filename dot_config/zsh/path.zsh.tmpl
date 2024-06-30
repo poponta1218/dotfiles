@@ -84,6 +84,13 @@ fi
 # <<< Intel compiler configure <<<
 {{- end }}
 
+# >>> CUDA configure >>>
+if [[ -e "/usr/local/cuda" ]]; then
+  export PATH="/usr/local/cuda/bin${PATH:+:${PATH}}"
+  export LD_LIBRARY_PATH="/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
+fi
+# <<< CUDA configure <<<
+
 # >>> GnuPG configure >>>
 export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
 # <<< GnuPG configure <<<
@@ -152,7 +159,8 @@ if [[ "$(uname -r)" == *microsoft* ]]; then
   vscode_path=$(wslpath -u "$(/mnt/c/Windows/System32/cmd.exe /c 'echo %PATH%' 2>/dev/null | grep -oP '(?<=;)[^;]+\\Microsoft VS Code\\bin'| head -n 1)")
   if [[ -n "${cursor_path}" ]]; then
     export PATH="${cursor_path}${PATH:+:${PATH}}"
-  elif [[ -n "${vscode_path}" ]]; then
+  fi
+  if [[ -n "${vscode_path}" ]]; then
     export PATH="${vscode_path}${PATH:+:${PATH}}"
   fi
   unset cursor_path vscode_path

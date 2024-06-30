@@ -14,6 +14,12 @@ local keymap = vim.api.nvim_set_keymap
 -- command_mode = "c",
 -- terminal_mode = "t",
 
+-- set <Leader> to <Space>
+setvar("mapleader", " ")
+
 -- convert ; to : and vice versa
 keymap("n", ";", ":", opts)
 keymap("n", ":", ";", opts)
+
+-- Shortcut keys
+keymap("n", "<Leader>nn", ":Neotree toggle<CR>", opts)
