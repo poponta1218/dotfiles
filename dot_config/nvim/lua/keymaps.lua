@@ -4,6 +4,7 @@ local opts = {
     silent = true,
 }
 
+local setvar = vim.api.nvim_set_var
 local keymap = vim.api.nvim_set_keymap
 
 -- Modes
