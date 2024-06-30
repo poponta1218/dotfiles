@@ -66,6 +66,7 @@ local common_plugins = {
 local vscode_plugins = {}
 
 local neovim_plugins = {
+    -- Appearance
     {
         "EdenEast/nightfox.nvim",
         lazy = false,
@@ -83,6 +84,59 @@ local neovim_plugins = {
         config = function() require("config/lualine") end,
     },
     {
+        "petertriho/nvim-scrollbar",
+        dependencies = {
+            {
+                "kevinhwang91/nvim-hlslens",
+            },
+            {
+                "lewis6991/gitsigns.nvim",
+            },
+        },
+        event = "VimEnter",
+        config = function() require("config/nvim-scrollbar") end,
+    },
+    -- Filer
+    {
+        "stevearc/oil.nvim",
+        opts = {},
+        dependencies = {
+            {
+                "nvim-tree/nvim-web-devicons",
+            },
+        },
+        cmd = {
+            "Oil",
+        },
+        config = function() require("config/oil-nvim") end,
+    },
+    {
+        "nvim-neo-tree/neo-tree.nvim",
+        branch = "v3.x",
+        dependencies = {
+            {
+                "nvim-lua/plenary.nvim",
+            },
+            { -- not strictly required, but recommended
+                "nvim-tree/nvim-web-devicons",
+            },
+            {
+                "MunifTanjim/nui.nvim",
+            },
+            { -- Optional image support in preview window: See `# Preview Mode` for more information
+                "3rd/image.nvim",
+            },
+            {
+                "s1n7ax/nvim-window-picker",
+                version = "2.*",
+                config = function() require("config/nvim-window-picker") end,
+            },
+        },
+        event = "VimEnter",
+        config = function() require("config/neo-tree") end,
+    },
+    -- Syntax Highlighter
+    {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         dependencies = {
@@ -97,7 +151,6 @@ local neovim_plugins = {
                 },
             },
         },
-        event = "VeryLazy",
         cmd = {
             "TSUpdateSync",
             "TSUPdate",
@@ -105,6 +158,76 @@ local neovim_plugins = {
         },
         config = function() require("config/nvim-treesitter") end,
     },
+    -- Language Server Protocol
+    {
+        "neovim/nvim-lspconfig",
+        dependencies = {
+            {
+                "nvimdev/lspsaga.nvim",
+                dependencies = {
+                    {
+                        {
+                            "nvim-treesitter/nvim-treesitter",
+                        },
+                        {
+                            "nvim-tree/nvim-web-devicons",
+                        },
+                    },
+                },
+                config = function() require("config/lspsaga") end,
+            },
+        },
+        event = "VimEnter",
+        config = function() require("config/lspconfig") end,
+    },
+    {
+        "nvimtools/none-ls.nvim",
+        dependencies = {
+            {
+                "nvim-lua/plenary.nvim",
+            },
+        },
+        event = "VeryLazy",
+        config = function() require("config/none-ls") end,
+    },
+    -- Popup UI
+    {
+        "folke/noice.nvim",
+        dependencies = {
+            {
+                -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+                "MunifTanjim/nui.nvim",
+            },
+            {
+                -- OPTIONAL:
+                --   `nvim-notify` is only needed, if you want to use the notification view.
+                --   If not available, we use `mini` as the fallback
+                "rcarriga/nvim-notify",
+            },
+        },
+        event = "VeryLazy",
+        opts = {
+            -- add any options here
+        },
+    },
+    {
+        "j-hui/fidget.nvim",
+        event = "VeryLazy",
+        opts = {},
+        config = function() require("config/fidget") end,
+    },
+    -- Auto Completion
+    {
+        "hrsh7th/nvim-cmp",
+        dependencies = {
+            {
+                "hrsh7th/cmp-nvim-lsp",
+            },
+        },
+        event = "InsertEnter",
+        config = function() require("config/nvim-cmp") end,
+    },
+    -- Others
     {
         "windwp/nvim-autopairs",
         event = "InsertEnter",
@@ -149,6 +272,7 @@ local neovim_plugins = {
     },
     {
         "lewis6991/gitsigns.nvim",
+        event = "VeryLazy",
         config = function() require("config/gitsigns") end,
     },
     {
@@ -174,6 +298,11 @@ local neovim_plugins = {
             vim.o.timeoutlen = 300
         end,
         opts = {},
+    },
+    {
+        "norcalli/nvim-colorizer.lua",
+        event = "VimEnter",
+        config = function() require("colorizer").setup() end,
     },
 }
 
