@@ -45,37 +45,16 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- Python
 lspconfig.ruff_lsp.setup {
-    init_options = {
-        settings = {
-            -- any extra cli arguments for `ruff` go here.
-            args = {},
-        },
-    },
-    filetypes = {
-        "python",
-    },
     capabilities = capabilities,
 }
 
 -- Fortran
 lspconfig.fortls.setup {
-    cmd = {
-        "fortls",
-    },
-    filetypes = {
-        "fortran",
-    },
     capabilities = capabilities,
 }
 
 -- Lua
 lspconfig.lua_ls.setup {
-    cmd = {
-        "lua-language-server",
-    },
-    filetypes = {
-        "lua",
-    },
     settings = {
         Lua = {
             runtime = {
@@ -107,12 +86,6 @@ lspconfig.lua_ls.setup {
 
 -- Go
 lspconfig.gopls.setup {
-    cmd = {
-        "gopls",
-    },
-    filetypes = {
-        "go",
-    },
     capabilities = capabilities,
 }
 
