@@ -29,6 +29,8 @@ exclude = [
   "venv",
 ]
 
+extend-include = ["*.ipynb"]
+
 indent-width = 4
 line-length = 119
 target-version = "py38"
