@@ -1,6 +1,6 @@
 {{- if contains ( or "linux" "darwin" ) .chezmoi.os -}}
 #!/usr/bin/env bash
-# vim: set ft=sh
+# vim: set ft=sh:
 
 # Install Sheldon
 if [[ ! -f "${HOME}/.local/bin/sheldon" ]]; then

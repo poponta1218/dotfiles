@@ -1,4 +1,4 @@
--- vim: set ft=lua
+-- vim: set ft=lua:
 local opts = {
     noremap = true,
     silent = true,

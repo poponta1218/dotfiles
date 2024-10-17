@@ -1,4 +1,4 @@
--- vim: set ft=lua
+-- vim: set ft=lua:
 require("noice").setup({
     lsp = {
         -- override markdown rendering so that **cmp** and other plugins use **Treesitter**

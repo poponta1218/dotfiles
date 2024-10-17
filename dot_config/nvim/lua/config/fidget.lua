@@ -1,3 +1,4 @@
+-- vim: set ft=lua:
 require("fidget").setup({
     -- Options related to LSP progress subsystem
     progress = {

@@ -1,4 +1,4 @@
-# vim: set ft=sh
+# vim: set ft=sh:
 
 # >>> Personal configure >>>
 # <<< Personal configure <<<

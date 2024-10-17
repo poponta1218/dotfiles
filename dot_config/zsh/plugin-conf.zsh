@@ -1,4 +1,4 @@
-# vim: set ft=sh
+# vim: set ft=sh:
 
 zmodload -F zsh/terminfo +p:terminfo
 # >>> Autosuggestions configure >>>

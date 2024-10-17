@@ -1,4 +1,4 @@
--- vim: set ft=lua
+-- vim: set ft=lua:
 require("window-picker").setup({
     filter_rules = {
         include_current_win = false,

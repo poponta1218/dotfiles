@@ -1,4 +1,4 @@
-# vim: set ft=ini
+# vim: set ft=ini:
 
 prefix=${XDG_DATA_HOME}/npm
 cache=${XDG_CACHE_HOME}/npm

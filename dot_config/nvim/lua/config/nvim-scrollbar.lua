@@ -1,4 +1,4 @@
--- vim: set ft=lua
+-- vim: set ft=lua:
 require("scrollbar").setup({
     auto_hide = true,
     auto_hide_timeout = 500,

@@ -1,4 +1,4 @@
--- vim: set ft=lua
+-- vim: set ft=lua:
 require("nvim-treesitter").setup({
     auto_install = true,
     highlight = {

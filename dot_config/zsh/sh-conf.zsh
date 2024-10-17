@@ -1,4 +1,4 @@
-# vim: set ft=sh
+# vim: set ft=sh:
 
 # >>> Terminal configure >>>
 setopt COMBINING_CHARS

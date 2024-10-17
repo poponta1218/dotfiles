@@ -1,4 +1,4 @@
--- vim: set ft=lua
+-- vim: set ft=lua:
 local null_ls = require("null-ls")
 null_ls.setup({
     sources = {

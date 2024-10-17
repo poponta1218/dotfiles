@@ -1,2 +1,2 @@
--- vim: set ft=lua
+-- vim: set ft=lua:
 require("lspsaga").setup()
