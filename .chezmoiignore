@@ -1,10 +1,14 @@
 # vim: set ft=ignore:
-
 README.md
 .gitignore
+{{- if eq .chezmoi.os "linux" }}
+# Linux
 **/*.zwc
 **/sheldon.zsh
-
+**/*.ps1
+**/*.bat
 {{- if contains "tako" .chezmoi.hostname }}
+
 .gnupg/
+{{- end }}
 {{- end }}
