@@ -96,6 +96,15 @@ local neovim_plugins = {
         event = "VimEnter",
         config = function() require("config/nvim-scrollbar") end,
     },
+    {
+        "kevinhwang91/nvim-ufo",
+        dependencies = {
+            {
+                "kevinhwang91/promise-async",
+            },
+        },
+        config = function() require("config/nvim-ufo") end,
+    },
     -- Filer
     {
         "stevearc/oil.nvim",
@@ -181,14 +190,8 @@ local neovim_plugins = {
         config = function() require("config/lspconfig") end,
     },
     {
-        "nvimtools/none-ls.nvim",
-        dependencies = {
-            {
-                "nvim-lua/plenary.nvim",
-            },
-        },
-        event = "VeryLazy",
-        config = function() require("config/none-ls") end,
+        "stevearc/conform.nvim",
+        event = "InsertEnter",
     },
     -- Popup UI
     {
@@ -209,6 +212,7 @@ local neovim_plugins = {
         opts = {
             -- add any options here
         },
+        config = function() require("config/noice") end,
     },
     {
         "j-hui/fidget.nvim",
@@ -223,9 +227,37 @@ local neovim_plugins = {
             {
                 "hrsh7th/cmp-nvim-lsp",
             },
+            {
+                "hrsh7th/cmp-buffer",
+            },
+            {
+                "hrsh7th/cmp-path",
+            },
+            {
+                "hrsh7th/cmp-cmdline",
+            },
+            {
+                "onsails/lspkind-nvim",
+            },
+            {
+                "zbian/copilot-cmp",
+            },
         },
         event = "InsertEnter",
         config = function() require("config/nvim-cmp") end,
+    },
+    -- snippets
+    {
+        "L3MON4D3/LuaSnip",
+        version = "v2.*",
+        build = "make install_jsregexp",
+        dependencies = {
+            {
+                "saadparwaiz1/cmp_luasnip",
+            },
+        },
+        event = "InsertEnter",
+        -- config = function() require("config/luasnip") end,
     },
     -- Others
     {
@@ -298,6 +330,20 @@ local neovim_plugins = {
             vim.o.timeoutlen = 300
         end,
         opts = {},
+    },
+    {
+        "zbirenbaum/copilot.lua",
+        dependencies = {
+            {
+                "zbirenbaum/copilot-cmp",
+                config = function() require("config/copilot-cmp") end,
+            },
+        },
+        cmd = {
+            "Copilot",
+        },
+        event = "InsertEnter",
+        config = function() require("config/copilot") end,
     },
     {
         "norcalli/nvim-colorizer.lua",

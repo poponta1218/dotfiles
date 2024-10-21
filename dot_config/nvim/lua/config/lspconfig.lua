@@ -37,19 +37,55 @@ vim.api.nvim_create_autocmd("LspAttach", {
                 async = true,
             }
         end, opts)
+
+        local client = vim.lsp.get_client_by_id(ev.data.client_id)
+        if client == nil then
+            return
+        end
     end,
 })
 
 local lspconfig = require("lspconfig")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
--- Python
-lspconfig.ruff_lsp.setup {
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true,
+}
+
+-- Bash
+lspconfig.bashls.setup {
+    capabilities = capabilities,
+}
+
+-- CSS
+lspconfig.cssls.setup {
     capabilities = capabilities,
 }
 
 -- Fortran
 lspconfig.fortls.setup {
+    capabilities = capabilities,
+}
+
+-- Go
+lspconfig.gopls.setup {
+    capabilities = capabilities,
+}
+
+-- HTML
+lspconfig.html.setup {
+    capabilities = capabilities,
+}
+
+-- JSON
+lspconfig.jsonls.setup {
+    capabilities = capabilities,
+}
+
+-- LaTeX
+lspconfig.texlab.setup {
     capabilities = capabilities,
 }
 
@@ -84,12 +120,52 @@ lspconfig.lua_ls.setup {
     capabilities = capabilities,
 }
 
--- Go
-lspconfig.gopls.setup {
+-- Markdown
+lspconfig.markdown_oxide.setup {
+    capabilities = vim.tbl_deep_extend("force", capabilities, {
+        workspace = {
+            didChangeWatchedFiles = {
+                dynamicRegistration = true,
+            },
+        },
+    }),
+}
+
+-- Python
+lspconfig.ruff_lsp.setup {
     capabilities = capabilities,
+}
+lspconfig.pyright.setup {
+    capabilities = capabilities,
+    settings = {
+        pyright = {
+            disableOrganizeImports = false,
+        },
+        python = {
+            venvPath = ".venv",
+            pythonPath = ".venv/bin/python",
+            analysis = {
+                autoSearchPaths = true,
+                diagnosticMode = "workspace",
+                useLibraryCodeForTypes = true,
+            },
+        },
+    },
 }
 
 -- Rust
 lspconfig.rust_analyzer.setup {
+    capabilities = capabilities,
+    settings = {
+        ["rust-analyzer"] = {
+            check = {
+                command = "clippy",
+            },
+        },
+    },
+}
+
+-- Yaml
+lspconfig.yamlls.setup {
     capabilities = capabilities,
 }
