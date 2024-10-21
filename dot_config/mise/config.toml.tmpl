@@ -1,40 +1,70 @@
 # vim: set ft=toml:
 
 [tools]
+# Languages
+uv = "latest"
+go = "latest"
+node = "22"
+rust = "latest"
+
+# Alternative commands
 bat = "latest"
-chezmoi = "latest"
 choose = "latest"
 delta = "latest"
 eza = "latest"
 fd = "latest"
-fzf = "latest"
-github-cli = "latest"
-hyperfine = "latest"
-lua-language-server = "latest"
-markdownlint-cli2 = "latest"
-neovim = "latest"
 ripgrep = "latest"
-shellcheck = "latest"
-shfmt = "latest"
 tokei = "latest"
-tree-sitter = "latest"
-watchexec = "latest"
 zoxide = "latest"
+
 {{- if not ( contains "tako" .chezmoi.hostname ) }}
 bitwarden = "latest"
-bun = "latest"
-go = "latest"
-java = "openjdk-21.0.2"
-julia = "latest"
-mysql = "latest"
-node = "latest"
-pre-commit = "latest"
-ruby = "latest"
-rust = "latest"
-uv = "latest"
+{{- end }}
+chezmoi = "latest"
+fzf = "latest"
+{{- if not ( contains "tako" .chezmoi.hostname ) }}
 zellij = "latest"
 {{- end }}
 
+# Development
+github-cli = "latest"
+hyperfine = "latest"
+neovim = "latest"
+pre-commit = "latest"
+tree-sitter = "latest"
+watchexec = "latest"
+
+# Linters, Formatters, and LSPs
+# Bash
+"npm:bash-language-server" = "latest"
+shellcheck = "latest"
+shfmt = "latest"
+# Fortran
+"pipx:fortls" = "latest"
+"pipx:fprettify" = "latest"
+# HTML, CSS, and JSON
+"npm:vscode-langservers-extracted" = "latest"
+# LaTeX
+"cargo:latex-lsp/texlab" = "tag:v5.20.0"
+# Lua
+lua-language-server = "latest"
+stylua = "latest"
+"pipx:ruff-lsp" = "latest"
+# KDL
+"cargo:kdlfmt" = "latest"
+# Markdown
+"cargo:Feel-ix-343/markdown-oxide" = "tag:v0.24.1"
+markdownlint-cli2 = "latest"
+"npm:markdown-toc" = "latest"
+# Python
+"pipx:mypy" = "latest"
+"pipx:ruff" = "latest"
+"npm:pyright" = "latest"
+# Yaml
+"npm:yaml-language-server" = "latest"
+
 [settings]
 experimental = true
-pip_uvx = true
+
+[settings.pipx]
+uvx = true
