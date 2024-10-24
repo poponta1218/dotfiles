@@ -1,4 +1,4 @@
--- vim: set ft=lua
+-- vim: set ft=lua:
 require("fzf-lua").setup({
     winopts = {
         height = 0.85, -- window height

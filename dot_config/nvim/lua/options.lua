@@ -1,4 +1,4 @@
--- vim: set ft=lua
+-- vim: set ft=lua:
 function merge_tables(t1, t2)
     local merged = {}
     for key, val in pairs(t1) do

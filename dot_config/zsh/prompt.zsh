@@ -1,4 +1,4 @@
-# vim: set ft=sh
+# vim: set ft=sh:
 
 # >>> Git prompt configure >>>
 ZSH_THEME_GIT_PROMPT_PREFIX="("

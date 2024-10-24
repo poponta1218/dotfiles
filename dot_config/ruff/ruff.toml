@@ -1,4 +1,4 @@
-# vim: set ft=toml
+# vim: set ft=toml:
 
 exclude = [
   ".bzr",
@@ -28,6 +28,8 @@ exclude = [
   "site-packages",
   "venv",
 ]
+
+extend-include = ["*.ipynb"]
 
 indent-width = 4
 line-length = 119

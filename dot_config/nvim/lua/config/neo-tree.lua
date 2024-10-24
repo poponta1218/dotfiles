@@ -1,4 +1,4 @@
--- vim: set ft=lua
+-- vim: set ft=lua:
 -- If you want icons for diagnostic errors, you'll need to define them somewhere:
 vim.fn.sign_define("DiagnosticSignError", {
     text = " ",
