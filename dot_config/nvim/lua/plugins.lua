@@ -84,6 +84,30 @@ local neovim_plugins = {
         config = function() require("config/lualine") end,
     },
     {
+        "romgrk/barbar.nvim",
+        dependencies = {
+            {
+                "kyazdani42/nvim-web-devicons",
+            },
+            {
+                "lewis6991/gitsigns.nvim",
+            },
+        },
+        event = {
+            "BufNewFile",
+            "BufRead",
+        },
+        opts = {},
+    },
+    {
+        "kazhala/close-buffers.nvim",
+        event = {
+            "BufNewFile",
+            "BufRead",
+        },
+        config = function() require("config/close-buffers") end,
+    },
+    {
         "petertriho/nvim-scrollbar",
         dependencies = {
             {
@@ -257,7 +281,7 @@ local neovim_plugins = {
             },
         },
         event = "InsertEnter",
-        -- config = function() require("config/luasnip") end,
+        config = function() require("config/luasnip") end,
     },
     -- Others
     {
