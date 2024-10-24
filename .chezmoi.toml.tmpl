@@ -7,7 +7,7 @@
 {{- $vendor_id := "" }}
 {{- if eq .chezmoi.os "linux" }}
 {{-   $vendor_id = (output "sh" "-c" "cat /proc/cpuinfo | grep vendor_id | head -n 1 | cut -d ' ' -f 2") | trim }}
-{{- else if "windows" .chezmoi.os }}
+{{- else if eq .chezmoi.os "windows" }}
 {{-   $vendor_id = (output "powershell.exe" "-NoProfile" "-NonInteractive"
                           "-Command" "(Get-CimInstance -ClassName Win32_Processor).Manufacturer") | trim }}
 {{- end }}
