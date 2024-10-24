@@ -1,6 +1,9 @@
 -- vim: set ft=lua:
 require("conform").setup({
     formatters_by_ft = {
+        awk = {
+            "awk",
+        },
         bash = {
             "shfmt",
             "shellcheck",
@@ -11,6 +14,9 @@ require("conform").setup({
         go = {
             "gofmt",
             "goimports",
+        },
+        json = {
+            "jq",
         },
         latex = {
             "latexindent",

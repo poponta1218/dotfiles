@@ -54,6 +54,11 @@ capabilities.textDocument.foldingRange = {
     lineFoldingOnly = true,
 }
 
+-- AWK
+lspconfig.awk_ls.setup {
+    capabilities = capabilities,
+}
+
 -- Bash
 lspconfig.bashls.setup {
     capabilities = capabilities,
@@ -163,6 +168,11 @@ lspconfig.rust_analyzer.setup {
             },
         },
     },
+}
+
+-- Toml
+lspconfig.taplo.setup {
+    capabilities = capabilities,
 }
 
 -- Yaml

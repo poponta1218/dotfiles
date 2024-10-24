@@ -2,10 +2,11 @@
 
 [tools]
 # Languages
-uv = "latest"
 go = "latest"
+java = "openjdk-21"
 node = "22"
 rust = "latest"
+uv = "latest"
 
 # Alternative commands
 bat = "latest"
@@ -35,6 +36,8 @@ tree-sitter = "latest"
 watchexec = "latest"
 
 # Linters, Formatters, and LSPs
+# AWK
+"npm:awk-language-server" = "latest"
 # Bash
 "npm:bash-language-server" = "latest"
 shellcheck = "latest"
@@ -44,14 +47,14 @@ shfmt = "latest"
 "pipx:fprettify" = "latest"
 # HTML, CSS, and JSON
 "npm:vscode-langservers-extracted" = "latest"
+# KDL
+"cargo:kdlfmt" = "latest"
 # LaTeX
 "cargo:latex-lsp/texlab" = "tag:v5.20.0"
 # Lua
 lua-language-server = "latest"
 stylua = "latest"
 "pipx:ruff-lsp" = "latest"
-# KDL
-"cargo:kdlfmt" = "latest"
 # Markdown
 "cargo:Feel-ix-343/markdown-oxide" = "tag:v0.24.1"
 markdownlint-cli2 = "latest"
@@ -60,6 +63,8 @@ markdownlint-cli2 = "latest"
 "pipx:mypy" = "latest"
 "pipx:ruff" = "latest"
 "npm:pyright" = "latest"
+# Toml
+"cargo:taplo-cli" = "latest"
 # Yaml
 "npm:yaml-language-server" = "latest"
 
