@@ -11,4 +11,12 @@ README.md
 
 .gnupg/
 {{- end }}
+{{- else if eq .chezmoi.os "windows" }}
+# Windows
+.config/**
+.local/**
+.ssh/**
+
+**/*.sh
+.zshenv
 {{- end }}
