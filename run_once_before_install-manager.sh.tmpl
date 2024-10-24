@@ -2,14 +2,132 @@
 #!/usr/bin/env bash
 # vim: set ft=sh:
 
+{{- if contains "debian" (or .chezmoi.osRelease.id .chezmoi.osRelease.idLike) }}
+# Install dependencies
+echo "Installing fundamental packages..."
+sudo apt update -y
+
+sudo apt install -y \
+  build-essential \
+  git \
+  gnupg \
+  gpg-agent \
+  wget \
+  zsh
+
+echo "Installing Python dependencies..."
+sudo apt -y install \
+  tk-dev \
+  libbz2-dev \
+  libdb-dev \
+  libffi-dev \
+  libgdbm-dev \
+  liblzma-dev \
+  libncurses-dev \
+  libreadline-dev \
+  libsqlite3-dev \
+  libssl-dev \
+  uuid-dev \
+  zlib1g-dev
+
+{{- else if contains "fedora" (or .chezmoi.osRelease.id .chezmoi.osRelease.idLike) }}
+# Install dependencies
+echo "Installing fundamental packages..."
+sudo dnf update -y
+
+sudo dnf groupinstall -y "Development Tools"
+sudo dnf install -y \
+  git \
+  gnupg2 \
+  gpg-agent \
+  wget \
+  zsh
+
+echo "Installing Python dependencies..."
+sudo dnf install -y \
+  bzip2-devel \
+  gdbm-devel \
+  git \
+  libffi-devel \
+  libuuid-devel \
+  ncurses-devel \
+  openssl-devel \
+  openssl11 \
+  openssl11-devel \
+  patch \
+  readline-devel \
+  sqlite-devel \
+  sqlite3-dbf \
+  tk-devel \
+  xz-devel \
+  zlib-devel \
+  zsh
+
+{{- end }}
 # Install Sheldon
+echo "Installing Sheldon..."
 if [[ ! -f "${HOME}/.local/bin/sheldon" ]]; then
   curl --proto '=https' -fLsS https://rossmacarthur.github.io/install/crate.sh |
     bash -s -- --repo rossmacarthur/sheldon --to "${HOME}/.local/bin"
 fi
 
 # Install mise
+echo "Installing mise..."
 if [[ ! -f "${HOME}/.local/bin/mise" ]]; then
   curl https://mise.run | sh
 fi
+{{- if eq .chezmoi.config.data.cpu.vendor_id "GenuineIntel" }}
+
+# Install Intel oneAPI
+echo "Installing Intel oneAPI..."
+if [[ ! -d "/opt/intel/oneapi" ]]; then
+{{- if contains "debian" (or .chezmoi.osRelease.id .chezmoi.osRelease.idLike) }}
+  wget -O- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB |
+    gpg --dearmor | sudo tee /usr/share/keyrings/oneapi-archive-keyring.gpg > /dev/null
+
+  echo "deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] \
+    https://apt.repos.intel.com/oneapi all main" |
+    sudo tee /etc/apt/sources.list.d/oneAPI.list
+
+  sudo apt update -y
+  sudo apt install -y intel-hpckit
+{{- else if contains "fedora" (or .chezmoi.osRelease.id .chezmoi.osRelease.idLike) }}
+  tee > /tmp/oneAPI.repo << EOF
+[oneAPI]
+name=Intel® oneAPI repository
+baseurl=https://yum.repos.intel.com/oneapi
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://yum.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
+EOF
+
+  sudo mv /tmp/oneAPI.repo /etc/yum.repos.d/
+  sudo dnf install -y intel-hpckit
+{{- end }}
+fi
+{{- else if eq .chezmoi.config.data.cpu.vendor_id "AuthenticAMD" }}
+
+# Install AMD AOCC/AOCL
+echo "Installing AMD AOCC and AOCL..."
+if [[ ! -d "/opt/AMD" ]]; then
+  sudo mkdir -p /opt/AMD
+fi
+
+# Install AOCC 5.0.0
+if [[ ! -d "/opt/AMD/aocc-compiler-5.0.0" ]]; then
+  wget "https://download.amd.com/developer/eula/aocc/aocc-5-0/aocc-compiler-5.0.0.tar" \
+    -O /tmp/aocc-compiler-5.0.0.tar
+  sudo tar -xvf /tmp/aocc-compiler-5.0.0.tar -C /opt/AMD --no-same-owner
+  sudo /opt/AMD/aocc-compiler-5.0.0/install.sh
+fi
+
+# Install AOCL 5.0.0
+if [[ ! -d "/opt/AMD/aocl" ]]; then
+  wget "https://download.amd.com/developer/eula/aocl/aocl-5-0/aocl-linux-aocc-4.2.0.tar.gz" \
+    -O /tmp/aocl-linux-aocc-5.0.0.tar.gz
+  sudo tar -xvf /tmp/aocl-linux-aocc-5.0.0.tar.gz -C /opt/AMD --no-same-owner
+  sudo /opt/AMD/aocl-linux-aocc-5.0.0/install.sh -t /opt/AMD/aocl -i lp64
+fi
+{{- end }}
 {{- end }}
