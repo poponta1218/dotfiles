@@ -1,5 +1,5 @@
 -- vim: set ft=lua:
-function merge_tables(t1, t2)
+local function merge_tables(t1, t2)
     local merged = {}
     for key, val in pairs(t1) do
         merged[key] = val
@@ -10,7 +10,7 @@ function merge_tables(t1, t2)
     return merged
 end
 
-function apply_options(options)
+local function apply_options(options)
     for key, val in pairs(options) do
         vim.opt[key] = val
     end

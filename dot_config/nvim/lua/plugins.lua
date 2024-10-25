@@ -12,7 +12,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-function merge_tables(t1, t2)
+local function merge_tables(t1, t2)
     local merged = {}
     for _, v in ipairs(t1) do
         table.insert(merged, v)
