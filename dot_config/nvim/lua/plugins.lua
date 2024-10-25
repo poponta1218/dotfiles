@@ -374,6 +374,14 @@ local neovim_plugins = {
         event = "VimEnter",
         config = function() require("colorizer").setup() end,
     },
+    {
+        "shellRaining/hlchunk.nvim",
+        event = {
+            "BufReadPre",
+            "BufNewFile",
+        },
+        config = function() require("config/hlchunk") end,
+    },
 }
 
 require("lazy").setup(merge_tables(common_plugins, is_vscode and vscode_plugins or neovim_plugins), lazyOpts)
