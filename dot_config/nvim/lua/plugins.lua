@@ -92,25 +92,25 @@ local neovim_plugins = {
     },
     {
         "nvim-lualine/lualine.nvim",
-        dependencies = {
-            {
-                "nvim-tree/nvim-web-devicons",
-                opt = true,
-            },
-        },
-        event = "VimEnter",
+        event = "VeryLazy",
         config = function() require("config/lualine") end,
     },
     {
+        "petertriho/nvim-scrollbar",
+        event = "VeryLazy",
+        config = function() require("config/nvim-scrollbar") end,
+    },
+    {
+        "kevinhwang91/nvim-hlslens",
+        event = "BufRead",
+        config = function() require("config/nvim-hlslens") end,
+    },
+    {
+        "kyazdani42/nvim-web-devicons",
+        opts = {},
+    },
+    {
         "romgrk/barbar.nvim",
-        dependencies = {
-            {
-                "kyazdani42/nvim-web-devicons",
-            },
-            {
-                "lewis6991/gitsigns.nvim",
-            },
-        },
         event = {
             "BufNewFile",
             "BufRead",
@@ -126,36 +126,16 @@ local neovim_plugins = {
         config = function() require("config/close-buffers") end,
     },
     {
-        "petertriho/nvim-scrollbar",
-        dependencies = {
-            {
-                "kevinhwang91/nvim-hlslens",
-            },
-            {
-                "lewis6991/gitsigns.nvim",
-            },
-        },
-        event = "VimEnter",
-        config = function() require("config/nvim-scrollbar") end,
+        "kevinhwang91/nvim-ufo",
+        event = "VeryLazy",
+        config = function() require("config/nvim-ufo") end,
     },
     {
-        "kevinhwang91/nvim-ufo",
-        dependencies = {
-            {
-                "kevinhwang91/promise-async",
-            },
-        },
-        config = function() require("config/nvim-ufo") end,
+        "kevinhwang91/promise-async",
     },
     -- Filer
     {
         "stevearc/oil.nvim",
-        opts = {},
-        dependencies = {
-            {
-                "nvim-tree/nvim-web-devicons",
-            },
-        },
         cmd = {
             "Oil",
         },
@@ -164,27 +144,20 @@ local neovim_plugins = {
     {
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v3.x",
-        dependencies = {
-            {
-                "nvim-lua/plenary.nvim",
-            },
-            { -- not strictly required, but recommended
-                "nvim-tree/nvim-web-devicons",
-            },
-            {
-                "MunifTanjim/nui.nvim",
-            },
-            { -- Optional image support in preview window: See `# Preview Mode` for more information
-                "3rd/image.nvim",
-            },
-            {
-                "s1n7ax/nvim-window-picker",
-                version = "2.*",
-                config = function() require("config/nvim-window-picker") end,
-            },
-        },
         event = "VimEnter",
         config = function() require("config/neo-tree") end,
+    },
+    {
+        "nvim-lua/plenary.nvim",
+    },
+    {
+        "3rd/image.nvim",
+    },
+    {
+        "s1n7ax/nvim-window-picker",
+        version = "2.*",
+        event = "VeryLazy",
+        config = function() require("config/nvim-window-picker") end,
     },
     -- Syntax Highlighter
     {
@@ -207,62 +180,78 @@ local neovim_plugins = {
             "TSUPdate",
             "TSInstall",
         },
+        event = {
+            "BufReadPre",
+            "BufWritePre",
+            "BufNewFile",
+        },
         config = function() require("config/nvim-treesitter") end,
     },
     -- Language Server Protocol
     {
         "neovim/nvim-lspconfig",
-        dependencies = {
-            {
-                "nvimdev/lspsaga.nvim",
-                dependencies = {
-                    {
-                        {
-                            "nvim-treesitter/nvim-treesitter",
-                        },
-                        {
-                            "nvim-tree/nvim-web-devicons",
-                        },
-                    },
-                },
-                config = function() require("config/lspsaga") end,
-            },
+        event = {
+            "BufReadPre",
+            "BufWritePre",
+            "BufNewFile",
         },
-        event = "VimEnter",
         config = function() require("config/lspconfig") end,
+    },
+    {
+        "nvimdev/lspsaga.nvim",
+        event = "LspAttach",
+        config = function() require("config/lspsaga") end,
     },
     {
         "stevearc/conform.nvim",
         event = "InsertEnter",
+        config = function() require("config/conform") end,
     },
     -- Popup UI
     {
         "folke/noice.nvim",
-        dependencies = {
-            {
-                -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-                "MunifTanjim/nui.nvim",
-            },
-            {
-                -- OPTIONAL:
-                --   `nvim-notify` is only needed, if you want to use the notification view.
-                --   If not available, we use `mini` as the fallback
-                "rcarriga/nvim-notify",
-            },
-        },
         event = "VeryLazy",
-        opts = {
-            -- add any options here
-        },
         config = function() require("config/noice") end,
+    },
+    {
+        "MunifTanjim/nui.nvim",
+    },
+    {
+        "rcarriga/nvim-notify",
+        opts = {},
     },
     {
         "j-hui/fidget.nvim",
         event = "VeryLazy",
-        opts = {},
         config = function() require("config/fidget") end,
     },
     -- Auto Completion
+    {
+        "L3MON4D3/LuaSnip",
+        version = "v2.*",
+        build = "make install_jsregexp",
+        dependencies = {
+            {
+                "saadparwaiz1/cmp_luasnip",
+            },
+        },
+        event = "InsertEnter",
+        config = function() require("config/luasnip") end,
+    },
+    {
+        "zbirenbaum/copilot.lua",
+        dependencies = {
+            {
+                "zbirenbaum/copilot-cmp",
+                config = function() require("config/copilot-cmp") end,
+            },
+        },
+        cmd = {
+            "Copilot",
+        },
+        event = "InsertEnter",
+        config = function() require("config/copilot") end,
+    },
     {
         "hrsh7th/nvim-cmp",
         dependencies = {
@@ -281,25 +270,22 @@ local neovim_plugins = {
             {
                 "onsails/lspkind-nvim",
             },
-            {
-                "zbian/copilot-cmp",
-            },
         },
-        event = "InsertEnter",
+        event = {
+            "InsertEnter",
+            "CmdlineEnter",
+        },
         config = function() require("config/nvim-cmp") end,
     },
-    -- snippets
+    -- Git
     {
-        "L3MON4D3/LuaSnip",
-        version = "v2.*",
-        build = "make install_jsregexp",
-        dependencies = {
-            {
-                "saadparwaiz1/cmp_luasnip",
-            },
+        "lewis6991/gitsigns.nvim",
+        event = {
+            "BufReadPre",
+            "BufWritePre",
+            "BufNewFile",
         },
-        event = "InsertEnter",
-        config = function() require("config/luasnip") end,
+        config = function() require("config/gitsigns") end,
     },
     -- Others
     {
@@ -316,20 +302,15 @@ local neovim_plugins = {
     {
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
-        event = "VimEnter",
+        event = {
+            "BufReadPost",
+            "BufWritePost",
+            "BufNewFile",
+        },
         config = function() require("config/indent-blankline") end,
     },
     {
         "ibhagwan/fzf-lua",
-        dependencies = {
-            {
-                "junegunn/fzf",
-                build = "./install --bin",
-                cmd = {
-                    "FzfLua",
-                },
-            },
-        },
         cmd = {
             "FzfLua",
         },
@@ -343,11 +324,6 @@ local neovim_plugins = {
                 mode = "c",
             },
         },
-    },
-    {
-        "lewis6991/gitsigns.nvim",
-        event = "VeryLazy",
-        config = function() require("config/gitsigns") end,
     },
     {
         "ctrlpvim/ctrlp.vim",
@@ -374,22 +350,8 @@ local neovim_plugins = {
         opts = {},
     },
     {
-        "zbirenbaum/copilot.lua",
-        dependencies = {
-            {
-                "zbirenbaum/copilot-cmp",
-                config = function() require("config/copilot-cmp") end,
-            },
-        },
-        cmd = {
-            "Copilot",
-        },
-        event = "InsertEnter",
-        config = function() require("config/copilot") end,
-    },
-    {
         "norcalli/nvim-colorizer.lua",
-        event = "VimEnter",
+        event = "VeryLazy",
         config = function() require("colorizer").setup() end,
     },
     {

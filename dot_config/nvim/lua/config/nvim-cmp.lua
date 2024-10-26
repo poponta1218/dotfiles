@@ -1,5 +1,19 @@
 -- vim: set ft=lua:
 require("cmp").setup({
+    completion = {
+        completeopt = "menu,menuone,noinsert",
+    },
+    formatting = {
+        format = require("lspkind").cmp_format({
+            mode = "symbol",
+            maxwidth = {
+                menu = 50,
+                abbr = 50,
+            },
+            ellipsis_char = "…",
+            show_labelDetails = true,
+        }),
+    },
     snippet = {
         expand = function(args) require("luasnip").lsp_expand(args.body) end,
     },
