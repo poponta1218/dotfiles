@@ -1,8 +1,9 @@
 -- vim: set ft=lua:
 require("nvim-highlight-colors").setup({
-    render = "virtual",
+    render = "background",
     virtual_symbol = "",
-    virtual_symbol_position = "eol",
-    virtual_symbol_suffix = "",
+    virtual_symbol_position = "inline",
+    virtual_symbol_prefix = "",
+    virtual_symbol_suffix = " ",
     enable_tailwind = true,
 })
