@@ -1,5 +1,29 @@
 -- vim: set ft=lua:
 require("cmp").setup({
+    completion = {
+        completeopt = "menu,menuone,noinsert",
+    },
+    formatting = {
+        format = function(entry, item)
+            local color_item = require("nvim-highlight-colors").format(entry, {
+                kind = item.kind,
+            })
+            item = require("lspkind").cmp_format({
+                mode = "symbol",
+                maxwidth = {
+                    menu = 50,
+                    abbr = 50,
+                },
+                ellipsis_char = "…",
+                show_labelDetails = true,
+            })(entry, item)
+            if color_item.abbr_hl_group then
+                item.kind_hl_group = color_item.abbr_hl_group
+                item.kind = color_item.abbr
+            end
+            return item
+        end,
+    },
     snippet = {
         expand = function(args) require("luasnip").lsp_expand(args.body) end,
     },
