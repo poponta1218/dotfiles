@@ -203,6 +203,11 @@ local neovim_plugins = {
         config = function() require("config/lspsaga") end,
     },
     {
+        "ray-x/lsp_signature.nvim",
+        event = "LspAttach",
+        config = function() require("config/lsp_signature") end,
+    },
+    {
         "stevearc/conform.nvim",
         event = "InsertEnter",
         config = function() require("config/conform") end,
