@@ -40,6 +40,7 @@ local neovim_opts = {
     scrolloff = 8,
     showmatch = true,
     matchtime = 1,
+    termguicolors = true,
 }
 
 vim.opt.shortmess:append("c")
