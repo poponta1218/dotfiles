@@ -133,6 +133,11 @@ local neovim_plugins = {
     {
         "kevinhwang91/promise-async",
     },
+    {
+        "brenoprata10/nvim-highlight-colors",
+        event = "VeryLazy",
+        config = function() require("config/nvim-highlight-colors").setup() end,
+    },
     -- Filer
     {
         "stevearc/oil.nvim",
@@ -353,11 +358,6 @@ local neovim_plugins = {
             vim.o.timeoutlen = 300
         end,
         opts = {},
-    },
-    {
-        "norcalli/nvim-colorizer.lua",
-        event = "VeryLazy",
-        config = function() require("colorizer").setup() end,
     },
     {
         "shellRaining/hlchunk.nvim",
