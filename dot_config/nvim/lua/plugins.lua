@@ -136,7 +136,7 @@ local neovim_plugins = {
     {
         "brenoprata10/nvim-highlight-colors",
         event = "VeryLazy",
-        config = function() require("config/nvim-highlight-colors").setup() end,
+        config = function() require("config/nvim-highlight-colors") end,
     },
     -- Filer
     {
