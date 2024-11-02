@@ -134,6 +134,11 @@ local neovim_plugins = {
         "kevinhwang91/promise-async",
     },
     {
+        "luukvbaal/statuscol.nvim",
+        event = "VimEnter",
+        config = function() require("config/statuscol") end,
+    },
+    {
         "brenoprata10/nvim-highlight-colors",
         event = "VeryLazy",
         config = function() require("config/nvim-highlight-colors") end,
