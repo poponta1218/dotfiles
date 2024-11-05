@@ -2,7 +2,7 @@
 #!/usr/bin/env bash
 # vim: set ft=sh:
 
-{{- if (and contains "debian" (or .chezmoi.osRelease.id .chezmoi.osRelease.idLike) (not contains (or "tako" "ice") .chezmoi.hostname)) }}
+{{- if (and (contains "debian" (or .chezmoi.osRelease.id .chezmoi.osRelease.idLike)) (not contains (or "tako" "ice") .chezmoi.hostname)) }}
 # Install dependencies
 echo "Installing fundamental packages..."
 sudo apt update -y
