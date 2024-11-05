@@ -2,7 +2,7 @@
 #!/usr/bin/env bash
 # vim: set ft=sh:
 
-{{- if contains "debian" (or .chezmoi.osRelease.id .chezmoi.osRelease.idLike) }}
+{{- if (and contains "debian" (or .chezmoi.osRelease.id .chezmoi.osRelease.idLike) (not contains (or "tako" "ice") .chezmoi.hostname)) }}
 # Install dependencies
 echo "Installing fundamental packages..."
 sudo apt update -y
@@ -30,7 +30,7 @@ sudo apt -y install \
   uuid-dev \
   zlib1g-dev
 
-{{- else if contains "fedora" (or .chezmoi.osRelease.id .chezmoi.osRelease.idLike) }}
+{{- else if (and (contains "fedora" (or .chezmoi.osRelease.id .chezmoi.osRelease.idLike)) (not contains (or "tako" "ice") .chezmoi.hostname)) }}
 # Install dependencies
 echo "Installing fundamental packages..."
 sudo dnf update -y
@@ -76,7 +76,7 @@ echo "Installing mise..."
 if [[ ! -f "${HOME}/.local/bin/mise" ]]; then
   curl https://mise.run | sh
 fi
-{{- if eq .chezmoi.config.data.cpu.vendor_id "GenuineIntel" }}
+{{- if (and (eq .chezmoi.config.data.cpu.vendor_id "GenuineIntel") (not contains (or "tako" "ice") .chezmoi.hostname)) }}
 
 # Install Intel oneAPI
 echo "Installing Intel oneAPI..."
@@ -106,7 +106,7 @@ EOF
   sudo dnf install -y intel-hpckit
 {{- end }}
 fi
-{{- else if eq .chezmoi.config.data.cpu.vendor_id "AuthenticAMD" }}
+{{- else if (and (eq .chezmoi.config.data.cpu.vendor_id "AuthenticAMD") (not contain (or "tako" "ice") .chezmoi.hostname)) }}
 
 # Install AMD AOCC/AOCL
 echo "Installing AMD AOCC and AOCL..."
