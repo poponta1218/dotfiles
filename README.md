@@ -3,9 +3,9 @@
 My dotfiles managed by [chezmoi](https://www.chezmoi.io/).
 
 - [dotfiles](#dotfiles)
-  - [1. Pre-requisites](#1-pre-requisites)
-  - [2. Apply dotfiles to a new system](#2-apply-dotfiles-to-a-new-system)
-  - [3. Update dotfiles](#3-update-dotfiles)
+    - [1. Pre-requisites](#1-pre-requisites)
+    - [2. Apply dotfiles to a new system](#2-apply-dotfiles-to-a-new-system)
+    - [3. Update dotfiles](#3-update-dotfiles)
 
 ## 1. Pre-requisites
 

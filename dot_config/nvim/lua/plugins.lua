@@ -134,6 +134,11 @@ local neovim_plugins = {
         "kevinhwang91/promise-async",
     },
     {
+        "luukvbaal/statuscol.nvim",
+        event = "VimEnter",
+        config = function() require("config/statuscol") end,
+    },
+    {
         "brenoprata10/nvim-highlight-colors",
         event = "VeryLazy",
         config = function() require("config/nvim-highlight-colors") end,
@@ -310,16 +315,6 @@ local neovim_plugins = {
         },
     },
     {
-        "lukas-reineke/indent-blankline.nvim",
-        main = "ibl",
-        event = {
-            "BufReadPost",
-            "BufWritePost",
-            "BufNewFile",
-        },
-        config = function() require("config/indent-blankline") end,
-    },
-    {
         "ibhagwan/fzf-lua",
         cmd = {
             "FzfLua",
@@ -366,6 +361,13 @@ local neovim_plugins = {
             "BufNewFile",
         },
         config = function() require("config/hlchunk") end,
+    },
+    {
+        "nmac427/guess-indent.nvim",
+        opts = {},
+        cmd = {
+            "GuessIndent",
+        },
     },
 }
 

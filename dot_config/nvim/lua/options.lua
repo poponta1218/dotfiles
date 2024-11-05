@@ -24,9 +24,11 @@ local common_opts = {
     swapfile = false,
     shell = "zsh",
     expandtab = true,
-    smartindent = true,
-    shiftwidth = 2,
     tabstop = 2,
+    softtabstop = -1,
+    shiftwidth = 0,
+    autoindent = true,
+    smartindent = true,
     splitbelow = true,
     splitright = true,
 }
@@ -41,6 +43,15 @@ local neovim_opts = {
     showmatch = true,
     matchtime = 1,
     termguicolors = true,
+    list = true,
+    listchars = {
+        tab = "→ ",
+        space = "·",
+        trail = "·",
+        extends = "…",
+        precedes = "…",
+        eol = "↲",
+    },
 }
 
 vim.opt.shortmess:append("c")
