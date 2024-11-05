@@ -104,6 +104,9 @@ EOF
 
   sudo mv /tmp/oneAPI.repo /etc/yum.repos.d/
   sudo dnf install -y intel-hpckit
+{{- else }}
+  echo "Unsupported OS for Intel oneAPI installation."
+  echo "Please install Intel oneAPI manually."
 {{- end }}
 fi
 {{- else if (and (eq .chezmoi.config.data.cpu.vendor_id "AuthenticAMD") (not contain (or "tako" "ice") .chezmoi.hostname)) }}
