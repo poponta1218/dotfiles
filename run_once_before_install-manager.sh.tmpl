@@ -109,7 +109,7 @@ EOF
   echo "Please install Intel oneAPI manually."
 {{- end }}
 fi
-{{- else if (and (eq .chezmoi.config.data.cpu.vendor_id "AuthenticAMD") (not contain (or "tako" "ice") .chezmoi.hostname)) }}
+{{- else if (and (eq .chezmoi.config.data.cpu.vendor_id "AuthenticAMD") (not contains (or "tako" "ice") .chezmoi.hostname)) }}
 
 # Install AMD AOCC/AOCL
 echo "Installing AMD AOCC and AOCL..."
