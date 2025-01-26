@@ -52,7 +52,7 @@ fi
 {{- if eq .chezmoi.hostname "tako50" }}
 
 # >>> Quantum Espresso configure >>>
-if [[ -e "/usr/local/bin/qe-7.2" ]]; then
+if [[ -e "/usr/local/bin/qe-1.7.2" ]]; then
   export PATH="/usr/local/bin/qe-1.7.2${PATH:+:${PATH}}"
 fi
 # <<< Quantum Espresso configure <<<
@@ -121,6 +121,7 @@ fi
 
 # >>> Perl configure >>>
 if [[ -e "${HOME}/perl5" ]]; then
+  typeset -gU PERL5LIB PERL_LOCAL_LIB_ROOT
   export PATH="${HOME}/perl5/bin${PATH:+:${PATH}}"
   export PERL5LIB="${HOME}/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
   export PERL_LOCAL_LIB_ROOT="${HOME}/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
@@ -134,19 +135,6 @@ if [[ -e "${XDG_CONFIG_HOME}/npm" ]]; then
   export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
 fi
 # <<< npm configure <<<
-
-# >>> Rye configure >>>
-if [[ -e "${XDG_DATA_HOME}/mise/plugins/rye" ]]; then
-  source "${HOME}/.rye/env"
-fi
-
-# >>> Shell-utilities configure >>>
-gitrepopath="${HOME}/git-repo"
-if [[ -e "${gitrepopath}" ]]; then
-  source "${gitrepopath}/shell-utilities/init.sh"
-fi
-unset gitrepopath
-# <<< Shell-utilities configure <<<
 
 # >>> General configure >>>
 export LD_LIBRARY_PATH="/usr/local/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"

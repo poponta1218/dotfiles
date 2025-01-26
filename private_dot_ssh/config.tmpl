@@ -17,6 +17,11 @@ Host github github.com
 {{- else }}
   IdentityFile ~/.ssh/id_ecdsa_github
 {{- end }}
+
+Host ssh.ppnt.dev home
+  HostName ssh.ppnt.dev
+  IdentityFile ~/.ssh/id_ed25519_ppnt-dev
+  ProxyCommand ~/.local/share/mise/installs/cloudflared/latest/bin/cloudflared access ssh --hostname %h
 {{- if eq .chezmoi.username "tako" }}
 
 Host 192.168.0.32

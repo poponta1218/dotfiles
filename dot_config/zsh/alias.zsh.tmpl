@@ -63,6 +63,8 @@ fi
 if [[ -z "${EDITOR}" ]]; then
   if (( ${+commands[nvim]} )); then
     export EDITOR="nvim"
+  elif (( ${+commands[vim]} )); then
+    export EDITOR="vim"
   elif (( ${+commands[vi]} )); then
     export EDITOR="vi"
   elif (( ${+commands[emacs]} )); then
@@ -77,6 +79,8 @@ fi
 if [[ -z "${VISUAL}" ]]; then
   if (( ${+commands[nvim]} )); then
     export EDITOR="nvim"
+  elif (( ${+commands[vim]} )); then
+    export VISUAL="vim"
   elif (( ${+commands[vi]} )); then
     export VISUAL="vi"
   elif (( ${+commands[emacs]} )); then
@@ -229,6 +233,10 @@ fi
 alias cdz="cd ${ZDOTDIR}"
 # <<< cd alias configure <<<
 
+# >>> grep alias configure >>>
+alias grep="${aliases[grep]:-grep} --color=auto --line-number"
+# <<< grep alias configure <<<
+
 # >>> source alias configure >>>
 alias s="source"
 alias sz="source ${ZDOTDIR}/.zshrc"
@@ -250,12 +258,12 @@ fi
 alias vu="vi"
 # <<< vim alias configure <<<
 
-# >>> Rye alias configure >>>
-if (( ${+commands[rye]} )); then
+# >>> Python alias configure >>>
+if (( ${+commands[python]} )); then
   alias mkvenv="python3 -m venv --upgrade-deps --prompt . .venv && activate"
-  alias activate=". .venv/bin/activate"
+  alias activate="source .venv/bin/activate"
 fi
-# <<< Rye alias configure <<<
+# <<< Python alias configure <<<
 
 # >>> Personal script alias configure >>>
 if (( ${commands[ejobs]} )); then
