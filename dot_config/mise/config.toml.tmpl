@@ -22,6 +22,7 @@ zoxide = "latest"
 bitwarden = "latest"
 {{- end }}
 chezmoi = "latest"
+cloudflared = "latest"
 fzf = "latest"
 {{- if not ( contains "tako" .chezmoi.hostname ) }}
 zellij = "latest"
@@ -45,6 +46,8 @@ shfmt = "latest"
 # Fortran
 "pipx:fortls" = "latest"
 "pipx:fprettify" = "latest"
+# Golang
+"golangci-lint" = "latest"
 # HTML, CSS, and JSON
 "npm:vscode-langservers-extracted" = "latest"
 # KDL
