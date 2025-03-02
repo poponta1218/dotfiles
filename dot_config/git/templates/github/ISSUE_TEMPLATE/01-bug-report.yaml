@@ -1,0 +1,88 @@
+# vim: set ft=yaml:
+name: 🐛 Bug Report
+description: Report an issue to help us improve
+title: "[Bug] "
+labels: ["bug"]
+
+body:
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: ✅ Before Submitting
+      description: Please ensure the following before reporting a bug
+      options:
+        - label: I have searched existing issues and confirmed this is not a duplicate.
+          required: true
+        - label: I have reproduced this issue with the latest version of the repository.
+          required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 📝 Bug Description
+      description: What is the issue? Provide a clear and concise description.
+      placeholder: "Briefly describe the bug."
+    validations:
+      required: true
+
+  - type: textarea
+    id: current_behavior
+    attributes:
+      label: 🔴 Current Behavior
+      description: What is happening? Provide details on the unexpected behavior.
+      placeholder: "Describe the current behavior in detail."
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 🔄 Steps to Reproduce
+      description: How can we reproduce this bug? List the steps.
+      placeholder: |
+        1. Open the application
+        2. Click on 'X'
+        3. Observe the issue
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: ✅ Expected Behavior
+      description: What should happen instead? Describe the correct behavior.
+      placeholder: "Describe the expected outcome."
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: 📷 Screenshots (if applicable)
+      description: Add screenshots or videos to illustrate the issue.
+      placeholder: "Drag and drop screenshots here."
+    validations:
+      required: false
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: 💻 Operating System
+      description: Which operating system are you using?
+      options:
+        - Windows
+        - macOS
+        - Linux
+        - Android
+        - iOS
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: 🗒 Additional Context
+      description: Provide any other relevant information about this bug.
+      placeholder: "Include logs, error messages, or other context if necessary."
+    validations:
+      required: false

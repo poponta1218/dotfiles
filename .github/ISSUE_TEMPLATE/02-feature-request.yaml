@@ -1,0 +1,51 @@
+# vim: set ft=yaml:# vim: set ft=yaml:
+name: 🚀 Feature Request
+description: Propose a new feature or improvement for this project
+title: "[Feature] "
+labels: ["enhancement"]
+
+body:
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: ✅ Before Submitting
+      description: Please ensure the following before submitting a feature request
+      options:
+        - label: I have searched existing issues and confirmed this is not a duplicate.
+          required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 📝 Feature Description
+      description: What problem does this feature solve? What frustration or limitation does it address?
+      placeholder: "Explain the problem or need for this feature."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: 💡 Proposed Solution
+      description: How do you think this should be implemented? Provide details on how this feature should work.
+      placeholder: "Describe your proposed solution."
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 🔄 Alternatives Considered
+      description: Have you thought of other ways to solve this problem? If so, list them here.
+      placeholder: "Mention any alternative solutions you've considered."
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: 📎 Additional Context
+      description: Any other relevant details, links, or screenshots.
+      placeholder: "Include additional information if necessary."
+    validations:
+      required: false

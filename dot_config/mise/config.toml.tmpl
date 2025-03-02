@@ -76,3 +76,17 @@ experimental = true
 
 [settings.pipx]
 uvx = true
+
+[tasks.generate-templates]
+description = "Generate templates for issue and PR in git repositories"
+run = """
+#!/usr/bin/env bash
+if [[ ( -d ".git/github" ) && (! -d .github) ]]; then
+  cp -r .git/github .github
+  echo "Templates generated"
+elif [[ -d .github ]]; then
+  echo "Templates already exist"
+elif [[ ! -d ".git" ]]; then
+  echo "Not a git repository or not in the root of the repository"
+fi
+"""
