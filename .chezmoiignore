@@ -1,6 +1,7 @@
 # vim: set ft=ignore:
 README.md
 .gitignore
+.github/
 {{- if eq .chezmoi.os "linux" }}
 # Linux
 **/*.zwc
