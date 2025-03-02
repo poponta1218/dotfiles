@@ -1,4 +1,4 @@
-<!-- vim: set filetype=markdown: -->
+<!-- vim: set ft=markdown: -->
 <!--
   Please use this template when creating a Pull Request.
   This template is intended to standardize communication for the project.
