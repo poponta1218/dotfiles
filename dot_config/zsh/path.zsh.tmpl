@@ -84,12 +84,16 @@ fi
 # <<< Intel compiler configure <<<
 {{- end }}
 
-# >>> CUDA configure >>>
-if [[ -e "/usr/local/cuda" ]]; then
-  export PATH="/usr/local/cuda/bin${PATH:+:${PATH}}"
-  export LD_LIBRARY_PATH="/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
+# >>> Spack configure >>>
+if [[ -e "/opt/spack" ]]; then
+  source "/opt/spack/share/spack/setup-env.sh"
+  spack load aocc
+  spack load amd-aocl%aocc
+  spack load openmpi%aocc
+  spack load cuda%aocc
+  spack load cudnn%aocc
 fi
-# <<< CUDA configure <<<
+# <<< Spack configure <<<
 
 # >>> GnuPG configure >>>
 export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
@@ -118,17 +122,6 @@ if [[ -e "/usr/local/texlive" ]]; then
   export INFOPATH="/usr/local/texlive/latest/texmf-dist/doc/info${INFOPATH:+:${INFOPATH}}"
 fi
 # >>> TeXLive configure <<<
-
-# >>> Perl configure >>>
-if [[ -e "${HOME}/perl5" ]]; then
-  typeset -gU PERL5LIB PERL_LOCAL_LIB_ROOT
-  export PATH="${HOME}/perl5/bin${PATH:+:${PATH}}"
-  export PERL5LIB="${HOME}/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
-  export PERL_LOCAL_LIB_ROOT="${HOME}/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
-  export PERL_MB_OPT="--install_base \"${HOME}/perl5\""
-  export PERL_MM_OPT="INSTALL_BASE=${HOME}/perl5"
-fi
-# <<< Perl configure <<<
 
 # >>> npm configure >>>
 if [[ -e "${XDG_CONFIG_HOME}/npm" ]]; then
