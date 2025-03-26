@@ -84,6 +84,17 @@ fi
 # <<< Intel compiler configure <<<
 {{- end }}
 
+# >>> Spack configure >>>
+if [[ -e "/opt/spack" ]]; then
+  source "/opt/spack/share/spack/setup-env.sh"
+  spack load aocc
+  spack load amd-aocl%aocc
+  spack load openmpi%aocc
+  spack load cuda%aocc
+  spack load cudnn%aocc
+fi
+# <<< Spack configure <<<
+
 # >>> GnuPG configure >>>
 export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
 # <<< GnuPG configure <<<
