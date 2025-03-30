@@ -18,23 +18,26 @@ ripgrep = "latest"
 tokei = "latest"
 zoxide = "latest"
 
+# Development
+# Git/GitHub
+github-cli = "latest"
+pre-commit = "latest"
+
+# Others
 {{- if not ( contains "tako" .chezmoi.hostname ) }}
 bitwarden = "latest"
 {{- end }}
 chezmoi = "latest"
+{{- if not ( contains "tako" .chezmoi.hostname ) }}
 cloudflared = "latest"
+{{- end }}
 fzf = "latest"
+neovim = "latest"
+tree-sitter = "latest"
+watchexec = "latest"
 {{- if not ( contains "tako" .chezmoi.hostname ) }}
 zellij = "latest"
 {{- end }}
-
-# Development
-github-cli = "latest"
-hyperfine = "latest"
-neovim = "latest"
-pre-commit = "latest"
-tree-sitter = "latest"
-watchexec = "latest"
 
 # Linters, Formatters, and LSPs
 # AWK
