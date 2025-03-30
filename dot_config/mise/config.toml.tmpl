@@ -5,6 +5,7 @@
 go = "latest"
 java = "openjdk-21"
 node = "22"
+bun = "latest"
 rust = "latest"
 uv = "latest"
 
@@ -18,23 +19,29 @@ ripgrep = "latest"
 tokei = "latest"
 zoxide = "latest"
 
+# Development
+# Git/GitHub
+ghq = "latest"
+github-cli = "latest"
+lazygit = "latest"
+pre-commit = "latest"
+"npm:czg" = "latest"
+
+# Others
 {{- if not ( contains "tako" .chezmoi.hostname ) }}
 bitwarden = "latest"
 {{- end }}
 chezmoi = "latest"
+{{- if not ( contains "tako" .chezmoi.hostname ) }}
 cloudflared = "latest"
+{{- end }}
 fzf = "latest"
+neovim = "latest"
+tree-sitter = "latest"
+watchexec = "latest"
 {{- if not ( contains "tako" .chezmoi.hostname ) }}
 zellij = "latest"
 {{- end }}
-
-# Development
-github-cli = "latest"
-hyperfine = "latest"
-neovim = "latest"
-pre-commit = "latest"
-tree-sitter = "latest"
-watchexec = "latest"
 
 # Linters, Formatters, and LSPs
 # AWK
@@ -50,16 +57,14 @@ shfmt = "latest"
 "golangci-lint" = "latest"
 # HTML, CSS, and JSON
 "npm:vscode-langservers-extracted" = "latest"
-# KDL
-"cargo:kdlfmt" = "latest"
 # LaTeX
-"cargo:latex-lsp/texlab" = "tag:v5.20.0"
+"ubi:latex-lsp/texlab" = "latest"
 # Lua
 lua-language-server = "latest"
 stylua = "latest"
 "pipx:ruff-lsp" = "latest"
 # Markdown
-"cargo:Feel-ix-343/markdown-oxide" = "tag:v0.24.1"
+"ubi:Feel-ix-343/markdown-oxide" = "latest"
 markdownlint-cli2 = "latest"
 "npm:markdown-toc" = "latest"
 # Python
@@ -73,6 +78,9 @@ markdownlint-cli2 = "latest"
 
 [settings]
 experimental = true
+
+[settings.npm]
+bun = true
 
 [settings.pipx]
 uvx = true

@@ -1,0 +1,11 @@
+# vim: set ft=yaml:
+
+customCommands:
+  - command: czg --config="${XDG_CONFIG_HOME}/czg/.czrc"
+    context: files
+    subprocess: true
+    key: c
+  - command: czg --config="${XDG_CONFIG_HOME}/czg/.czrc" ai
+    context: files
+    subprocess: true
+    key: C
