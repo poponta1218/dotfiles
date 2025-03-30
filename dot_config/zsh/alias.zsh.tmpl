@@ -265,6 +265,12 @@ if (( ${+commands[python]} )); then
 fi
 # <<< Python alias configure <<<
 
+# >>> Git alias configure >>>
+if (( ${+commands[czg]} )); then
+  alias czg="czg --config=${XDG_CONFIG_HOME}/cz-git/.czrc"
+fi
+# <<< Git alias configure <<<
+
 # >>> Personal script alias configure >>>
 if (( ${commands[ejobs]} )); then
   alias pid="ejobs"
