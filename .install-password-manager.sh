@@ -14,3 +14,8 @@ if [[ "$(type -P bw)" == "" ]]; then
 else
   echo "Bitwarden CLI is already installed."
 fi
+
+while ! bw login --check; do
+  echo "Logging into Bitwarden..."
+  bw login --raw --quiet
+done
