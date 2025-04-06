@@ -28,9 +28,7 @@ pre-commit = "latest"
 "npm:czg" = "latest"
 
 # Others
-{{- if not ( contains "tako" .chezmoi.hostname ) }}
 bitwarden = "latest"
-{{- end }}
 chezmoi = "latest"
 {{- if not ( contains "tako" .chezmoi.hostname ) }}
 cloudflared = "latest"
