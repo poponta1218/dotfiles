@@ -130,6 +130,10 @@ fi
 # <<< npm configure <<<
 
 # >>> General configure >>>
+export PATH="${HOME}/bin${PATH:+:${PATH}}"
+export PATH="${HOME}/.local/bin${PATH:+:${PATH}}"
+export PATH="/snap/bin${PATH:+:${PATH}}"
+
 export LD_LIBRARY_PATH="/usr/local/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
 export LIBRARY_PATH="/usr/local/lib${LIBRARY_PATH:+:${LIBRARY_PATH}}"
 
@@ -147,10 +151,6 @@ if [[ "$(uname -r)" == *microsoft* ]]; then
   unset cursor_path vscode_path
 fi
 {{- end }}
-
-export PATH="${HOME}/bin${PATH:+:${PATH}}"
-export PATH="${HOME}/.local/bin${PATH:+:${PATH}}"
-export PATH="/snap/bin${PATH:+:${PATH}}"
 # <<< General configure <<<
 
 # >>> Personal configure >>>
