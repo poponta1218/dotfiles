@@ -74,7 +74,6 @@ fi
 {{- end }}
 
 {{- if ( or ( contains "tako" .chezmoi.hostname ) ( eq .chezmoi.username "tako" ) )}}
-
 # >>> Intel compiler configure >>>
 if [[ -e "/opt/intel/oneapi" ]]; then
   source "/opt/intel/oneapi/setvars.sh" intel64 >/dev/null
