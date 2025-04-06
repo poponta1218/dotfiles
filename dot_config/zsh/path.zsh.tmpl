@@ -141,7 +141,7 @@ export LIBRARY_PATH="/usr/local/lib${LIBRARY_PATH:+:${LIBRARY_PATH}}"
 
 if [[ "$(uname -r)" == *microsoft* ]]; then
   cursor_path=$(wslpath -u "$(/mnt/c/Windows/System32/cmd.exe /c 'echo %PATH%' 2>/dev/null | grep -oP '(?<=;)[^;]+\\cursor\\resources\\app\\bin' | head -n 1)")
-  vscode_path=$(wslpath -u "$(/mnt/c/Windows/System32/cmd.exe /c 'echo %PATH%' 2>/dev/null | grep -oP '(?<=;)[^;]+\\Microsoft VS Code\\bin'| head -n 1)")
+  vscode_path=$(wslpath -u "$(/mnt/c/Windows/System32/cmd.exe /c 'echo %PATH%' 2>/dev/null | grep -oP '(?<=;)[^;]+\\Microsoft VS Code\\bin' | head -n 1)")
   if [[ -n "${cursor_path}" ]]; then
     export PATH="${cursor_path}${PATH:+:${PATH}}"
   fi
