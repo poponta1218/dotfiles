@@ -2,7 +2,7 @@
 
 {{- $gitname := promptStringOnce . "gitname" "Your git name" }}
 {{- $gitemail := promptStringOnce . "gitemail" "Your github email" }}
-{{- $gitsigningkey := promptStringOnce . "gitsigningkey" "Your PGP signing key" }}
+{{- $gitsigningkey := promptStringOnce . "gitsigningkey" "Your SSH / PGP signing key" }}
 
 {{- $vendor_id := "" }}
 {{- if eq .chezmoi.os "linux" }}

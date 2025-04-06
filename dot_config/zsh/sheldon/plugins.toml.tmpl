@@ -46,15 +46,6 @@ github = "ohmyzsh/ohmyzsh"
 dir = "plugins"
 use = ["{command-not-found,git}/*.plugin.zsh"]
 
-[plugins.auth-agent]
-github = "ohmyzsh/ohmyzsh"
-dir = "plugins"
-{{- if contains "tako" .chezmoi.hostname }}
-use = ["ssh-agent/*.plugin.zsh"]
-{{- else }}
-use = ["gpg-agent/*.plugin.zsh"]
-{{- end }}
-
 [plugins.dot-expansion]
 github = "wazum/zsh-directory-dot-expansion"
 

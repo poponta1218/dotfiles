@@ -95,6 +95,12 @@ if [[ -e "/opt/spack" ]]; then
 fi
 # <<< Spack configure <<<
 
+# >>> WSL SSH agent relay >>>
+if [[ "$(uname -r)" == *microsoft* ]]; then
+  eval "$(wsl2-ssh-agent -log /tmp/wsl2-ssh-agent.log)"
+fi
+# <<< WSL SSH agent relay <<<
+
 # >>> GnuPG configure >>>
 export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
 # <<< GnuPG configure <<<
