@@ -28,7 +28,11 @@ pre-commit = "latest"
 "npm:czg" = "latest"
 
 # Others
+{{- if ( or ( not ( contains "tako" .chezmoi.hostname ) ) ( eq .chezmoi.hostname "tako62" ) ) }}
 bitwarden = "latest"
+{{- else if ( and ( contains "tako" .chezmoi.hostname ) ( le ( atoi ( substr 4 6 .chezmoi.hostname ) ) 61 ) ) }}
+bitwarden = "2023.1.0"
+{{- end }}
 chezmoi = "latest"
 {{- if not ( contains "tako" .chezmoi.hostname ) }}
 cloudflared = "latest"
