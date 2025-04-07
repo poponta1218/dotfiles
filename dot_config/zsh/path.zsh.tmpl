@@ -96,7 +96,7 @@ fi
 
 # >>> WSL SSH agent relay >>>
 if [[ "$(uname -r)" == *microsoft* ]]; then
-  eval "$(wsl2-ssh-agent -log /tmp/wsl2-ssh-agent.log)"
+  eval "$(${HOME}/.local/bin/wsl2-ssh-agent -log /tmp/wsl2-ssh-agent.log)"
 fi
 # <<< WSL SSH agent relay <<<
 
