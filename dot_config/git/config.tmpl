@@ -1,10 +1,10 @@
 # vim: set ft=ini:
 
 [user]
-  name = {{ .git.name | quote }}
-  email = {{ .git.email | quote }}
+  name = "poponta"
+  email = {{ (bitwardenFields "item" "174e19bf-01a7-4da1-a464-af85004558d2").mail.value | quote }}
 {{- if not ( contains "tako" .chezmoi.hostname ) }}
-  signingkey = {{ .git.signingkey | quote }}
+  signingkey = {{ (bitwarden "item" "d0f1bdd0-7123-404d-9225-b2b00013c92d").sshKey.publicKey | quote }}
 {{- end }}
 
 [core]
