@@ -77,4 +77,14 @@ if [[ ! -f "${HOME}/.local/bin/sheldon" ]]; then
   curl --proto '=https' -fLsS https://rossmacarthur.github.io/install/crate.sh |
     bash -s -- --repo rossmacarthur/sheldon --to "${HOME}/.local/bin"
 fi
+
+# Install WSL SSH Agent
+if [[ "$(uname --kernel-release)" == "*microsoft*" ]]; then
+  if [[ ! -e "${HOME}/.local/bin/wsl2-ssh-agetnt" ]]; then
+    echo "Installing WSL2 SSH Agent..."
+    curl --fail --silent --show-error --location \
+      "https://github.com/mame/wsl2-ssh-agent/releases/latest/download/wsl2-ssh-agent" \
+      --output "${HOME}/.local/bin/wsl2-ssh-agent"
+  fi
+fi
 {{- end }}
