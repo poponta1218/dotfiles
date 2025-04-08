@@ -9,7 +9,7 @@ if [[ "$(type -P bw)" == "" ]]; then
       wget -O /tmp/bw.zip "https://vault.bitwarden.com/download/?app=cli&platform=linux"
     elif [[ "$(type -P curl)" != "" ]]; then
       echo "Installing Bitwarden CLI via curl..."
-      curl -fsSL "https://vault.bitwarden.com/download/?app=cli&platform=linux" --output /tmp/bw.tar.gz
+      curl --output /tmp/bw.zip -fsSL "https://vault.bitwarden.com/download/?app=cli&platform=linux"
     else
       echo "Neither wget nor curl is available. Please install one of them to proceed."
       exit 1
