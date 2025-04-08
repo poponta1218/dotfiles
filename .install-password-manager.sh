@@ -1,15 +1,16 @@
-{{- if contains ( or "linux" "darwin" ) .chezmoi.os -}}
 #!/usr/bin/env bash
 # vim: set ft=sh:
 
 if [[ "$(type -P bw)" == "" ]]; then
   case "$(uname --kernel-name)" in
   Linux)
-{{- if ( or ( not ( contains "tako" .chezmoi.hostname ) ) ( eq .chezmoi.hostname "tako62" ) ) }}
-  download_url="https://vault.bitwarden.com/download/?app=cli&platform=linux"
-{{- else if ( and ( contains "tako" .chezmoi.hostname ) ( le ( atoi ( substr 4 6 .chezmoi.hostname ) ) 61 ) ) }}
-  download_url="https://github.com/bitwarden/clients/releases/download/cli-v2023.1.0/bw-linux-2023.1.0.zip"
-{{- end }}
+    host="$(uname --nodename)"
+    if [[ "${host}" == "tako*" && "${host##tako}" -le "61" ]]; then
+      download_url="https://github.com/bitwarden/clients/releases/download/cli-v2023.1.0/bw-linux-2023.1.0.zip"
+    else
+      download_url="https://vault.bitwarden.com/download/?app=cli&platform=linux"
+    fi
+
     if [[ "$(type -P wget)" != "" ]]; then
       echo "Installing Bitwarden CLI via wget..."
       wget --output-document /tmp/bw.zip "${download_url}" --quiet
@@ -40,4 +41,3 @@ if [[ "$(type -P bw)" != "" ]]; then
     bw login --raw --quiet
   done
 fi
-{{- end }}
