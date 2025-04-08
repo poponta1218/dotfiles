@@ -9,8 +9,28 @@ if [[ ! -e "${HOME}/.local/bin/mise" ]]; then
 fi
 
 if [[ "$(type -P bw)" == "" ]]; then
-  echo "Installing Bitwarden CLI..."
-  "${HOME}"/.local/bin/mise use --global bitwarden
+  case "$(uname -s)" in
+  Linux)
+    if [[ "$(type -P wget)" != "" ]]; then
+      echo "Installing Bitwarden CLI via wget..."
+      wget -O /tmp/bw.zip "https://vault.bitwarden.com/download/?app=cli&platform=linux"
+    elif [[ "$(type -P curl)" != "" ]]; then
+      echo "Installing Bitwarden CLI via curl..."
+      curl -fsSL "https://vault.bitwarden.com/download/?app=cli&platform=linux" --output /tmp/bw.tar.gz
+    else
+      echo "Neither wget nor curl is available. Please install one of them to proceed."
+      exit 1
+    fi
+    mkdir -p "${HOME}/.local/bin"
+    unzip -o /tmp/bw.zip -d "${HOME}/.local/bin"
+    chmod +x "${HOME}/.local/bin/bw"
+    rm /tmp/bw.zip
+    ;;
+  *)
+    echo "Unsupported OS. Please install Bitwarden CLI manually."
+    exit 1
+    ;;
+  esac
 else
   echo "Bitwarden CLI is already installed."
 fi
