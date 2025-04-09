@@ -106,6 +106,7 @@ export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
 
 # >>> mise configure >>>
 if [[ -e "${HOME}/.local/bin/mise" ]]; then
+  export MISE_GITHUB_TOKEN={{ (bitwardenFields "item" "174e19bf-01a7-4da1-a464-af85004558d2").GitHubAPIAuthToken.value | quote }}
   export PATH="${XDG_DATA_HOME}/mise/shims${PATH:+:${PATH}}"
 fi
 # <<< mise configure <<<
