@@ -1,9 +1,9 @@
 {{- if eq .chezmoi.os "linux" -}}
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 # vim: set ft=sh:
 
+export MISE_GITHUB_TOKEN={{ (bitwardenFields "item" "174e19bf-01a7-4da1-a464-af85004558d2").GitHubAPIAuthToken.value | quote }}
 "${HOME}/.local/bin/mise" self-update --yes
 "${HOME}/.local/bin/mise" install --yes
 "${HOME}/.local/bin/mise" upgrade --yes
-source "${HOME}/.config/zsh/.zshrc"
 {{- end }}

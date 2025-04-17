@@ -64,73 +64,27 @@ sudo dnf install -y \
   zsh
 
 {{- end }}
+# Install mise
+if [[ ! -e "${HOME}/.local/bin/mise" ]]; then
+  echo "Installing mise..."
+  curl https://mise.run | MISE_INSTALL_PATH="${HOME}/.local/bin/mise" sh
+  echo "mise installed successfully."
+fi
+
 # Install Sheldon
-echo "Installing Sheldon..."
 if [[ ! -f "${HOME}/.local/bin/sheldon" ]]; then
+  echo "Installing Sheldon..."
   curl --proto '=https' -fLsS https://rossmacarthur.github.io/install/crate.sh |
     bash -s -- --repo rossmacarthur/sheldon --to "${HOME}/.local/bin"
 fi
 
-# Install mise
-echo "Installing mise..."
-if [[ ! -f "${HOME}/.local/bin/mise" ]]; then
-  curl https://mise.run | sh
+# Install WSL SSH Agent
+if [[ "$(uname --kernel-release)" == "*microsoft*" ]]; then
+  if [[ ! -e "${HOME}/.local/bin/wsl2-ssh-agetnt" ]]; then
+    echo "Installing WSL2 SSH Agent..."
+    curl --fail --silent --show-error --location \
+      "https://github.com/mame/wsl2-ssh-agent/releases/latest/download/wsl2-ssh-agent" \
+      --output "${HOME}/.local/bin/wsl2-ssh-agent"
+  fi
 fi
-{{- if (and (eq .chezmoi.config.data.cpu.vendor_id "GenuineIntel") (not (contains (or "tako" "ice") .chezmoi.hostname))) }}
-
-# Install Intel oneAPI
-echo "Installing Intel oneAPI..."
-if [[ ! -d "/opt/intel/oneapi" ]]; then
-{{- if contains "debian" (or .chezmoi.osRelease.id .chezmoi.osRelease.idLike) }}
-  wget -O- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB |
-    gpg --dearmor | sudo tee /usr/share/keyrings/oneapi-archive-keyring.gpg > /dev/null
-
-  echo "deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] \
-    https://apt.repos.intel.com/oneapi all main" |
-    sudo tee /etc/apt/sources.list.d/oneAPI.list
-
-  sudo apt update -y
-  sudo apt install -y intel-hpckit
-{{- else if contains "fedora" (or .chezmoi.osRelease.id .chezmoi.osRelease.idLike) }}
-  tee > /tmp/oneAPI.repo << EOF
-[oneAPI]
-name=Intel® oneAPI repository
-baseurl=https://yum.repos.intel.com/oneapi
-enabled=1
-gpgcheck=1
-repo_gpgcheck=1
-gpgkey=https://yum.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
-EOF
-
-  sudo mv /tmp/oneAPI.repo /etc/yum.repos.d/
-  sudo dnf install -y intel-hpckit
-{{- else }}
-  echo "Unsupported OS for Intel oneAPI installation."
-  echo "Please install Intel oneAPI manually."
-{{- end }}
-fi
-{{- else if (and (eq .chezmoi.config.data.cpu.vendor_id "AuthenticAMD") (not (contains (or "tako" "ice") .chezmoi.hostname))) }}
-
-# Install AMD AOCC/AOCL
-echo "Installing AMD AOCC and AOCL..."
-if [[ ! -d "/opt/AMD" ]]; then
-  sudo mkdir -p /opt/AMD
-fi
-
-# Install AOCC 5.0.0
-if [[ ! -d "/opt/AMD/aocc-compiler-5.0.0" ]]; then
-  wget "https://download.amd.com/developer/eula/aocc/aocc-5-0/aocc-compiler-5.0.0.tar" \
-    -O /tmp/aocc-compiler-5.0.0.tar
-  sudo tar -xvf /tmp/aocc-compiler-5.0.0.tar -C /opt/AMD --no-same-owner
-  sudo /opt/AMD/aocc-compiler-5.0.0/install.sh
-fi
-
-# Install AOCL 5.0.0
-if [[ ! -d "/opt/AMD/aocl" ]]; then
-  wget "https://download.amd.com/developer/eula/aocl/aocl-5-0/aocl-linux-aocc-4.2.0.tar.gz" \
-    -O /tmp/aocl-linux-aocc-5.0.0.tar.gz
-  sudo tar -xvf /tmp/aocl-linux-aocc-5.0.0.tar.gz -C /opt/AMD --no-same-owner
-  sudo /opt/AMD/aocl-linux-aocc-5.0.0/install.sh -t /opt/AMD/aocl -i lp64
-fi
-{{- end }}
 {{- end }}

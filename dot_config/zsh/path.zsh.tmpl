@@ -74,7 +74,6 @@ fi
 {{- end }}
 
 {{- if ( or ( contains "tako" .chezmoi.hostname ) ( eq .chezmoi.username "tako" ) )}}
-
 # >>> Intel compiler configure >>>
 if [[ -e "/opt/intel/oneapi" ]]; then
   source "/opt/intel/oneapi/setvars.sh" intel64 >/dev/null
@@ -95,12 +94,19 @@ if [[ -e "/opt/spack" ]]; then
 fi
 # <<< Spack configure <<<
 
+# >>> WSL SSH agent relay >>>
+if [[ "$(uname -r)" == *microsoft* ]]; then
+  eval "$(${HOME}/.local/bin/wsl2-ssh-agent -log /tmp/wsl2-ssh-agent.log)"
+fi
+# <<< WSL SSH agent relay <<<
+
 # >>> GnuPG configure >>>
 export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
 # <<< GnuPG configure <<<
 
 # >>> mise configure >>>
 if [[ -e "${HOME}/.local/bin/mise" ]]; then
+  export MISE_GITHUB_TOKEN={{ (bitwardenFields "item" "174e19bf-01a7-4da1-a464-af85004558d2").GitHubAPIAuthToken.value | quote }}
   export PATH="${XDG_DATA_HOME}/mise/shims${PATH:+:${PATH}}"
 fi
 # <<< mise configure <<<
@@ -130,6 +136,10 @@ fi
 # <<< npm configure <<<
 
 # >>> General configure >>>
+export PATH="${HOME}/bin${PATH:+:${PATH}}"
+export PATH="${HOME}/.local/bin${PATH:+:${PATH}}"
+export PATH="/snap/bin${PATH:+:${PATH}}"
+
 export LD_LIBRARY_PATH="/usr/local/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
 export LIBRARY_PATH="/usr/local/lib${LIBRARY_PATH:+:${LIBRARY_PATH}}"
 
@@ -137,7 +147,7 @@ export LIBRARY_PATH="/usr/local/lib${LIBRARY_PATH:+:${LIBRARY_PATH}}"
 
 if [[ "$(uname -r)" == *microsoft* ]]; then
   cursor_path=$(wslpath -u "$(/mnt/c/Windows/System32/cmd.exe /c 'echo %PATH%' 2>/dev/null | grep -oP '(?<=;)[^;]+\\cursor\\resources\\app\\bin' | head -n 1)")
-  vscode_path=$(wslpath -u "$(/mnt/c/Windows/System32/cmd.exe /c 'echo %PATH%' 2>/dev/null | grep -oP '(?<=;)[^;]+\\Microsoft VS Code\\bin'| head -n 1)")
+  vscode_path=$(wslpath -u "$(/mnt/c/Windows/System32/cmd.exe /c 'echo %PATH%' 2>/dev/null | grep -oP '(?<=;)[^;]+\\Microsoft VS Code\\bin' | head -n 1)")
   if [[ -n "${cursor_path}" ]]; then
     export PATH="${cursor_path}${PATH:+:${PATH}}"
   fi
@@ -147,10 +157,6 @@ if [[ "$(uname -r)" == *microsoft* ]]; then
   unset cursor_path vscode_path
 fi
 {{- end }}
-
-export PATH="${HOME}/bin${PATH:+:${PATH}}"
-export PATH="${HOME}/.local/bin${PATH:+:${PATH}}"
-export PATH="/snap/bin${PATH:+:${PATH}}"
 # <<< General configure <<<
 
 # >>> Personal configure >>>

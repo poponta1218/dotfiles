@@ -1,9 +1,5 @@
 # vim: set ft=toml:
 
-{{- $gitname := promptStringOnce . "gitname" "Your git name" }}
-{{- $gitemail := promptStringOnce . "gitemail" "Your github email" }}
-{{- $gitsigningkey := promptStringOnce . "gitsigningkey" "Your PGP signing key" }}
-
 {{- $vendor_id := "" }}
 {{- if eq .chezmoi.os "linux" }}
 {{-   $vendor_id = (output "sh" "-c" "cat /proc/cpuinfo | grep vendor_id | head -n 1 | cut -d ' ' -f 2") | trim }}
@@ -12,10 +8,8 @@
                           "-Command" "(Get-CimInstance -ClassName Win32_Processor).Manufacturer") | trim }}
 {{- end }}
 
-[data.git]
-  name = {{ $gitname | quote }}
-  email = {{ $gitemail | quote }}
-  signingkey = {{ $gitsigningkey | quote }}
-
 [data.cpu]
   vendor_id = {{ $vendor_id | quote }}
+
+[hooks.read-source-state.pre]
+  command = ".local/share/chezmoi/.install-password-manager.sh"
