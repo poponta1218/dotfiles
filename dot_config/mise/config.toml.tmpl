@@ -2,47 +2,48 @@
 
 [tools]
 # Languages
-go = "latest"
-java = "openjdk-21"
-node = "22"
-bun = "latest"
-rust = "latest"
-uv = "latest"
+"core:go" = "latest"
+"core:java" = "openjdk-21"
+"core:node" = "22"
+"core:bun" = "latest"
+"core:rust" = "latest"
+"aqua:astral-sh/uv" = "latest"
+"ubi:VirtusLab/scala-cli" = "latest"
 
 # Alternative commands
-bat = "latest"
-choose = "latest"
-delta = "latest"
-eza = "latest"
-fd = "latest"
-ripgrep = "latest"
-tokei = "latest"
-zoxide = "latest"
+"ubi:sharkdp/bat" = "latest"
+"ubi:theryangeary/choose" = "latest"
+"ubi:dandavison/delta" = "latest"
+"aqua:eza-community/eza" = "latest"
+"aqua:sharkdp/fd" = "latest"
+"aqua:BurntSushi/ripgrep" = "latest"
+"ubi:XAMPPRocky/tokei" = "latest"
+"ubi:ajeetdsouza/zoxide" = "latest"
 
 # Development
 # Git/GitHub
-ghq = "latest"
-github-cli = "latest"
-lazygit = "latest"
-pre-commit = "latest"
+"aqua:x-motemen/ghq" = "latest"
+"aqua:cli/cli" = "latest"
+"aqua:jesseduffield/lazygit" = "latest"
+"aqua:pre-commit/pre-commit" = "latest"
 "npm:czg" = "latest"
 
 # Others
 {{- if ( or ( not ( contains "tako" .chezmoi.hostname ) ) ( eq .chezmoi.hostname "tako62" ) ) }}
-bitwarden = "latest"
+"aqua:bitwarden/clients" = "latest"
 {{- else if ( and ( contains "tako" .chezmoi.hostname ) ( le ( atoi ( substr 4 6 .chezmoi.hostname ) ) 61 ) ) }}
-bitwarden = "2023.1.0"
+"aqua:bitwarden/clients" = "cli-v2023.1.0"
 {{- end }}
-chezmoi = "latest"
+"ubi:twpayne/chezmoi" = "latest"
 {{- if not ( contains "tako" .chezmoi.hostname ) }}
-cloudflared = "latest"
+"aqua:cloudflare/cloudflared" = "latest"
 {{- end }}
-fzf = "latest"
-neovim = "latest"
-tree-sitter = "latest"
-watchexec = "latest"
+"aqua:junegunn/fzf" = "latest"
+"aqua:neovim/neovim" = "latest"
+"aqua:tree-sitter/tree-sitter" = "latest"
+"ubi:watchexec/watchexec" = "latest"
 {{- if not ( contains "tako" .chezmoi.hostname ) }}
-zellij = "latest"
+"ubi:zellij-org/zellij" = "latest"
 {{- end }}
 
 # Linters, Formatters, and LSPs
@@ -50,33 +51,35 @@ zellij = "latest"
 "npm:awk-language-server" = "latest"
 # Bash
 "npm:bash-language-server" = "latest"
-shellcheck = "latest"
-shfmt = "latest"
+"aqua:koalaman/shellcheck" = "latest"
+"aqua:mvdan/sh" = "latest"
 # Fortran
 "pipx:fortls" = "latest"
 "pipx:fprettify" = "latest"
 # Golang
-"golangci-lint" = "latest"
+"aqua:golangci/golangci-lint" = "latest"
 # HTML, CSS, and JSON
 "npm:vscode-langservers-extracted" = "latest"
 # LaTeX
 "ubi:latex-lsp/texlab" = "latest"
 # Lua
-lua-language-server = "latest"
-stylua = "latest"
-"pipx:ruff-lsp" = "latest"
+"aqua:LuaLS/lua-language-server" = "latest"
+"aqua:JohnnyMorganz/StyLua" = "latest"
 # Markdown
 "ubi:Feel-ix-343/markdown-oxide" = "latest"
-markdownlint-cli2 = "latest"
-"npm:markdown-toc" = "latest"
+"npm:markdownlint-cli2" = "latest"
+"aqua:ekalinin/github-markdown-toc" = "latest"
 # Python
 "pipx:mypy" = "latest"
 "pipx:ruff" = "latest"
+"pipx:ruff-lsp" = "latest"
 "npm:pyright" = "latest"
 # Toml
-"cargo:taplo-cli" = { version = "latest", features = "lsp" }
+"ubi:tamasfe/taplo" = { version = "latest", matching = "full" }
 # Yaml
 "npm:yaml-language-server" = "latest"
+"aqua:google/yamlfmt" = "latest"
+"pipx:yamllint" = "latest"
 
 [settings]
 experimental = true
