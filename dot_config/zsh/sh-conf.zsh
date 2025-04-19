@@ -28,7 +28,7 @@ unsetopt CASE_GLOB
 WORDCHARS="*?_-.[]~&;!#$%^(){}<>"
 WORDCHARS=${WORDCHARS//[\/]}
 
-ZSH_COMP_DIR="${ZDOTDIR}/external-comp"
+ZSH_COMP_DIR="${ZDOTDIR}/completions"
 FPATH="${ZSH_COMP_DIR}${FPATH:+:${FPATH}}"
 # <<< Terminal configure <<<
 
