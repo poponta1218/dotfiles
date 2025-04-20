@@ -1,16 +1,6 @@
 # vim: set ft=sh:
 
 {{- if contains "tako" .chezmoi.hostname }}
-# >>> Gaussian03 configure >>>
-export g03root="/usr/local/pgi"
-if [[ -e "${g03root}/g03" ]]; then
-  source "${g03root}/g03/bsd/g03.profile"
-  export GAUSS_SCRDIR="${HOME}/.scr"
-  mkdir -p "${GAUSS_SCRDIR}"
-  export PATH="${g03root}/g03${PATH:+:${PATH}}"
-fi
-# <<< Gaussian03 configure <<<
-
 # >>> Gaussian09 configure >>>
 export g09root="/usr/local/pgi"
 if [[ -e "${g09root}/g09" ]]; then
@@ -47,30 +37,6 @@ if [[ -e "/opt/mpich2" ]]; then
   export PATH="/opt/mpich2/bin${PATH:+:${PATH}}"
 fi
 # <<< MPI configure <<<
-{{- end }}
-
-{{- if eq .chezmoi.hostname "tako50" }}
-
-# >>> Quantum Espresso configure >>>
-if [[ -e "/usr/local/bin/qe-1.7.2" ]]; then
-  export PATH="/usr/local/bin/qe-1.7.2${PATH:+:${PATH}}"
-fi
-# <<< Quantum Espresso configure <<<
-
-# >>> XCrySDen configure >>>
-if [[ -e "/usr/local/bin/xcrysden-1.6.2" ]]; then
-  export PATH="/usr/local/bin/xcrysden-1.6.2${PATH:+:${PATH}}"
-elif [[ -e "/usr/local/bin/xcrysden-1.5.60" ]]; then
-  export PATH="/usr/local/bin/xcrysden-1.5.60${PATH:+:${PATH}}"
-fi
-# <<< XCrySDen configure <<<
-
-# >>> VESTA configure >>>
-if [[ -e "/usr/local/bin/VESTA-3.5.8" ]]; then
-  export PATH="/usr/local/bin/VESTA-3.5.8${PATH:+:${PATH}}"
-  export LD_LIBRARY_PATH="/usr/local/bin/VESTA-3.5.8${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
-fi
-# <<< VESTA configure <<<
 {{- end }}
 
 {{- if ( or ( contains "tako" .chezmoi.hostname ) ( eq .chezmoi.username "tako" ) )}}
