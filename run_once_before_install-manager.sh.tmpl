@@ -9,7 +9,6 @@ echo "Detected distribution: ${DISTRO}"
 # Install dependencies
 if [[ "${DISTRO}" == "unknown" ]]; then
     echo "Unknown distribution. Please install dependencies manually."
-    exit 1
 elif [[ "${DISTRO}" == *"debian"* ]]; then
     echo "Installing fundamental packages..."
     sudo apt update -y
@@ -68,7 +67,6 @@ elif [[ "${DISTRO}" == *"fedora"* ]]; then
         zlib-devel
 else
     echo "Unsupported distribution: ${DISTRO}. Please install dependencies manually."
-    exit 1
 fi
 
 # Install mise
