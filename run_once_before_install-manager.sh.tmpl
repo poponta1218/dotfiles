@@ -64,8 +64,7 @@ elif [[ "${DISTRO}" == *"fedora"* ]]; then
         sqlite3-dbf \
         tk-devel \
         xz-devel \
-        zlib-devel \
-        zsh
+        zlib-devel
 else
     echo "Unsupported distribution: ${DISTRO}. Please install dependencies manually."
     exit 1
@@ -87,7 +86,7 @@ fi
 
 # Install WSL SSH Agent
 if [[ "$(uname --kernel-release)" == "*microsoft*" ]]; then
-    if [[ ! -e "${home}/.local/bin/wsl2-ssh-agetnt" ]]; then
+    if [[ ! -e "${home}/.local/bin/wsl2-ssh-agent" ]]; then
         echo "installing wsl2 ssh agent..."
         curl --fail --silent --show-error --location \
             "https://github.com/mame/wsl2-ssh-agent/releases/latest/download/wsl2-ssh-agent" \
