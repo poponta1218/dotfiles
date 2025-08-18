@@ -10,7 +10,7 @@ echo "Detected distribution: ${DISTRO}"
 if [[ "${DISTRO}" == "unknown" ]]; then
     echo "Unknown distribution. Please install dependencies manually."
     exit 1
-elif [[ "${DISTRO}" == "*debian*" ]]; then
+elif [[ "${DISTRO}" == *"debian"* ]]; then
     echo "Installing fundamental packages..."
     sudo apt update -y
 
@@ -36,7 +36,7 @@ elif [[ "${DISTRO}" == "*debian*" ]]; then
         libssl-dev \
         uuid-dev \
         zlib1g-dev
-elif [[ "${DISTRO}" == "*fedora*" ]]; then
+elif [[ "${DISTRO}" == *"fedora"* ]]; then
     echo "Installing fundamental packages..."
     sudo dnf update -y
 
@@ -86,7 +86,7 @@ if [[ ! -f "${HOME}/.local/bin/sheldon" ]]; then
 fi
 
 # Install WSL SSH Agent
-if [[ "$(uname --kernel-release)" == "*microsoft*" ]]; then
+if [[ "$(uname --kernel-release)" == *"microsoft"* ]]; then
     if [[ ! -e "${home}/.local/bin/wsl2-ssh-agent" ]]; then
         echo "installing wsl2 ssh agent..."
         curl --fail --silent --show-error --location \

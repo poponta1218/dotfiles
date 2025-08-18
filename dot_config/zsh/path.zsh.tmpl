@@ -61,7 +61,7 @@ fi
 # <<< Spack configure <<<
 
 # >>> WSL SSH agent relay >>>
-if [[ "$(uname -r)" == "*microsoft*" ]]; then
+if [[ "$(uname -r)" == *"microsoft"* ]]; then
     eval "$(${HOME}/.local/bin/wsl2-ssh-agent -log /tmp/wsl2-ssh-agent.log)"
 fi
 # <<< WSL SSH agent relay <<<
@@ -110,7 +110,7 @@ export LD_LIBRARY_PATH="/usr/local/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
 export LIBRARY_PATH="/usr/local/lib${LIBRARY_PATH:+:${LIBRARY_PATH}}"
 {{- if contains "WSL" .chezmoi.kernel.osrelease }}
 
-if [[ "$(uname -r)" == "*microsoft*" ]]; then
+if [[ "$(uname -r)" == *"microsoft"* ]]; then
     cursor_path=$(wslpath -u "$(/mnt/c/Windows/System32/cmd.exe /c 'echo %PATH%' 2>/dev/null | grep -oP '(?<=;)[^;]+\\cursor\\resources\\app\\bin' | head -n 1)")
     vscode_path=$(wslpath -u "$(/mnt/c/Windows/System32/cmd.exe /c 'echo %PATH%' 2>/dev/null | grep -oP '(?<=;)[^;]+\\Microsoft VS Code\\bin' | head -n 1)")
     if [[ -n "${cursor_path}" ]]; then
