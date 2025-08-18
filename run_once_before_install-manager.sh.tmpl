@@ -85,11 +85,11 @@ fi
 
 # Install WSL SSH Agent
 if [[ "$(uname --kernel-release)" == *"microsoft"* ]]; then
-    if [[ ! -e "${home}/.local/bin/wsl2-ssh-agent" ]]; then
+    if [[ ! -e "${HOME}/.local/bin/wsl2-ssh-agent" ]]; then
         echo "installing wsl2 ssh agent..."
         curl --fail --silent --show-error --location \
             "https://github.com/mame/wsl2-ssh-agent/releases/latest/download/wsl2-ssh-agent" \
-            --output "${home}/.local/bin/wsl2-ssh-agent"
+            --output "${HOME}/.local/bin/wsl2-ssh-agent"
     fi
 fi
 {{- end }}
