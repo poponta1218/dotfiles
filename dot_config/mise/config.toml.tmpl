@@ -96,11 +96,11 @@ description = "Generate templates for issue and PR in git repositories"
 run = """
 #!/usr/bin/env bash
 if [[ ( -d ".git/github" ) && (! -d .github) ]]; then
-  cp -r .git/github .github
-  echo "Templates generated"
+    cp -r .git/github .github
+    echo "Templates generated"
 elif [[ -d .github ]]; then
-  echo "Templates already exist"
+    echo "Templates already exist"
 elif [[ ! -d ".git" ]]; then
-  echo "Not a git repository or not in the root of the repository"
+    echo "Not a git repository or not in the root of the repository"
 fi
 """

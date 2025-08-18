@@ -1,23 +1,23 @@
 # vim: set ft=ssh_config:
 
 Host *
-  ForwardAgent yes
-  ForwardX11Trusted yes
-  ServerAliveInterval 60
-  TCPKeepAlive yes
-  XAuthLocation /usr/bin/xauth
+    ForwardAgent yes
+    ForwardX11Trusted yes
+    ServerAliveInterval 60
+    TCPKeepAlive yes
+    XAuthLocation /usr/bin/xauth
 
 Host github github.com
-  HostName github.com
-  User git
+    HostName github.com
+    User git
 
 Host lab.ppnt.dev lab
-  HostName lab.ppnt.dev/jump
-  ProxyCommand cloudflared access ssh --hostname %h
+    HostName lab.ppnt.dev/jump
+    ProxyCommand cloudflared access ssh --hostname %h
 {{- if eq .chezmoi.username "tako" }}
 
 Host 192.168.0.32
-  HostName tako32
-  HostKeyAlgorithms +ssh-dss,ssh-rsa
-  PubKeyAcceptedAlgorithms +ssh-rsa
+    HostName tako32
+    HostKeyAlgorithms +ssh-dss,ssh-rsa
+    PubKeyAcceptedAlgorithms +ssh-rsa
 {{- end }}

@@ -1,45 +1,45 @@
 # vim: set ft=ini:
 
 [user]
-  name = "poponta"
-  email = {{ (bitwardenFields "item" "174e19bf-01a7-4da1-a464-af85004558d2").mail.value | quote }}
+    name = "poponta"
+    email = {{ (bitwardenFields "item" "174e19bf-01a7-4da1-a464-af85004558d2").mail.value | quote }}
 {{- if not ( contains "tako" .chezmoi.hostname ) }}
-  signingkey = {{ (bitwarden "item" "d0f1bdd0-7123-404d-9225-b2b00013c92d").sshKey.publicKey | quote }}
+    signingkey = {{ (bitwarden "item" "d0f1bdd0-7123-404d-9225-b2b00013c92d").sshKey.publicKey | quote }}
 {{- end }}
 
 [core]
 {{- if contains ( or "linux" "darwin" ) .chezmoi.os }}
-  autocrlf = input
+    autocrlf = input
 {{- else if contains "windows" .chezmoi.os }}
-  autocrlf = true
+    autocrlf = true
 {{- end }}
-  safecrlf = true
-  ignorecase = false
-  quotepath = false
+    safecrlf = true
+    ignorecase = false
+    quotepath = false
 
 [url "git@github.com:"]
-  pushInsteadOf = https://github.com/
+    pushInsteadOf = https://github.com/
 
 [init]
-  defaultBranch = main
-  templateDir = ~/.config/git/templates
+    defaultBranch = main
+    templateDir = ~/.config/git/templates
 
 [merge]
-  ff = false
+    ff = false
 
 [push]
-  default = simple
+    default = simple
 
 [pull]
-  ff = only
+    ff = only
 {{- if not ( contains "tako" .chezmoi.hostname ) }}
 
 [commit]
-  gpgsign = true
+    gpgsign = true
 
 [gpg]
-  format = ssh
+    format = ssh
 {{- end }}
 
 [ghq]
-  root = ~/src
+    root = ~/src

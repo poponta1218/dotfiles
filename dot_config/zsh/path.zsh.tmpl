@@ -4,37 +4,37 @@
 # >>> Gaussian09 configure >>>
 export g09root="/usr/local/pgi"
 if [[ -e "${g09root}/g09" ]]; then
-  source "${g09root}/g09/bsd/g09.profile"
-  export GAUSS_SCRDIR="${HOME}/.scr"
-  mkdir -p "${GAUSS_SCRDIR}"
-  export PATH="${g09root}/g09${PATH:+:${PATH}}"
+    source "${g09root}/g09/bsd/g09.profile"
+    export GAUSS_SCRDIR="${HOME}/.scr"
+    mkdir -p "${GAUSS_SCRDIR}"
+    export PATH="${g09root}/g09${PATH:+:${PATH}}"
 fi
 # <<< Gaussian09 configure <<<
 
 # >>> GRRM11 configure >>>
 export GRRMroot="/usr/local/GRRM11"
 if [[ -e "${GRRMroot}" ]]; then
-  export subgau="g09"
+    export subgau="g09"
 # export subgau="./g09grrm"
-  export subchk="formchk"
-  export subgrr="GRRM.out"
+    export subchk="formchk"
+    export subgrr="GRRM.out"
 # export submol="molpro -W./"
-  export PATH="${GRRMroot}${PATH:+:${PATH}}"
+    export PATH="${GRRMroot}${PATH:+:${PATH}}"
 fi
 # <<< GRRM11 configure <<<
 
 # >>> xTB 6.5.1 configure >>>
 if [[ -e "${HOME}/xTB/xtb-6.5.1" ]]; then
-  source "${HOME}/xTB/xtb-6.5.1/share/xtb/config_env.bash"
-  export OMP_NUM_THREADS=1
-  export OMP_STACKSIZE=512000
+    source "${HOME}/xTB/xtb-6.5.1/share/xtb/config_env.bash"
+    export OMP_NUM_THREADS=1
+    export OMP_STACKSIZE=512000
 # export MKL_NUM_THREADS=4
 fi
 # <<< xTB 6.5.1 configure <<<
 
 # >>> MPI configure >>>
 if [[ -e "/opt/mpich2" ]]; then
-  export PATH="/opt/mpich2/bin${PATH:+:${PATH}}"
+    export PATH="/opt/mpich2/bin${PATH:+:${PATH}}"
 fi
 # <<< MPI configure <<<
 {{- end }}
@@ -42,27 +42,27 @@ fi
 {{- if ( or ( contains "tako" .chezmoi.hostname ) ( eq .chezmoi.username "tako" ) )}}
 # >>> Intel compiler configure >>>
 if [[ -e "/opt/intel/oneapi" ]]; then
-  source "/opt/intel/oneapi/setvars.sh" intel64 >/dev/null
+    source "/opt/intel/oneapi/setvars.sh" intel64 >/dev/null
 elif [[ -e "/opt/intel/bin" ]]; then
-  . "/opt/intel/bin/compilervars.sh" intel64 >/dev/null
+    . "/opt/intel/bin/compilervars.sh" intel64 >/dev/null
 fi
 # <<< Intel compiler configure <<<
 {{- end }}
 
 # >>> Spack configure >>>
 if [[ -e "/opt/spack" ]]; then
-  source "/opt/spack/share/spack/setup-env.sh"
-  spack load aocc
-  spack load amd-aocl%aocc
-  spack load openmpi%aocc
-  spack load cuda%aocc
-  spack load cudnn%aocc
+    source "/opt/spack/share/spack/setup-env.sh"
+    spack load aocc
+    spack load amd-aocl%aocc
+    spack load openmpi%aocc
+    spack load cuda%aocc
+    spack load cudnn%aocc
 fi
 # <<< Spack configure <<<
 
 # >>> WSL SSH agent relay >>>
 if [[ "$(uname -r)" == *microsoft* ]]; then
-  eval "$(${HOME}/.local/bin/wsl2-ssh-agent -log /tmp/wsl2-ssh-agent.log)"
+    eval "$(${HOME}/.local/bin/wsl2-ssh-agent -log /tmp/wsl2-ssh-agent.log)"
 fi
 # <<< WSL SSH agent relay <<<
 
@@ -72,8 +72,8 @@ export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
 
 # >>> mise configure >>>
 if [[ -e "${HOME}/.local/bin/mise" ]]; then
-  export MISE_GITHUB_TOKEN={{ (bitwardenFields "item" "174e19bf-01a7-4da1-a464-af85004558d2").GitHubAPIAuthToken.value | quote }}
-  export PATH="${XDG_DATA_HOME}/mise/shims${PATH:+:${PATH}}"
+    export MISE_GITHUB_TOKEN={{ (bitwardenFields "item" "174e19bf-01a7-4da1-a464-af85004558d2").GitHubAPIAuthToken.value | quote }}
+    export PATH="${XDG_DATA_HOME}/mise/shims${PATH:+:${PATH}}"
 fi
 # <<< mise configure <<<
 
@@ -83,21 +83,21 @@ export DOTNET_CLI_HOME="${XDG_DATA_HOME}/dotnet"
 
 # >>> Go configure >>>
 if [[ -e "${XDG_DATA_HOME}/mise/plugins/go" ]]; then
-  export GOPATH="${XDG_DATA_HOME}/go"
+    export GOPATH="${XDG_DATA_HOME}/go"
 fi
 # <<< Go configure <<<
 
 # >>> TeXLive configure >>>
 if [[ -e "/usr/local/texlive" ]]; then
-  export PATH="/usr/local/texlive/latest/bin/x86_64-linux${PATH:+:${PATH}}"
-  export MANPATH="/usr/local/texlive/latest/texmf-dist/doc/man${MANPATH:+:${MANPATH}}"
-  export INFOPATH="/usr/local/texlive/latest/texmf-dist/doc/info${INFOPATH:+:${INFOPATH}}"
+    export PATH="/usr/local/texlive/latest/bin/x86_64-linux${PATH:+:${PATH}}"
+    export MANPATH="/usr/local/texlive/latest/texmf-dist/doc/man${MANPATH:+:${MANPATH}}"
+    export INFOPATH="/usr/local/texlive/latest/texmf-dist/doc/info${INFOPATH:+:${INFOPATH}}"
 fi
 # >>> TeXLive configure <<<
 
 # >>> npm configure >>>
 if [[ -e "${XDG_CONFIG_HOME}/npm" ]]; then
-  export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
+    export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
 fi
 # <<< npm configure <<<
 
@@ -111,21 +111,21 @@ export LIBRARY_PATH="/usr/local/lib${LIBRARY_PATH:+:${LIBRARY_PATH}}"
 {{- if contains "WSL" .chezmoi.kernel.osrelease }}
 
 if [[ "$(uname -r)" == *microsoft* ]]; then
-  cursor_path=$(wslpath -u "$(/mnt/c/Windows/System32/cmd.exe /c 'echo %PATH%' 2>/dev/null | grep -oP '(?<=;)[^;]+\\cursor\\resources\\app\\bin' | head -n 1)")
-  vscode_path=$(wslpath -u "$(/mnt/c/Windows/System32/cmd.exe /c 'echo %PATH%' 2>/dev/null | grep -oP '(?<=;)[^;]+\\Microsoft VS Code\\bin' | head -n 1)")
-  if [[ -n "${cursor_path}" ]]; then
-    export PATH="${cursor_path}${PATH:+:${PATH}}"
-  fi
-  if [[ -n "${vscode_path}" ]]; then
-    export PATH="${vscode_path}${PATH:+:${PATH}}"
-  fi
-  unset cursor_path vscode_path
+    cursor_path=$(wslpath -u "$(/mnt/c/Windows/System32/cmd.exe /c 'echo %PATH%' 2>/dev/null | grep -oP '(?<=;)[^;]+\\cursor\\resources\\app\\bin' | head -n 1)")
+    vscode_path=$(wslpath -u "$(/mnt/c/Windows/System32/cmd.exe /c 'echo %PATH%' 2>/dev/null | grep -oP '(?<=;)[^;]+\\Microsoft VS Code\\bin' | head -n 1)")
+    if [[ -n "${cursor_path}" ]]; then
+        export PATH="${cursor_path}${PATH:+:${PATH}}"
+    fi
+    if [[ -n "${vscode_path}" ]]; then
+        export PATH="${vscode_path}${PATH:+:${PATH}}"
+    fi
+    unset cursor_path vscode_path
 fi
 {{- end }}
 # <<< General configure <<<
 
 # >>> Personal configure >>>
 if [[ -e "${ZDOTDIR}/personal-conf.zsh" ]]; then
-  source "${ZDOTDIR}/personal-conf.zsh"
+    source "${ZDOTDIR}/personal-conf.zsh"
 fi
 # <<< Personal configure <<<

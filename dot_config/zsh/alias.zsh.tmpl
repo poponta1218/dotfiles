@@ -44,7 +44,7 @@ alias lni="${aliases[ln]:-ln} -i"
 alias mvi="${aliases[mv]:-mv} -i"
 alias rmi="${aliases[rm]:-rm} -i"
 if (( ${+commands[safe-rm]} && ! ${+commands[safe-rmdir]} )); then
-  alias rm=safe-rm
+    alias rm=safe-rm
 fi
 
 alias chmod="chmod --preserve-root -v"
@@ -55,82 +55,82 @@ alias zshrc="${EDITOR} ${ZDOTDIR}/.zshrc"
 
 # >>> Browser configure >>>
 if [[ -z "${BROWSER}" && "${OSTYPE}" == darwin* ]]; then
-  export BROWSER="open"
+    export BROWSER="open"
 fi
 # <<< Browser configure <<<
 
 # >>> Editors configure >>>
 if [[ -z "${EDITOR}" ]]; then
-  if (( ${+commands[nvim]} )); then
-    export EDITOR="nvim"
-  elif (( ${+commands[vim]} )); then
-    export EDITOR="vim"
-  elif (( ${+commands[vi]} )); then
-    export EDITOR="vi"
-  elif (( ${+commands[emacs]} )); then
-    export EDITOR="emacs"
-  elif (( ${+commands[nano]} )); then
-    export EDITOR="nano"
-  else
-    export EDITOR=""
-  fi
+    if (( ${+commands[nvim]} )); then
+        export EDITOR="nvim"
+    elif (( ${+commands[vim]} )); then
+        export EDITOR="vim"
+    elif (( ${+commands[vi]} )); then
+        export EDITOR="vi"
+    elif (( ${+commands[emacs]} )); then
+        export EDITOR="emacs"
+    elif (( ${+commands[nano]} )); then
+        export EDITOR="nano"
+    else
+        export EDITOR=""
+    fi
 fi
 
 if [[ -z "${VISUAL}" ]]; then
-  if (( ${+commands[nvim]} )); then
-    export EDITOR="nvim"
-  elif (( ${+commands[vim]} )); then
-    export VISUAL="vim"
-  elif (( ${+commands[vi]} )); then
-    export VISUAL="vi"
-  elif (( ${+commands[emacs]} )); then
-    export VISUAL="emacs"
-  elif (( ${+commands[nano]} )); then
-    export VISUAL="nano"
-  else
-    export VISUAL=""
-  fi
+    if (( ${+commands[nvim]} )); then
+        export EDITOR="nvim"
+    elif (( ${+commands[vim]} )); then
+        export VISUAL="vim"
+    elif (( ${+commands[vi]} )); then
+        export VISUAL="vi"
+    elif (( ${+commands[emacs]} )); then
+        export VISUAL="emacs"
+    elif (( ${+commands[nano]} )); then
+        export VISUAL="nano"
+    else
+        export VISUAL=""
+    fi
 fi
 
 if [[ -z "${PAGER}" ]]; then
-  if (( ${+commands[less]} )); then
-    export PAGER="less"
-  else
-    export PAGER="more"
-  fi
+    if (( ${+commands[less]} )); then
+        export PAGER="less"
+    else
+        export PAGER="more"
+    fi
 fi
 # <<< Editors configure <<<
 
 # >>> Less configure >>>
 if [[ -z "${LESS}" ]]; then
-  export LESS="--chop-long-lines --ignore-case --jump-target=4 --LONG-PROMPT --no-init --quit-if-one-screen --RAW-CONTROL-CHARS"
+    export LESS="--chop-long-lines --ignore-case --jump-target=4 --LONG-PROMPT --no-init --quit-if-one-screen --RAW-CONTROL-CHARS"
 fi
 
 if [[ -z "${LESSOPEN}" ]] && (( ${#commands[(i)lesspipe(|.sh)]} )); then
-  export LESSOPEN="| /usr/bin/env ${commands[(i)lesspipe(|.sh)]} %s 2>&-"
+    export LESSOPEN="| /usr/bin/env ${commands[(i)lesspipe(|.sh)]} %s 2>&-"
 fi
 # <<< Less configure <<<
 
 # >>> Clipboard alias configure >>>
 if [[ "${OSTYPE}" == darwin* ]]; then
-  alias o="open"
+    alias o="open"
 elif [[ "${OSTYPE}" == cygwin* ]]; then
-  alias o="cygstart"
-  alias pbcopy="tee > /dev/clipboard"
-  alias pbpaste="cat /dev/clipboard"
+    alias o="cygstart"
+    alias pbcopy="tee > /dev/clipboard"
+    alias pbpaste="cat /dev/clipboard"
 elif [[ "${OSTYPE}" == linux-android ]]; then
-  alias o="termux-open"
-  alias pbcopy="termux-clipboard-set"
-  alias pbpaste="termux-clipboard-get"
+    alias o="termux-open"
+    alias pbcopy="termux-clipboard-set"
+    alias pbpaste="termux-clipboard-get"
 else
-  alias o="xdg-open"
-  if (( ${+commands[xclip]} )); then
-    alias pbcopy="xclip -selection clipboard -in"
-    alias pbpaste="xclip -selection clipboard -out"
-  elif (( ${+commands[xsel]} )); then
-    alias pbcopy="xsel --clipboard --input"
-    alias pbpaste="xsel --clipboard --output"
-  fi
+    alias o="xdg-open"
+    if (( ${+commands[xclip]} )); then
+        alias pbcopy="xclip -selection clipboard -in"
+        alias pbpaste="xclip -selection clipboard -out"
+    elif (( ${+commands[xsel]} )); then
+        alias pbcopy="xsel --clipboard --input"
+        alias pbpaste="xsel --clipboard --output"
+    fi
 fi
 
 alias clip="pbcopy"
@@ -141,42 +141,42 @@ alias pbp="pbpaste"
 # >>> Download helper configure >>>
 {{- if ( and ( contains .chezmoi.hostname "tako" ) ( le ( atoi ( substr 4 6 .chezmoi.hostname ) ) 58 ) ) }}
 if (( ${+commands[aria2c]} )); then
-  alias aria2c="aria2c --check-certificate=false"
+    alias aria2c="aria2c --check-certificate=false"
 fi
 if (( ${+commands[axel]} )); then
-  alias axel="axel --insecure"
+    alias axel="axel --insecure"
 fi
 if (( ${+commands[wget]} )); then
-  alias wget="wget --no-check-certificate"
+    alias wget="wget --no-check-certificate"
 fi
 if (( ${+commands[curl]} )); then
-  alias curl="curl --insecure"
+    alias curl="curl --insecure"
 fi
 
 {{- end }}
 if (( ${+commands[aria2c]} )); then
-  alias get="${aliases[aria2c]:-aria2c} --max-connection-per-server=5 --continue"
+    alias get="${aliases[aria2c]:-aria2c} --max-connection-per-server=5 --continue"
 elif (( ${+commands[axel]} )); then
-  alias get="${aliases[axel]:-axel} --num-connections=5 --alternate"
+    alias get="${aliases[axel]:-axel} --num-connections=5 --alternate"
 elif (( ${+commands[wget]} )); then
-  alias get="${aliases[wget]:-wget} --continue --progress=bar --timestamping --hsts-file=${XDG_CACHE_HOME}/wget-hsts"
+    alias get="${aliases[wget]:-wget} --continue --progress=bar --timestamping --hsts-file=${XDG_CACHE_HOME}/wget-hsts"
 elif (( ${+commands[curl]} )); then
-  alias get="${aliases[curl]:-curl} --continue-at - --location --progress-bar --remote-name --remote-time"
+    alias get="${aliases[curl]:-curl} --continue-at - --location --progress-bar --remote-name --remote-time"
 fi
 # <<< Download helper configure <<<
 
 # >>> Directory server via HTTP >>>
 if (( $#commands[(i)python(|[23])] )); then
-  autoload -Uz is-at-least
-  if (( $+commands[python3] )); then
-    alias http-serve="python3 -m http.server"
-  elif (( $+commands[python2] )); then
-    alias http-serve="python2 -m SimpleHTTPServer"
-  elif is-at-least 3 ${"$(python --version 2>&1)"[(w)2]}; then
-    alias http-serve="python -m http.server"
-  else
-    alias http-serve="python -m SimpleHTTPServer"
-  fi
+    autoload -Uz is-at-least
+    if (( $+commands[python3] )); then
+        alias http-serve="python3 -m http.server"
+    elif (( $+commands[python2] )); then
+        alias http-serve="python2 -m SimpleHTTPServer"
+    elif is-at-least 3 ${"$(python --version 2>&1)"[(w)2]}; then
+        alias http-serve="python -m http.server"
+    else
+        alias http-serve="python -m SimpleHTTPServer"
+    fi
 fi
 # <<< Directory server via HTTP <<<
 
@@ -185,11 +185,11 @@ alias df="df -kh"
 alias du="du -kh"
 
 if [[ "${OSTYPE}" == darwin* || "${OSTYPE}" == *bsd* ]]; then
-  alias topc="top -o cpu"
-  alias topm="top -o vsize"
+    alias topc="top -o cpu"
+    alias topm="top -o vsize"
 else
-  alias topc="top -o %CPU"
-  alias topm="top -o %MEM"
+    alias topc="top -o %CPU"
+    alias topm="top -o %MEM"
 fi
 # <<< Resource usage alias configure >>>
 
@@ -203,21 +203,21 @@ alias kk="ll"
 alias lll="ll"
 alias lm="la | ${PAGER}"
 if (( ${+commands[eza]} )); then
-  alias ls="eza"
-  alias ll="${aliases[ll]} --icons --git"
-  alias lr="ll -T"
-  alias lx="ll -sextension"
-  alias lk="ll -ssize"
-  alias lt="ll -smodified"
-  alias lc="ll -schanged"
+    alias ls="eza"
+    alias ll="${aliases[ll]} --icons --git"
+    alias lr="ll -T"
+    alias lx="ll -sextension"
+    alias lk="ll -ssize"
+    alias lt="ll -smodified"
+    alias lc="ll -schanged"
 else
-  alias lr="ll -R"
-  if [[ ${(@M)${(f)"$(ls --version 2>&1)"}:#*GNU *} ]]; then
-    alias lx="ll -XB"
-  fi
-  alias lk="ll -Sr"
-  alias lt="ll -tr"
-  alias lc="lt -c"
+    alias lr="ll -R"
+    if [[ ${(@M)${(f)"$(ls --version 2>&1)"}:#*GNU *} ]]; then
+        alias lx="ll -XB"
+    fi
+    alias lk="ll -Sr"
+    alias lt="ll -tr"
+    alias lc="lt -c"
 fi
 alias ls="${aliases[ls]:-ls} --group-directories-first --color=auto"
 alias lu="lt -u"
@@ -225,7 +225,7 @@ alias lu="lt -u"
 
 # >>> cat alias configure >>>
 if (( ${+commands[bat]} )); then
-  alias cat="bat --paging=never"
+    alias cat="bat --paging=never"
 fi
 # <<< cat alias configure <<<
 
@@ -249,30 +249,30 @@ alias restart="kill -CONT"
 
 # >>> vim alias configure >>>
 if (( ${+commands[nvim]} )); then
-  alias vi="nvim"
-  alias vim="nvim"
-  alias neovim="nvim"
-  alias vimtutor="nvim -c Tutor"
-  export NVIM_CONFIG_DIR="${XDG_CONFIG_HOME}/nvim"
+    alias vi="nvim"
+    alias vim="nvim"
+    alias neovim="nvim"
+    alias vimtutor="nvim -c Tutor"
+    export NVIM_CONFIG_DIR="${XDG_CONFIG_HOME}/nvim"
 fi
 alias vu="vi"
 # <<< vim alias configure <<<
 
 # >>> Python alias configure >>>
 if (( ${+commands[python]} )); then
-  alias mkvenv="python3 -m venv --upgrade-deps --prompt . .venv && activate"
-  alias activate="source .venv/bin/activate"
+    alias mkvenv="python3 -m venv --upgrade-deps --prompt . .venv && activate"
+    alias activate="source .venv/bin/activate"
 fi
 # <<< Python alias configure <<<
 
 # >>> Git alias configure >>>
 if (( ${+commands[czg]} )); then
-  alias czg="czg --config=${XDG_CONFIG_HOME}/czg/.czrc"
+    alias czg="czg --config=${XDG_CONFIG_HOME}/czg/.czrc"
 fi
 # <<< Git alias configure <<<
 
 # >>> Personal script alias configure >>>
 if (( ${commands[ejobs]} )); then
-  alias pid="ejobs"
+    alias pid="ejobs"
 fi
 # <<< Personal script alias configure <<<

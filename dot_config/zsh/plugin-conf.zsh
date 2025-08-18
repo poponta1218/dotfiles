@@ -65,18 +65,18 @@ zstyle ':completion::*:(-command-|export):*' fake-parameters ${${${_comps[(I)-va
 
 zstyle -e ':completion:*:hosts' hosts 'reply=(
 ${=${=${=${${(f)"$(cat {/etc/ssh/ssh_,~/.ssh/}known_hosts(|2)(N) 2> /dev/null)"}%%[#| ]*}//\]:[0-9]*/ }//,/ }//\[/ }
-  ${=${(f)"$(cat /etc/hosts(|)(N) <<(ypcat hosts 2> /dev/null))"}%%(\#${_etc_host_ignores:+|${(j:|:)~_etc_host_ignores}})*}
-  ${=${${${${(@M)${(f)"$(cat ~/.ssh/config 2> /dev/null)"}:#Host *}#Host }:#*\**}:#*\?*}}
+    ${=${(f)"$(cat /etc/hosts(|)(N) <<(ypcat hosts 2> /dev/null))"}%%(\#${_etc_host_ignores:+|${(j:|:)~_etc_host_ignores}})*}
+    ${=${${${${(@M)${(f)"$(cat ~/.ssh/config 2> /dev/null)"}:#Host *}#Host }:#*\**}:#*\?*}}
 )'
 
 zstyle ':completion:*:*:*:users' ignored-patterns \
-  adm amanda apache avahi beaglidx bin cacti canna clamav daemon \
-  dbus distcache dovecot fax ftp games gdm gkrellmd gopher \
-  hacluster haldaemon halt hsqldb ident junkbust ldap lp mail \
-  mailman mailnull mldonkey mysql nagios \
-  named netdump news nfsnobody nobody nscd ntp nut nx openvpn \
-  operator pcap postfix postgres privoxy pulse pvm quagga radvd \
-  rpc rpcuser rpm shutdown squid sshd sync uucp vcsa xfs '_*'
+    adm amanda apache avahi beaglidx bin cacti canna clamav daemon \
+    dbus distcache dovecot fax ftp games gdm gkrellmd gopher \
+    hacluster haldaemon halt hsqldb ident junkbust ldap lp mail \
+    mailman mailnull mldonkey mysql nagios \
+    named netdump news nfsnobody nobody nscd ntp nut nx openvpn \
+    operator pcap postfix postgres privoxy pulse pvm quagga radvd \
+    rpc rpcuser rpm shutdown squid sshd sync uucp vcsa xfs '_*'
 
 zstyle '*' single-ignored show
 
@@ -103,14 +103,14 @@ zstyle ':completion:*:(ssh|scp|rsync):*:hosts-ipaddr' ignored-patterns '^(<->.<-
 # >>> Smart URL configure >>>
 autoload -Uz is-at-least
 if [[ ${ZSH_VERSION} != 5.1.1 && ${TERM} != "dumb" ]]; then
-  if is-at-least 5.2; then
-    autoload -Uz bracketed-paste-url-magic
-    zle -N bracketed-paste bracketed-paste-url-magic
-  elif is-at-least 5.1; then
-    autoload -Uz bracketed-paste-magic
-    zle -N bracketed-paste bracketed-paste-magic
-  fi
-  autoload -Uz url-quote-magic
-  zle -N self-insert url-quote-magic
+    if is-at-least 5.2; then
+        autoload -Uz bracketed-paste-url-magic
+        zle -N bracketed-paste bracketed-paste-url-magic
+    elif is-at-least 5.1; then
+        autoload -Uz bracketed-paste-magic
+        zle -N bracketed-paste bracketed-paste-magic
+    fi
+    autoload -Uz url-quote-magic
+    zle -N self-insert url-quote-magic
 fi
 # <<< Smart URL configure <<<

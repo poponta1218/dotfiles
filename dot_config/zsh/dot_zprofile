@@ -2,7 +2,7 @@
 
 # >>> Language configure >>>
 if [[ -z "${LANG}" ]]; then
-  export LANG="C.UTF-8"
+    export LANG="C.UTF-8"
 fi
 # <<< Language configure <<<
 
@@ -11,13 +11,13 @@ typeset -gU cdpath fpath mailpath manpath infopath path
 typeset -gU CDPATH FPATH MAILPATH MANPATH INOPATH PATH
 typeset -gU LD_LIBRARY_PATH LIBRARY_PATH
 # cdpath=(
-#   $cdpath
+#     $cdpath
 # )
 
 path=(
-  ${HOME}/{,s}bin(N)
-  /opt/{homebrew,local}/{,s}bin(N)
-  /usr/local/{,s}bin(N)
-  ${path}
+    ${HOME}/{,s}bin(N)
+    /opt/{homebrew,local}/{,s}bin(N)
+    /usr/local/{,s}bin(N)
+    ${path}
 )
 # <<< Paths configure <<<
