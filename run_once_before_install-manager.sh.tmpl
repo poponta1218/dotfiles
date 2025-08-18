@@ -2,89 +2,96 @@
 #!/usr/bin/env bash
 # vim: set ft=sh:
 
-{{- if (and (contains "debian" (or .chezmoi.osRelease.id .chezmoi.osRelease.idLike)) (not (contains (or "tako" "ice") .chezmoi.hostname))) }}
+# Distribution detection
+DISTRO={{- default "unknown" .chezmoi.osRelease.idLike | lower -}}
+
 # Install dependencies
-echo "Installing fundamental packages..."
-sudo apt update -y
+if [[ "${DISTRO}" == "unknown" ]]; then
+    echo "Unknown distribution. Please install dependencies manually."
+    exit 1
+elif [[ "${DISTRO}" == *"debian"* ]]; then
+    echo "Installing fundamental packages..."
+    sudo apt update -y
 
-sudo apt install -y \
-  build-essential \
-  git \
-  gnupg \
-  gpg-agent \
-  wget \
-  zsh
+    sudo apt install -y \
+        build-essential \
+        git \
+        gnupg \
+        gpg-agent \
+        wget \
+        zsh
 
-echo "Installing Python dependencies..."
-sudo apt -y install \
-  tk-dev \
-  libbz2-dev \
-  libdb-dev \
-  libffi-dev \
-  libgdbm-dev \
-  liblzma-dev \
-  libncurses-dev \
-  libreadline-dev \
-  libsqlite3-dev \
-  libssl-dev \
-  uuid-dev \
-  zlib1g-dev
+    echo "Installing Python dependencies..."
+    sudo apt -y install \
+        tk-dev \
+        libbz2-dev \
+        libdb-dev \
+        libffi-dev \
+        libgdbm-dev \
+        liblzma-dev \
+        libncurses-dev \
+        libreadline-dev \
+        libsqlite3-dev \
+        libssl-dev \
+        uuid-dev \
+        zlib1g-dev
+elif [[ "${DISTRO}" == *"fedora"* ]]; then
+    echo "Installing fundamental packages..."
+    sudo dnf update -y
 
-{{- else if (and (contains "fedora" (or .chezmoi.osRelease.id .chezmoi.osRelease.idLike)) (not (contains (or "tako" "ice") .chezmoi.hostname))) }}
-# Install dependencies
-echo "Installing fundamental packages..."
-sudo dnf update -y
+    sudo dnf groupinstall -y "Development Tools"
+    sudo dnf install -y \
+        git \
+        gnupg2 \
+        gpg-agent \
+        wget \
+        zsh
 
-sudo dnf groupinstall -y "Development Tools"
-sudo dnf install -y \
-  git \
-  gnupg2 \
-  gpg-agent \
-  wget \
-  zsh
+    echo "Installing Python dependencies..."
+    sudo dnf install -y \
+        bzip2-devel \
+        gdbm-devel \
+        git \
+        libffi-devel \
+        libuuid-devel \
+        ncurses-devel \
+        openssl-devel \
+        openssl11 \
+        openssl11-devel \
+        patch \
+        readline-devel \
+        sqlite-devel \
+        sqlite3-dbf \
+        tk-devel \
+        xz-devel \
+        zlib-devel \
+        zsh
+else
+    echo "Unsupported distribution: ${DISTRO}. Please install dependencies manually."
+    exit 1
+fi
 
-echo "Installing Python dependencies..."
-sudo dnf install -y \
-  bzip2-devel \
-  gdbm-devel \
-  git \
-  libffi-devel \
-  libuuid-devel \
-  ncurses-devel \
-  openssl-devel \
-  openssl11 \
-  openssl11-devel \
-  patch \
-  readline-devel \
-  sqlite-devel \
-  sqlite3-dbf \
-  tk-devel \
-  xz-devel \
-  zlib-devel \
-  zsh
-
-{{- end }}
 # Install mise
 if [[ ! -e "${HOME}/.local/bin/mise" ]]; then
-  echo "Installing mise..."
-  curl https://mise.run | MISE_INSTALL_PATH="${HOME}/.local/bin/mise" sh
-  echo "mise installed successfully."
+    echo "Installing mise..."
+    curl https://mise.run | MISE_INSTALL_PATH="${HOME}/.local/bin/mise" sh
+    echo "mise installed successfully."
 fi
 
 # Install Sheldon
 if [[ ! -f "${HOME}/.local/bin/sheldon" ]]; then
-  echo "Installing Sheldon..."
-  curl --proto '=https' -fLsS https://rossmacarthur.github.io/install/crate.sh |
-    bash -s -- --repo rossmacarthur/sheldon --to "${HOME}/.local/bin"
+    echo "Installing Sheldon..."
+    curl --proto '=https' -fLsS https://rossmacarthur.github.io/install/crate.sh |
+        bash -s -- --repo rossmacarthur/sheldon --to "${HOME}/.local/bin"
 fi
 
 # Install WSL SSH Agent
 if [[ "$(uname --kernel-release)" == "*microsoft*" ]]; then
-  if [[ ! -e "${HOME}/.local/bin/wsl2-ssh-agetnt" ]]; then
-    echo "Installing WSL2 SSH Agent..."
-    curl --fail --silent --show-error --location \
-      "https://github.com/mame/wsl2-ssh-agent/releases/latest/download/wsl2-ssh-agent" \
-      --output "${HOME}/.local/bin/wsl2-ssh-agent"
-  fi
+    if [[ ! -e "${home}/.local/bin/wsl2-ssh-agetnt" ]]; then
+        echo "installing wsl2 ssh agent..."
+        curl --fail --silent --show-error --location \
+            "https://github.com/mame/wsl2-ssh-agent/releases/latest/download/wsl2-ssh-agent" \
+            --output "${home}/.local/bin/wsl2-ssh-agent"
+    fi
 fi
 {{- end }}
