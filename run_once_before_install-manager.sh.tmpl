@@ -3,13 +3,14 @@
 # vim: set ft=sh:
 
 # Distribution detection
-DISTRO={{- default "unknown" .chezmoi.osRelease.idLike | lower -}}
+DISTRO={{- default "unknown" .chezmoi.osRelease.idLike | lower | trim }}
+echo "Detected distribution: ${DISTRO}"
 
 # Install dependencies
 if [[ "${DISTRO}" == "unknown" ]]; then
     echo "Unknown distribution. Please install dependencies manually."
     exit 1
-elif [[ "${DISTRO}" == *"debian"* ]]; then
+elif [[ "${DISTRO}" == "*debian*" ]]; then
     echo "Installing fundamental packages..."
     sudo apt update -y
 
@@ -35,7 +36,7 @@ elif [[ "${DISTRO}" == *"debian"* ]]; then
         libssl-dev \
         uuid-dev \
         zlib1g-dev
-elif [[ "${DISTRO}" == *"fedora"* ]]; then
+elif [[ "${DISTRO}" == "*fedora*" ]]; then
     echo "Installing fundamental packages..."
     sudo dnf update -y
 
